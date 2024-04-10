@@ -9,18 +9,19 @@ import SwiftUI
 
 struct MainView: View {
     @StateObject var viewModel = MainViewModel()
-    
+
     var body: some View {
-        if  viewModel.isSignedIn,
-            !viewModel.currentUserId.isEmpty {
-            accountView
-        } 
-        else {
-            LoginView()
+        Group {
+            if viewModel.isSignedIn, let user = viewModel.user {
+                accountView(for: user)
+            } else {
+                LoginView()
+            }
         }
     }
-    
-    var accountView: some View {
+
+    @ViewBuilder
+    private func accountView(for user: User) -> some View {
         TabView {
             AnnounceView()
                 .tabItem {
@@ -36,7 +37,7 @@ struct MainView: View {
                     Label("Profile", systemImage: "person.circle")
                 }
             
-            if ((viewModel.user?.role.isAdmin) != nil) {
+            if user.role.isAdmin {
                 ManageView()
                     .tabItem {
                         Label("Manage",systemImage: "person.2.badge.gearshape" )
