@@ -77,3 +77,15 @@ extension PostViewModel {
         return post?.likes.count ?? 0
     }
 }
+
+protocol Pinnable {
+    var createDate: TimeInterval { get }
+    var is_pin: Bool { get set }
+    mutating func toggle_pin()
+}
+
+extension Pinnable {
+    mutating func toggle_pin() {
+        self.is_pin = !self.is_pin
+    }
+}
