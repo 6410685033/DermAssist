@@ -29,6 +29,10 @@ struct ProfileView: View {
                         Text(user.email)
                     }
                     HStack {
+                        Text("Role: ")
+                        Text(user.role.displayName)
+                    }
+                    HStack {
                         Text("Member Since: ")
                         Text("\(Date(timeIntervalSince1970: user.joined).formatted(date: .abbreviated, time: .shortened))")
                             .font(.footnote)
@@ -43,6 +47,11 @@ struct ProfileView: View {
                 }
             } else {
                 Text("Loading Profile...")
+                Button {
+                    viewModel.logOut()
+                } label: {
+                    Text("Log in again")
+                }
             }
         }
         .onAppear {

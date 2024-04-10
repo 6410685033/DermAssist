@@ -48,7 +48,9 @@ extension User {
             "email": email,
             "tel": tel,
             "gender": gender,
-            "joined": joined]
+            "joined": joined,
+            "role": role.rawValue,
+        ]
     }
 }
 

@@ -30,7 +30,8 @@ class ProfileViewModel: ObservableObject {
                         email: data["email"] as? String ?? "",
                         tel: data["tel"] as? String ?? "",
                         gender: data["gender"] as? String ?? "",
-                        joined: data["joined"] as? TimeInterval ?? 0
+                        joined: data["joined"] as? TimeInterval ?? 0,
+                        role: UserRole(rawValue: data["role"] as? String ?? "") ?? .patient
                     )
                 }
             }

@@ -14,4 +14,22 @@ struct User: Codable {
     let tel: String
     let gender: String
     let joined: TimeInterval
+    let role: UserRole
+}
+
+enum UserRole: String, Codable {
+    case docter = "doctor"
+    case patient = "patient"
+    case admin = "admin"
+    
+    var displayName: String {
+        switch self {
+        case .docter:
+            return "Doctor"
+        case .patient:
+            return "Patient"
+        case .admin:
+            return "Admin"
+        }
+    }
 }
