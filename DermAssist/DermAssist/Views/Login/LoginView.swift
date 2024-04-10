@@ -13,7 +13,7 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             VStack {
-                HeaderView(title: "Note", subtitle: "Record things", angle: 15, background: .pink)
+                HeaderView(title: "Derm Assist", subtitle: "Find the proper product", angle: 15, background: .mint)
                 
                 Form {
                     TextField("Email Address", text: $viewModel.email)

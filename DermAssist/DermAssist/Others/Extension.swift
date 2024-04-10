@@ -26,6 +26,32 @@ extension Encodable {
     }
 }
 
+extension Post {
+    func asDictionary() -> [String: Any] {
+        return [
+            "id": id,
+            "title": title,
+            "createDate": createDate,
+            "content": content,
+            "creator": creator,
+            "comments": comments.map { $0.asDictionary() },  // Assuming comments are also Codable
+            "likes": likes,
+        ]
+    }
+}
+
+extension User {
+    var asDictionary: [String: Any] {
+        return [
+            "id": id,
+            "name": name,
+            "email": email,
+            "tel": tel,
+            "gender": gender,
+            "joined": joined]
+    }
+}
+
 extension Comment {
     var dictionary: [String: Any] {
         return [
