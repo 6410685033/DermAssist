@@ -25,6 +25,10 @@ struct MainView: View {
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
+            ChatView()
+                .tabItem {
+                    Label("Chat", systemImage: "message.fill")
+                }
             
             ProfileView(viewModel: ProfileViewModel())
                 .tabItem {
