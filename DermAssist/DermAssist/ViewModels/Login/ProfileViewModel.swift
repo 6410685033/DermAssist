@@ -44,4 +44,32 @@ class ProfileViewModel: ObservableObject {
             print(error)
         }
     }
+    
+    func deleteAccount(completion: @escaping (Bool, Error?) -> Void) {
+        guard let user = Auth.auth().currentUser else {
+            completion(false, nil)  // No user is logged in.
+            return
+        }
+        
+        let userId = user.uid
+        let db = Firestore.firestore()
+
+        // Delete user data from Firestore first
+        db.collection("users").document(userId).delete { error in
+            if let error = error {
+                completion(false, error)
+                return
+            }
+            
+            // Once the user data is deleted from Firestore, delete the authentication record
+            user.delete { error in
+                if let error = error {
+                    completion(false, error)
+                } else {
+                    completion(true, nil)
+                }
+            }
+        }
+    }
+
 }

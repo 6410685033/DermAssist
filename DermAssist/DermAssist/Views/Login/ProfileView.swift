@@ -10,7 +10,10 @@ import FirebaseFirestoreSwift
 
 struct ProfileView: View {
     @StateObject var viewModel: ProfileViewModel
-
+    @State private var showConfirmationAlert = false
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+    
     var body: some View {
         VStack {
             if let user = viewModel.user {
@@ -45,19 +48,45 @@ struct ProfileView: View {
                 } label: {
                     Text("Logout")
                 }
-            } else {
-                Text("Loading Profile...")
-                Button {
-                    viewModel.logOut()
-                } label: {
-                    Text("Log in again")
+                
+                Button("Delete Account") {
+                    // Show confirmation alert
+                    showConfirmationAlert = true
+                }.foregroundColor(.red)
+                .alert("Are you sure you want to delete your account?", isPresented: $showConfirmationAlert) {
+                    Button("Cancel", role: .cancel) { }
+                    Button("Delete", role: .destructive) {
+                        viewModel.deleteAccount { success, error in
+                            if success {
+                                print("account deleted")
+                            } else {
+                                alertMessage = error?.localizedDescription ?? "An error occurred"
+                                showAlert = true
+                            }
+                        }
+                    }
+                } message: {
+                    Text("This action cannot be undone.")
                 }
+            
+                .alert("Error", isPresented: $showAlert) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text(alertMessage)
+                }
+        } else {
+            Text("Loading Profile...")
+            Button {
+                viewModel.logOut()
+            } label: {
+                Text("Log in again")
             }
         }
+    }
         .onAppear {
             viewModel.fetchUser()
         }
-    }
+}
 }
 
 #Preview {

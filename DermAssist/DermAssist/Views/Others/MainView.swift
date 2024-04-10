@@ -14,7 +14,8 @@ struct MainView: View {
         if  viewModel.isSignedIn,
             !viewModel.currentUserId.isEmpty {
             accountView
-        } else {
+        } 
+        else {
             LoginView()
         }
     }
@@ -34,6 +35,13 @@ struct MainView: View {
                 .tabItem {
                     Label("Profile", systemImage: "person.circle")
                 }
+            
+            if ((viewModel.user?.role.isAdmin) != nil) {
+                ManageView()
+                    .tabItem {
+                        Label("Manage",systemImage: "person.2.badge.gearshape" )
+                    }
+            }
         }
     }
 }

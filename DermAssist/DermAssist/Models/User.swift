@@ -32,4 +32,16 @@ enum UserRole: String, Codable {
             return "Admin"
         }
     }
+    
+    var isDoctor: Bool {
+        self == .docter
+    }
+    
+    var isAdmin: Bool {
+        self == .admin
+    }
+    
+    var isPatient: Bool {
+        self == .patient
+    }
 }
