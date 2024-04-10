@@ -72,7 +72,7 @@ class PostViewModel: ObservableObject {
         let postRef = db.collection("post").document(postId)
         
         // create new comment object
-        let newComment = Comment(id: UUID().uuidString, authorId: uId, content: content, timestamp: Date().timeIntervalSince1970)
+        let newComment = Comment(is_pin: false, createDate: Date().timeIntervalSince1970, id: UUID().uuidString, authorId: uId, content: content)
         
         // add comment to comment field
         postRef.updateData([

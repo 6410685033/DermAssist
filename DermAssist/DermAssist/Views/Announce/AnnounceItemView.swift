@@ -53,5 +53,5 @@ struct AnnounceItemView: View {
 }
 
 #Preview {
-    AnnounceItemView(item: .init(id: "123", title: "AnnounceTitle", createDate: Date().timeIntervalSince1970, content: "contenttttttt", creator: "tNcfb0V8ergVGyPfyuUkRQWlnoW2", comments: [], likes: []))
+    AnnounceItemView(item: .init(is_pin: false, createDate: Date().timeIntervalSince1970, id: "123", title: "AnnounceTitle", content: "contenttttttt", creator: "tNcfb0V8ergVGyPfyuUkRQWlnoW2", comments: [], likes: []))
 }

@@ -2,17 +2,49 @@
 //  ChatView.swift
 //  DermAssist
 //
-//  Created by Thammasat Thonggamgaew on 10/4/2567 BE.
+//  Created by Supakrit Nithikethkul on 10/4/2567 BE.
 //
 
 import SwiftUI
+import FirebaseFirestoreSwift
 
 struct ChatView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    
+    @StateObject var viewModel: ChatViewModel
+    @FirestoreQuery var items: [Chat]
+    
+    init(userId: String) {
+        self._items = FirestoreQuery(collectionPath: "users/\(userId)/chats")
+        self._viewModel = StateObject(wrappedValue: ChatViewModel(userId: userId))
     }
-}
-
-#Preview {
-    ChatView()
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                List(items) { item in
+                    ChatItemView(item: item)
+                        .swipeActions {
+                            Button {
+                                viewModel.delete(id: item.id)
+                            } label: {
+                                Image(systemName: "trash.fill")
+                            }
+                        }
+                        .tint(.red)
+                }
+                .listStyle(PlainListStyle())
+            }
+            .navigationTitle("Chats")
+            .toolbar {
+                Button {
+                    viewModel.showingnewItemView = true
+                } label: {
+                    Image(systemName: "plus")
+                }
+            }
+            .sheet(isPresented: $viewModel.showingnewItemView) {
+                NewChatView(newItemPresented: $viewModel.showingnewItemView)
+            }
+        }
+    }
 }

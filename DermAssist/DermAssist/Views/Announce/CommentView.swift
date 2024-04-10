@@ -22,16 +22,11 @@ struct CommentView: View {
             Text(viewModel.authorName.isEmpty ? "Loading..." : viewModel.authorName)
                 .font(.caption)
                 .bold()
-            Text("Comment on \(viewModel.formattedDate(for: comment.timestamp))")
+            Text("Comment on \(viewModel.formattedDate(for: comment.createDate))")
                 .font(.caption)
                 .foregroundColor(.gray)
             Text(comment.content)
                 .font(.body)
         }
     }
-}
-
-
-#Preview {
-    CommentView(comment: Comment(id: "1", authorId: "123", content: "Sample comment", timestamp: 1609459200))
 }

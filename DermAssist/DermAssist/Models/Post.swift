@@ -7,19 +7,23 @@
 
 import Foundation
 
-struct Post: Codable {
+struct Post: Codable, Pinnable {
+    var is_pin: Bool
+    let createDate: TimeInterval
+    
     let id: String
     let title: String
-    let createDate: TimeInterval
     let content: String
     let creator: String
     var comments: [Comment]
     var likes: [User]
 }
 
-struct Comment: Codable {
+struct Comment: Codable, Pinnable {
+    var is_pin: Bool
+    let createDate: TimeInterval
+    
     let id: String
     let authorId: String
     let content: String
-    let timestamp: TimeInterval
 }

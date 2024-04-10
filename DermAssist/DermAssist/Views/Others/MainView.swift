@@ -27,7 +27,7 @@ struct MainView: View {
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
-            ChatView()
+            ChatView(userId: viewModel.currentUserId)
                 .tabItem {
                     Label("Chat", systemImage: "message.fill")
                 }
