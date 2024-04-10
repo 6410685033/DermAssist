@@ -36,6 +36,19 @@ extension Post {
             "creator": creator,
             "comments": comments.map { $0.asDictionary() },  // Assuming comments are also Codable
             "likes": likes,
+            "is_pin": is_pin,
+        ]
+    }
+}
+
+extension Comment {
+    var dictionary: [String: Any] {
+        return [
+            "id": id,
+            "authorId": authorId,
+            "content": content,
+            "createDate": createDate,
+            "is_pin": is_pin,
         ]
     }
 }
@@ -50,17 +63,6 @@ extension User {
             "gender": gender,
             "joined": joined,
             "role": role.rawValue,
-        ]
-    }
-}
-
-extension Comment {
-    var dictionary: [String: Any] {
-        return [
-            "id": id,
-            "authorId": authorId,
-            "content": content,
-            "timestamp": timestamp
         ]
     }
 }
