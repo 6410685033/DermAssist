@@ -7,11 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B8DCDCC2BC66D2400D70C6C /* DermAssistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8DCDCB2BC66D2400D70C6C /* DermAssistApp.swift */; };
-		7B8DCDCE2BC66D2400D70C6C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8DCDCD2BC66D2400D70C6C /* ContentView.swift */; };
-		7B8DCDD02BC66D2500D70C6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B8DCDCF2BC66D2500D70C6C /* Assets.xcassets */; };
 		7B8DCDD32BC66D2500D70C6C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B8DCDD22BC66D2500D70C6C /* Preview Assets.xcassets */; };
-		7B8DCDDA2BC672A900D70C6C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B8DCDD92BC672A900D70C6C /* GoogleService-Info.plist */; };
 		7B8DCDDE2BC675FC00D70C6C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCDDD2BC675FC00D70C6C /* FirebaseAnalytics */; };
 		7B8DCDE02BC675FC00D70C6C /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCDDF2BC675FC00D70C6C /* FirebaseAnalyticsOnDeviceConversion */; };
 		7B8DCDE22BC675FC00D70C6C /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCDE12BC675FC00D70C6C /* FirebaseAnalyticsSwift */; };
@@ -39,15 +35,63 @@
 		7B8DCE0E2BC675FC00D70C6C /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCE0D2BC675FC00D70C6C /* FirebaseRemoteConfigSwift */; };
 		7B8DCE102BC675FC00D70C6C /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCE0F2BC675FC00D70C6C /* FirebaseStorage */; };
 		7B8DCE122BC675FC00D70C6C /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCE112BC675FC00D70C6C /* FirebaseStorageCombine-Community */; };
+		CE6C33722BC67CB700D754A8 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C335F2BC67CB700D754A8 /* HeaderView.swift */; };
+		CE6C33732BC67CB700D754A8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33602BC67CB700D754A8 /* LoginView.swift */; };
+		CE6C33742BC67CB700D754A8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33612BC67CB700D754A8 /* MainView.swift */; };
+		CE6C33752BC67CB700D754A8 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33622BC67CB700D754A8 /* ProfileView.swift */; };
+		CE6C33762BC67CB700D754A8 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33632BC67CB700D754A8 /* RegisterView.swift */; };
+		CE6C33772BC67CB700D754A8 /* TLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33642BC67CB700D754A8 /* TLButton.swift */; };
+		CE6C33782BC67CB700D754A8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33662BC67CB700D754A8 /* User.swift */; };
+		CE6C33792BC67CB700D754A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE6C33682BC67CB700D754A8 /* Assets.xcassets */; };
+		CE6C337A2BC67CB700D754A8 /* DermAssistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33692BC67CB700D754A8 /* DermAssistApp.swift */; };
+		CE6C337B2BC67CB700D754A8 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C336A2BC67CB700D754A8 /* Extension.swift */; };
+		CE6C337C2BC67CB700D754A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE6C336B2BC67CB700D754A8 /* GoogleService-Info.plist */; };
+		CE6C337D2BC67CB700D754A8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C336D2BC67CB700D754A8 /* LoginViewModel.swift */; };
+		CE6C337E2BC67CB700D754A8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C336E2BC67CB700D754A8 /* MainViewModel.swift */; };
+		CE6C337F2BC67CB700D754A8 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C336F2BC67CB700D754A8 /* ProfileViewModel.swift */; };
+		CE6C33802BC67CB700D754A8 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33702BC67CB700D754A8 /* RegisterViewModel.swift */; };
+		CE6C33822BC67D8C00D754A8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33812BC67D8C00D754A8 /* Post.swift */; };
+		CE6C33872BC67E2400D754A8 /* AnnounceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33862BC67E2400D754A8 /* AnnounceView.swift */; };
+		CE6C33892BC67E5200D754A8 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33882BC67E5200D754A8 /* CommentView.swift */; };
+		CE6C338B2BC67E6C00D754A8 /* AnnounceItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C338A2BC67E6C00D754A8 /* AnnounceItemView.swift */; };
+		CE6C338D2BC67E8C00D754A8 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C338C2BC67E8C00D754A8 /* PostView.swift */; };
+		CE6C338F2BC67EA100D754A8 /* NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C338E2BC67EA100D754A8 /* NewPostView.swift */; };
+		CE6C33912BC67EBF00D754A8 /* LikeUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33902BC67EBF00D754A8 /* LikeUserView.swift */; };
+		CE6C33962BC67F1200D754A8 /* AnnounceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33952BC67F1200D754A8 /* AnnounceViewModel.swift */; };
+		CE6C33982BC67F3600D754A8 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33972BC67F3600D754A8 /* PostViewModel.swift */; };
+		CE6C339A2BC67F5100D754A8 /* NewPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33992BC67F5100D754A8 /* NewPostViewModel.swift */; };
+		CE6C339C2BC67F6800D754A8 /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C339B2BC67F6800D754A8 /* CommentViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7B8DCDC82BC66D2400D70C6C /* DermAssist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DermAssist.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B8DCDCB2BC66D2400D70C6C /* DermAssistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DermAssistApp.swift; sourceTree = "<group>"; };
-		7B8DCDCD2BC66D2400D70C6C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		7B8DCDCF2BC66D2500D70C6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B8DCDD22BC66D2500D70C6C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		7B8DCDD92BC672A900D70C6C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CE6C335F2BC67CB700D754A8 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		CE6C33602BC67CB700D754A8 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		CE6C33612BC67CB700D754A8 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		CE6C33622BC67CB700D754A8 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		CE6C33632BC67CB700D754A8 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		CE6C33642BC67CB700D754A8 /* TLButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLButton.swift; sourceTree = "<group>"; };
+		CE6C33662BC67CB700D754A8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CE6C33682BC67CB700D754A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CE6C33692BC67CB700D754A8 /* DermAssistApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DermAssistApp.swift; sourceTree = "<group>"; };
+		CE6C336A2BC67CB700D754A8 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		CE6C336B2BC67CB700D754A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CE6C336D2BC67CB700D754A8 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		CE6C336E2BC67CB700D754A8 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		CE6C336F2BC67CB700D754A8 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		CE6C33702BC67CB700D754A8 /* RegisterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		CE6C33812BC67D8C00D754A8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		CE6C33862BC67E2400D754A8 /* AnnounceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceView.swift; sourceTree = "<group>"; };
+		CE6C33882BC67E5200D754A8 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		CE6C338A2BC67E6C00D754A8 /* AnnounceItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceItemView.swift; sourceTree = "<group>"; };
+		CE6C338C2BC67E8C00D754A8 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		CE6C338E2BC67EA100D754A8 /* NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostView.swift; sourceTree = "<group>"; };
+		CE6C33902BC67EBF00D754A8 /* LikeUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeUserView.swift; sourceTree = "<group>"; };
+		CE6C33952BC67F1200D754A8 /* AnnounceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceViewModel.swift; sourceTree = "<group>"; };
+		CE6C33972BC67F3600D754A8 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		CE6C33992BC67F5100D754A8 /* NewPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewModel.swift; sourceTree = "<group>"; };
+		CE6C339B2BC67F6800D754A8 /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,10 +152,10 @@
 		7B8DCDCA2BC66D2400D70C6C /* DermAssist */ = {
 			isa = PBXGroup;
 			children = (
-				7B8DCDCB2BC66D2400D70C6C /* DermAssistApp.swift */,
-				7B8DCDCD2BC66D2400D70C6C /* ContentView.swift */,
-				7B8DCDCF2BC66D2500D70C6C /* Assets.xcassets */,
-				7B8DCDD92BC672A900D70C6C /* GoogleService-Info.plist */,
+				CE6C33672BC67CB700D754A8 /* Models */,
+				CE6C336C2BC67CB700D754A8 /* Others */,
+				CE6C33712BC67CB700D754A8 /* ViewModels */,
+				CE6C33652BC67CB700D754A8 /* Views */,
 				7B8DCDD12BC66D2500D70C6C /* Preview Content */,
 			);
 			path = DermAssist;
@@ -130,6 +174,108 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE6C33652BC67CB700D754A8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE6C33852BC67DF100D754A8 /* Others */,
+				CE6C33842BC67DE100D754A8 /* Login */,
+				CE6C33832BC67DC700D754A8 /* Announce */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CE6C33672BC67CB700D754A8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE6C33662BC67CB700D754A8 /* User.swift */,
+				CE6C33812BC67D8C00D754A8 /* Post.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CE6C336C2BC67CB700D754A8 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				CE6C33682BC67CB700D754A8 /* Assets.xcassets */,
+				CE6C33692BC67CB700D754A8 /* DermAssistApp.swift */,
+				CE6C336A2BC67CB700D754A8 /* Extension.swift */,
+				CE6C336B2BC67CB700D754A8 /* GoogleService-Info.plist */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		CE6C33712BC67CB700D754A8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				CE6C33942BC67EF500D754A8 /* Announce */,
+				CE6C33932BC67EEC00D754A8 /* Others */,
+				CE6C33922BC67EDE00D754A8 /* Login */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		CE6C33832BC67DC700D754A8 /* Announce */ = {
+			isa = PBXGroup;
+			children = (
+				CE6C33862BC67E2400D754A8 /* AnnounceView.swift */,
+				CE6C338A2BC67E6C00D754A8 /* AnnounceItemView.swift */,
+				CE6C33882BC67E5200D754A8 /* CommentView.swift */,
+				CE6C338C2BC67E8C00D754A8 /* PostView.swift */,
+				CE6C338E2BC67EA100D754A8 /* NewPostView.swift */,
+				CE6C33902BC67EBF00D754A8 /* LikeUserView.swift */,
+			);
+			path = Announce;
+			sourceTree = "<group>";
+		};
+		CE6C33842BC67DE100D754A8 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CE6C33602BC67CB700D754A8 /* LoginView.swift */,
+				CE6C33632BC67CB700D754A8 /* RegisterView.swift */,
+				CE6C33622BC67CB700D754A8 /* ProfileView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		CE6C33852BC67DF100D754A8 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				CE6C33642BC67CB700D754A8 /* TLButton.swift */,
+				CE6C335F2BC67CB700D754A8 /* HeaderView.swift */,
+				CE6C33612BC67CB700D754A8 /* MainView.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		CE6C33922BC67EDE00D754A8 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CE6C336D2BC67CB700D754A8 /* LoginViewModel.swift */,
+				CE6C33702BC67CB700D754A8 /* RegisterViewModel.swift */,
+				CE6C336F2BC67CB700D754A8 /* ProfileViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		CE6C33932BC67EEC00D754A8 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				CE6C336E2BC67CB700D754A8 /* MainViewModel.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		CE6C33942BC67EF500D754A8 /* Announce */ = {
+			isa = PBXGroup;
+			children = (
+				CE6C33952BC67F1200D754A8 /* AnnounceViewModel.swift */,
+				CE6C33972BC67F3600D754A8 /* PostViewModel.swift */,
+				CE6C33992BC67F5100D754A8 /* NewPostViewModel.swift */,
+				CE6C339B2BC67F6800D754A8 /* CommentViewModel.swift */,
+			);
+			path = Announce;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,9 +368,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE6C33792BC67CB700D754A8 /* Assets.xcassets in Resources */,
 				7B8DCDD32BC66D2500D70C6C /* Preview Assets.xcassets in Resources */,
-				7B8DCDD02BC66D2500D70C6C /* Assets.xcassets in Resources */,
-				7B8DCDDA2BC672A900D70C6C /* GoogleService-Info.plist in Resources */,
+				CE6C337C2BC67CB700D754A8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,8 +381,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B8DCDCE2BC66D2400D70C6C /* ContentView.swift in Sources */,
-				7B8DCDCC2BC66D2400D70C6C /* DermAssistApp.swift in Sources */,
+				CE6C339C2BC67F6800D754A8 /* CommentViewModel.swift in Sources */,
+				CE6C337B2BC67CB700D754A8 /* Extension.swift in Sources */,
+				CE6C338F2BC67EA100D754A8 /* NewPostView.swift in Sources */,
+				CE6C338B2BC67E6C00D754A8 /* AnnounceItemView.swift in Sources */,
+				CE6C33872BC67E2400D754A8 /* AnnounceView.swift in Sources */,
+				CE6C33752BC67CB700D754A8 /* ProfileView.swift in Sources */,
+				CE6C339A2BC67F5100D754A8 /* NewPostViewModel.swift in Sources */,
+				CE6C33772BC67CB700D754A8 /* TLButton.swift in Sources */,
+				CE6C33762BC67CB700D754A8 /* RegisterView.swift in Sources */,
+				CE6C33732BC67CB700D754A8 /* LoginView.swift in Sources */,
+				CE6C33822BC67D8C00D754A8 /* Post.swift in Sources */,
+				CE6C33742BC67CB700D754A8 /* MainView.swift in Sources */,
+				CE6C337F2BC67CB700D754A8 /* ProfileViewModel.swift in Sources */,
+				CE6C33722BC67CB700D754A8 /* HeaderView.swift in Sources */,
+				CE6C33892BC67E5200D754A8 /* CommentView.swift in Sources */,
+				CE6C33802BC67CB700D754A8 /* RegisterViewModel.swift in Sources */,
+				CE6C337A2BC67CB700D754A8 /* DermAssistApp.swift in Sources */,
+				CE6C337D2BC67CB700D754A8 /* LoginViewModel.swift in Sources */,
+				CE6C33912BC67EBF00D754A8 /* LikeUserView.swift in Sources */,
+				CE6C33962BC67F1200D754A8 /* AnnounceViewModel.swift in Sources */,
+				CE6C33982BC67F3600D754A8 /* PostViewModel.swift in Sources */,
+				CE6C33782BC67CB700D754A8 /* User.swift in Sources */,
+				CE6C338D2BC67E8C00D754A8 /* PostView.swift in Sources */,
+				CE6C337E2BC67CB700D754A8 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +538,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DermAssist/Preview Content\"";
-				DEVELOPMENT_TEAM = X57M4G4AV9;
+				DEVELOPMENT_TEAM = XX86AGP7AN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -399,7 +567,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DermAssist/Preview Content\"";
-				DEVELOPMENT_TEAM = X57M4G4AV9;
+				DEVELOPMENT_TEAM = XX86AGP7AN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

@@ -21,10 +21,10 @@ struct MainView: View {
     
     var accountView: some View {
         TabView {
-//            NoteView(userId: viewModel.currentUserId)
-//                .tabItem {
-//                    Label("Home", systemImage: "house")
-//                }
+            AnnounceView()
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                }
             
             ProfileView(viewModel: ProfileViewModel())
                 .tabItem {

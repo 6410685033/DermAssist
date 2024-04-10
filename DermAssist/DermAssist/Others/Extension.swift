@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import UIKit
+import FirebaseAuth
 
 extension Encodable {
     func asDictionary() -> [String: Any] {
@@ -21,5 +23,29 @@ extension Encodable {
         }
         
         
+    }
+}
+
+extension Comment {
+    var dictionary: [String: Any] {
+        return [
+            "id": id,
+            "authorId": authorId,
+            "content": content,
+            "timestamp": timestamp
+        ]
+    }
+}
+
+extension PostViewModel {
+    // Check if the current user has liked the post
+    var isLiked: Bool {
+        guard let userId = Auth.auth().currentUser?.uid else { return false }
+        return post?.likes.contains { $0.id == userId } ?? false
+    }
+    
+    // Count of likes
+    var likeCount: Int {
+        return post?.likes.count ?? 0
     }
 }
