@@ -43,7 +43,7 @@ extension Post {
 extension User {
     var asDictionary: [String: Any] {
         return [
-            "id": id,
+            "id": id ?? "",  // Providing a default value if id is nil
             "name": name,
             "email": email,
             "tel": tel,

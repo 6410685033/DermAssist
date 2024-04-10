@@ -6,18 +6,19 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
-struct User: Codable {
-    let id: String
-    let name: String
+struct User: Codable, Identifiable {
+    @DocumentID var id: String?
+    var name: String
     let email: String
-    let tel: String
-    let gender: String
+    var tel: String
+    var gender: String
     let joined: TimeInterval
-    let role: UserRole
+    var role: UserRole
 }
 
-enum UserRole: String, Codable {
+enum UserRole: String, Codable, CaseIterable {
     case docter = "doctor"
     case patient = "patient"
     case admin = "admin"

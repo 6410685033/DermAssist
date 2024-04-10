@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B21CF002BC68588006224CB /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21CEFF2BC68588006224CB /* ChatView.swift */; };
+		7B21CF032BC6859F006224CB /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21CF022BC6859F006224CB /* ChatViewModel.swift */; };
+		7B2221C72BC69B6C00D5DECF /* ManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2221C62BC69B6C00D5DECF /* ManageView.swift */; };
+		7B2221CA2BC6A71E00D5DECF /* ManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2221C92BC6A71E00D5DECF /* ManageViewModel.swift */; };
+		7B2221CC2BC6A92300D5DECF /* UserManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2221CB2BC6A92300D5DECF /* UserManageView.swift */; };
+		7B2221CE2BC6AC4700D5DECF /* UserManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2221CD2BC6AC4700D5DECF /* UserManageViewModel.swift */; };
 		7B8DCDD32BC66D2500D70C6C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B8DCDD22BC66D2500D70C6C /* Preview Assets.xcassets */; };
 		7B8DCDDE2BC675FC00D70C6C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCDDD2BC675FC00D70C6C /* FirebaseAnalytics */; };
 		7B8DCDE02BC675FC00D70C6C /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCDDF2BC675FC00D70C6C /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -64,6 +70,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B21CEFF2BC68588006224CB /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		7B21CF022BC6859F006224CB /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		7B2221C62BC69B6C00D5DECF /* ManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageView.swift; sourceTree = "<group>"; };
+		7B2221C92BC6A71E00D5DECF /* ManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageViewModel.swift; sourceTree = "<group>"; };
+		7B2221CB2BC6A92300D5DECF /* UserManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManageView.swift; sourceTree = "<group>"; };
+		7B2221CD2BC6AC4700D5DECF /* UserManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManageViewModel.swift; sourceTree = "<group>"; };
 		7B8DCDC82BC66D2400D70C6C /* DermAssist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DermAssist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B8DCDD22BC66D2500D70C6C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CE6C335F2BC67CB700D754A8 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -132,6 +144,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B21CEFE2BC6857F006224CB /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				7B21CEFF2BC68588006224CB /* ChatView.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		7B21CF012BC68591006224CB /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				7B21CF022BC6859F006224CB /* ChatViewModel.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		7B2221C52BC69B5800D5DECF /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				7B2221C62BC69B6C00D5DECF /* ManageView.swift */,
+				7B2221CB2BC6A92300D5DECF /* UserManageView.swift */,
+			);
+			path = Admin;
+			sourceTree = "<group>";
+		};
+		7B2221C82BC6A71400D5DECF /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				7B2221C92BC6A71E00D5DECF /* ManageViewModel.swift */,
+				7B2221CD2BC6AC4700D5DECF /* UserManageViewModel.swift */,
+			);
+			path = Admin;
+			sourceTree = "<group>";
+		};
 		7B8DCDBF2BC66D2400D70C6C = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +225,8 @@
 		CE6C33652BC67CB700D754A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7B2221C52BC69B5800D5DECF /* Admin */,
+				7B21CEFE2BC6857F006224CB /* Chat */,
 				CE6C33852BC67DF100D754A8 /* Others */,
 				CE6C33842BC67DE100D754A8 /* Login */,
 				CE6C33832BC67DC700D754A8 /* Announce */,
@@ -209,6 +257,8 @@
 		CE6C33712BC67CB700D754A8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				7B2221C82BC6A71400D5DECF /* Admin */,
+				7B21CF012BC68591006224CB /* Chat */,
 				CE6C33942BC67EF500D754A8 /* Announce */,
 				CE6C33932BC67EEC00D754A8 /* Others */,
 				CE6C33922BC67EDE00D754A8 /* Login */,
@@ -381,8 +431,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B21CF032BC6859F006224CB /* ChatViewModel.swift in Sources */,
 				CE6C339C2BC67F6800D754A8 /* CommentViewModel.swift in Sources */,
 				CE6C337B2BC67CB700D754A8 /* Extension.swift in Sources */,
+				7B2221C72BC69B6C00D5DECF /* ManageView.swift in Sources */,
 				CE6C338F2BC67EA100D754A8 /* NewPostView.swift in Sources */,
 				CE6C338B2BC67E6C00D754A8 /* AnnounceItemView.swift in Sources */,
 				CE6C33872BC67E2400D754A8 /* AnnounceView.swift in Sources */,
@@ -391,6 +443,7 @@
 				CE6C33772BC67CB700D754A8 /* TLButton.swift in Sources */,
 				CE6C33762BC67CB700D754A8 /* RegisterView.swift in Sources */,
 				CE6C33732BC67CB700D754A8 /* LoginView.swift in Sources */,
+				7B2221CA2BC6A71E00D5DECF /* ManageViewModel.swift in Sources */,
 				CE6C33822BC67D8C00D754A8 /* Post.swift in Sources */,
 				CE6C33742BC67CB700D754A8 /* MainView.swift in Sources */,
 				CE6C337F2BC67CB700D754A8 /* ProfileViewModel.swift in Sources */,
@@ -398,8 +451,11 @@
 				CE6C33892BC67E5200D754A8 /* CommentView.swift in Sources */,
 				CE6C33802BC67CB700D754A8 /* RegisterViewModel.swift in Sources */,
 				CE6C337A2BC67CB700D754A8 /* DermAssistApp.swift in Sources */,
+				7B21CF002BC68588006224CB /* ChatView.swift in Sources */,
 				CE6C337D2BC67CB700D754A8 /* LoginViewModel.swift in Sources */,
 				CE6C33912BC67EBF00D754A8 /* LikeUserView.swift in Sources */,
+				7B2221CC2BC6A92300D5DECF /* UserManageView.swift in Sources */,
+				7B2221CE2BC6AC4700D5DECF /* UserManageViewModel.swift in Sources */,
 				CE6C33962BC67F1200D754A8 /* AnnounceViewModel.swift in Sources */,
 				CE6C33982BC67F3600D754A8 /* PostViewModel.swift in Sources */,
 				CE6C33782BC67CB700D754A8 /* User.swift in Sources */,
