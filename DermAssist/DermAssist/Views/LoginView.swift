@@ -8,8 +8,31 @@
 import SwiftUI
 
 struct LoginView: View {
+    @StateObject var viewModel = LoginViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            VStack {
+                HeaderView(title: "Note", subtitle: "Record things", angle: 15, background: .pink)
+                
+                Form {
+                    TextField("Email Address", text: $viewModel.email)
+                        .textFieldStyle(DefaultTextFieldStyle())
+                        .autocorrectionDisabled()
+                        .autocapitalization(.none)
+                    SecureField("Password", text: $viewModel.password)
+                        .textFieldStyle(DefaultTextFieldStyle())
+                    TLButton(title: "Log In", background: .blue) {
+                        viewModel.login()
+                    }
+                }
+                VStack {
+                    Text("Hello")
+                    NavigationLink("Create an Account", destination:
+                        RegisterView())
+                }
+            }
+        }
     }
 }
 
