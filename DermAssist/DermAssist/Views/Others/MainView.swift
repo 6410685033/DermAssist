@@ -23,7 +23,7 @@ struct MainView: View {
     @ViewBuilder
     private func accountView(for user: User) -> some View {
         TabView {
-            AnnounceView()
+            AnnounceView(user: user)
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }

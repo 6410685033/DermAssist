@@ -76,7 +76,7 @@ class PostViewModel: ObservableObject {
         
         // add comment to comment field
         postRef.updateData([
-            "comments": FieldValue.arrayUnion([newComment.dictionary])
+            "comments": FieldValue.arrayUnion([newComment.asDictionary])
         ]) { error in
             if let error = error {
                 print("Error adding comment: \(error.localizedDescription)")

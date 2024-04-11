@@ -10,6 +10,7 @@ import SwiftUI
 
 struct AnnounceView: View {
     @StateObject var viewModel = AnnounceViewModel()
+    var user: User
     
     var body: some View {
         NavigationView {
@@ -22,10 +23,12 @@ struct AnnounceView: View {
             }
             .navigationTitle("Announcements")
             .toolbar {
-                Button {
-                    viewModel.showingnewPostView = true
-                } label: {
-                    Image(systemName: "plus")
+                if (user.role.isDoctor) {
+                    Button {
+                        viewModel.showingnewPostView = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
                 }
             }
             .sheet(isPresented: $viewModel.showingnewPostView) {
@@ -57,5 +60,6 @@ private let itemFormatter: DateFormatter = {
 }()
 
 #Preview {
-    AnnounceView()
+    AnnounceView(user: .init(id: "123", name: "John", email: "john@mail.com", tel: "0812345643", gender: "Male", joined: Date().timeIntervalSince1970, role: .patient))
+//    AnnounceView(user: .init(id: "123", name: "John", email: "john@mail.com", tel: "0812345643", gender: "Male", joined: Date().timeIntervalSince1970, role: .doctor))
 }

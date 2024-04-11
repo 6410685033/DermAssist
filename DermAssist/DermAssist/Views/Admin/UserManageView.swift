@@ -52,5 +52,5 @@ struct UserManageView: View {
 }
 
 #Preview {
-    UserManageView(user: User.init(id: "123", name: "Tony Stark", email: "iron@man.com", tel: "0812345678", gender: "Male", joined: Date().timeIntervalSince1970, role: .docter))
+    UserManageView(user: User.init(id: "123", name: "Tony Stark", email: "iron@man.com", tel: "0812345678", gender: "Male", joined: Date().timeIntervalSince1970, role: .doctor))
 }

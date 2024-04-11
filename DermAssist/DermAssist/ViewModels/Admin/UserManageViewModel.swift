@@ -17,7 +17,7 @@ class UserManageViewModel: ObservableObject {
             return
         }
         
-        db.collection("users").document(userId).setData(user.asDictionary) { error in
+        db.collection("users").document(userId).setData(user.asDictionary()) { error in
             if let error = error {
                 completion(false, error)
             } else {

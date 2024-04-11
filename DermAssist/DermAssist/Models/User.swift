@@ -19,13 +19,13 @@ struct User: Codable, Identifiable {
 }
 
 enum UserRole: String, Codable, CaseIterable {
-    case docter = "doctor"
+    case doctor = "doctor"
     case patient = "patient"
     case admin = "admin"
     
     var displayName: String {
         switch self {
-        case .docter:
+        case .doctor:
             return "Doctor"
         case .patient:
             return "Patient"
@@ -35,7 +35,7 @@ enum UserRole: String, Codable, CaseIterable {
     }
     
     var isDoctor: Bool {
-        self == .docter
+        self == .doctor
     }
     
     var isAdmin: Bool {

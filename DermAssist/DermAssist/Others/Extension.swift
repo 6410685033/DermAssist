@@ -26,47 +26,6 @@ extension Encodable {
     }
 }
 
-extension Post {
-    func asDictionary() -> [String: Any] {
-        return [
-            "id": id,
-            "title": title,
-            "createDate": createDate,
-            "content": content,
-            "creator": creator,
-            "comments": comments.map { $0.asDictionary() },  // Assuming comments are also Codable
-            "likes": likes,
-            "is_pin": is_pin,
-        ]
-    }
-}
-
-extension Comment {
-    var dictionary: [String: Any] {
-        return [
-            "id": id,
-            "authorId": authorId,
-            "content": content,
-            "createDate": createDate,
-            "is_pin": is_pin,
-        ]
-    }
-}
-
-extension User {
-    var asDictionary: [String: Any] {
-        return [
-            "id": id ?? "",  // Providing a default value if id is nil
-            "name": name,
-            "email": email,
-            "tel": tel,
-            "gender": gender,
-            "joined": joined,
-            "role": role.rawValue,
-        ]
-    }
-}
-
 extension PostViewModel {
     // Check if the current user has liked the post
     var isLiked: Bool {
