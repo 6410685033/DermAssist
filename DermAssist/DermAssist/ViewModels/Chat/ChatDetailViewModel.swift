@@ -31,28 +31,47 @@ final class ChatDetailsViewModel: ObservableObject {
     }
     
     func sendUserMessage(_ message: String) {
+        guard let openAI = openAI else {
+            print("OpenAI is not initialized")
+            return
+        }
+        
         let userMessage = Message(is_pin: false, createDate: Date().timeIntervalSince1970, id: UUID().uuidString, message: message, isUser: true)
         messages.append(userMessage) // Append user message to chat history
         saveMessage(userMessage) // Save user message to Firestore
         
-        openAI?.sendCompletion(with: message, maxTokens: 500) { [weak self] result in
+        openAI.sendCompletion(with: message, maxTokens: 500) { [weak self] result in
+            guard let self = self else { return }
+            
             switch result {
             case .success(let model):
+                print("Full model response: \(model)")  // Print the entire response
                 if let response = model.choices?.first?.text {
-                    self?.receiveBotMessage(response) // Handle bot's response
-                    print("response success")
+                    if !response.isEmpty {
+                        DispatchQueue.main.async {
+                            self.receiveBotMessage(response) // Handle bot's response
+                        }
+                    } else {
+                        print("Received an empty string as a response.")
+                    }
+                } else {
+                    print("No text found in the first choice of the response.")
                 }
-            case .failure(_):
-                // Handle any errors during message sending
-                break
+            case .failure(let error):
+                print("OpenAI Request failed with error: \(error.localizedDescription)")
             }
         }
+        
     }
     
     private func receiveBotMessage(_ message: String) {
         let botMessage = Message(is_pin: false, createDate: Date().timeIntervalSince1970, id: UUID().uuidString, message: message, isUser: false)
-        messages.append(botMessage) // Append bot message to chat history
+        DispatchQueue.main.async {
+            self.messages.append(botMessage) // Append bot message to chat history
+            self.saveMessage(botMessage) // Save bot message to Firestore
+        }
     }
+    
     
     private func saveMessage(_ message: Message) {
         guard let uid = Auth.auth().currentUser?.uid else {
