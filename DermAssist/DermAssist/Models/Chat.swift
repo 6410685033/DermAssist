@@ -13,7 +13,6 @@ struct Chat: Codable ,Identifiable, Pinnable {
     
     let id: String
     var chat_name: String
-    var messages: [Message]
 }
 
 struct Message: Codable ,Identifiable, Pinnable {
