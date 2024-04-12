@@ -32,7 +32,7 @@ struct ChatDetailsView: View {
                     .cornerRadius(15)
                 Button {
                     self.viewModel.sendNewMessage(content: newMessage)
-                    newMessage = ""
+                    
                 } label: {
                     Image(systemName: "paperplane")
                 }
