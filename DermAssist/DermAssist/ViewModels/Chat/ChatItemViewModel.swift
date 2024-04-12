@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 class ChatItemViewModel: ObservableObject {
     
-    func toggleIsDone(item: Chat) {
+    func toggleIsDone(item: ChatRoom) {
         var itemCopy = item
         itemCopy.toggle_pin()
         

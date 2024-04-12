@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Chat: Codable ,Identifiable, Pinnable {
+struct ChatRoom: Codable ,Identifiable, Pinnable {
     var is_pin: Bool
     let createDate: TimeInterval
     

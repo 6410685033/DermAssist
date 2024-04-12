@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 struct ChatView: View {
     
     @StateObject var viewModel: ChatViewModel
-    @FirestoreQuery var items: [Chat]
+    @FirestoreQuery var items: [ChatRoom]
     
     init(userId: String) {
         self._items = FirestoreQuery(collectionPath: "users/\(userId)/chats")

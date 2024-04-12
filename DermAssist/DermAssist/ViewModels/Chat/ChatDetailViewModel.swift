@@ -9,14 +9,14 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
-import OpenAISwift
+import OpenAI
 
 final class ChatDetailsViewModel: ObservableObject {
     @Published var messages: [Message] = []
-    private var openAI: OpenAISwift?
+    let openAI = OpenAI(apiToken: "API")
     
     var itemId: String
-    @Published var item: Chat? = nil
+    @Published var item: ChatRoom? = nil
     @Published var showingEditView = false
     
     init(itemId: String) {
@@ -25,53 +25,30 @@ final class ChatDetailsViewModel: ObservableObject {
         fetch_messages()
     }
     
-    func setupOpenAI() {
-        let config: OpenAISwift.Config = .makeDefaultOpenAI(apiKey: "API")
-        openAI = OpenAISwift(config: config) // Initialize OpenAI
+    func sendNewMessage(content: String) {
+        let userMessage = Message(is_pin: false, createDate: Date().timeIntervalSince1970, id: UUID().uuidString, message: content, isUser: true)
+        self.messages.append(userMessage)
+        getBotReply()
     }
     
-    func sendUserMessage(_ message: String) {
-        guard let openAI = openAI else {
-            print("OpenAI is not initialized")
-            return
-        }
-        
-        let userMessage = Message(is_pin: false, createDate: Date().timeIntervalSince1970, id: UUID().uuidString, message: message, isUser: true)
-        messages.append(userMessage) // Append user message to chat history
-        saveMessage(userMessage) // Save user message to Firestore
-        
-        openAI.sendCompletion(with: message, maxTokens: 500) { [weak self] result in
-            guard let self = self else { return }
-            
+    func getBotReply() {
+
+        openAI.chats(query: .init(model: .gpt3_5Turbo,
+                                  messages: self.messages.map({Chat(role: .user, content: $0.message)}))) { result in
             switch result {
-            case .success(let model):
-                print("Full model response: \(model)")  // Print the entire response
-                if let response = model.choices?.first?.text {
-                    if !response.isEmpty {
-                        DispatchQueue.main.async {
-                            self.receiveBotMessage(response) // Handle bot's response
-                        }
-                    } else {
-                        print("Received an empty string as a response.")
-                    }
-                } else {
-                    print("No text found in the first choice of the response.")
+            case .success(let success):
+                guard let choice = success.choices.first else {
+                    return
                 }
-            case .failure(let error):
-                print("OpenAI Request failed with error: \(error.localizedDescription)")
+                let message = choice.message.content
+                DispatchQueue.main.async {
+                    self.messages.append(Message(is_pin: false, createDate: Date().timeIntervalSince1970, id: UUID().uuidString, message: message!, isUser: false))
+                }
+            case .failure(let failure):
+                print(failure)
             }
         }
-        
     }
-    
-    private func receiveBotMessage(_ message: String) {
-        let botMessage = Message(is_pin: false, createDate: Date().timeIntervalSince1970, id: UUID().uuidString, message: message, isUser: false)
-        DispatchQueue.main.async {
-            self.messages.append(botMessage) // Append bot message to chat history
-            self.saveMessage(botMessage) // Save bot message to Firestore
-        }
-    }
-    
     
     private func saveMessage(_ message: Message) {
         guard let uid = Auth.auth().currentUser?.uid else {
@@ -89,7 +66,7 @@ final class ChatDetailsViewModel: ObservableObject {
         }
     }
     
-    func toggleIsDone(item: Chat) {
+    func toggleIsDone(item: ChatRoom) {
         var itemCopy = item
         itemCopy.toggle_pin()
         
@@ -123,7 +100,7 @@ final class ChatDetailsViewModel: ObservableObject {
             let data = snapshot.data() ?? [:]
             
             DispatchQueue.main.async {
-                self.item = Chat(
+                self.item = ChatRoom(
                     is_pin: data["is_pin"] as? Bool ?? false,
                     createDate: data["createDate"] as? TimeInterval ?? 0,
                     id: data["id"] as? String ?? "",
@@ -175,3 +152,4 @@ final class ChatDetailsViewModel: ObservableObject {
     }
     
 }
+

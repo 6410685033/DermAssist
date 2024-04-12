@@ -22,7 +22,7 @@ class NewChatViewModel: ObservableObject {
         }
         
         let newId = UUID().uuidString
-        let newItem = Chat(is_pin: false, createDate: Date().timeIntervalSince1970, id: newId, chat_name: chat_name)
+        let newItem = ChatRoom(is_pin: false, createDate: Date().timeIntervalSince1970, id: newId, chat_name: chat_name)
         let db = Firestore.firestore()
         db.collection("users")
             .document(uId)
