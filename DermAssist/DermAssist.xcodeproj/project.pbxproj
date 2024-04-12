@@ -73,8 +73,9 @@
 		CE6C33C82BC843C700D754A8 /* ChatItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33C52BC843C700D754A8 /* ChatItemViewModel.swift */; };
 		CE6C33C92BC843C700D754A8 /* ChatDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33C62BC843C700D754A8 /* ChatDetailViewModel.swift */; };
 		CE6C33CA2BC843C700D754A8 /* NewChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33C72BC843C700D754A8 /* NewChatViewModel.swift */; };
-		CE6C33CC2BC843EC00D754A8 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33CB2BC843EC00D754A8 /* Chat.swift */; };
-		CE8C424D2BC851DA008BB442 /* OpenAISwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE8C424C2BC851DA008BB442 /* OpenAISwift */; };
+		CE9825962BC9684100DB384A /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9825952BC9684100DB384A /* ChatRoom.swift */; };
+		CE9825982BC9688900DB384A /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9825972BC9688900DB384A /* MessageView.swift */; };
+		CE98259B2BC9692600DB384A /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = CE98259A2BC9692600DB384A /* OpenAI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,7 +119,8 @@
 		CE6C33C52BC843C700D754A8 /* ChatItemViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatItemViewModel.swift; sourceTree = "<group>"; };
 		CE6C33C62BC843C700D754A8 /* ChatDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDetailViewModel.swift; sourceTree = "<group>"; };
 		CE6C33C72BC843C700D754A8 /* NewChatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewChatViewModel.swift; sourceTree = "<group>"; };
-		CE6C33CB2BC843EC00D754A8 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		CE9825952BC9684100DB384A /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
+		CE9825972BC9688900DB384A /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,9 +146,9 @@
 				7B8DCDF22BC675FC00D70C6C /* FirebaseDatabaseSwift in Frameworks */,
 				7B8DCE122BC675FC00D70C6C /* FirebaseStorageCombine-Community in Frameworks */,
 				7B8DCE0C2BC675FC00D70C6C /* FirebaseRemoteConfig in Frameworks */,
+				CE98259B2BC9692600DB384A /* OpenAI in Frameworks */,
 				7B8DCDFC2BC675FC00D70C6C /* FirebaseFunctions in Frameworks */,
 				7B8DCDE82BC675FC00D70C6C /* FirebaseAppDistribution-Beta in Frameworks */,
-				CE8C424D2BC851DA008BB442 /* OpenAISwift in Frameworks */,
 				7B8DCE0A2BC675FC00D70C6C /* FirebasePerformance in Frameworks */,
 				7B8DCDEC2BC675FC00D70C6C /* FirebaseAuthCombine-Community in Frameworks */,
 				7B8DCE102BC675FC00D70C6C /* FirebaseStorage in Frameworks */,
@@ -163,6 +165,7 @@
 		7B21CEFE2BC6857F006224CB /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				CE9825972BC9688900DB384A /* MessageView.swift */,
 				CE6C33C02BC843A200D754A8 /* ChatDetailView.swift */,
 				CE6C33C12BC843A200D754A8 /* ChatItemView.swift */,
 				CE6C33BF2BC843A200D754A8 /* NewChatView.swift */,
@@ -260,7 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				CE6C33662BC67CB700D754A8 /* User.swift */,
-				CE6C33CB2BC843EC00D754A8 /* Chat.swift */,
+				CE9825952BC9684100DB384A /* ChatRoom.swift */,
 				CE6C33812BC67D8C00D754A8 /* Post.swift */,
 			);
 			path = Models;
@@ -395,7 +398,7 @@
 				7B8DCE0D2BC675FC00D70C6C /* FirebaseRemoteConfigSwift */,
 				7B8DCE0F2BC675FC00D70C6C /* FirebaseStorage */,
 				7B8DCE112BC675FC00D70C6C /* FirebaseStorageCombine-Community */,
-				CE8C424C2BC851DA008BB442 /* OpenAISwift */,
+				CE98259A2BC9692600DB384A /* OpenAI */,
 			);
 			productName = DermAssist;
 			productReference = 7B8DCDC82BC66D2400D70C6C /* DermAssist.app */;
@@ -427,7 +430,7 @@
 			mainGroup = 7B8DCDBF2BC66D2400D70C6C;
 			packageReferences = (
 				7B8DCDDB2BC672EF00D70C6C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				CE8C424B2BC851DA008BB442 /* XCRemoteSwiftPackageReference "OpenAISwift" */,
+				CE9825992BC9692600DB384A /* XCRemoteSwiftPackageReference "OpenAI" */,
 			);
 			productRefGroup = 7B8DCDC92BC66D2400D70C6C /* Products */;
 			projectDirPath = "";
@@ -456,6 +459,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE9825962BC9684100DB384A /* ChatRoom.swift in Sources */,
 				7B21CF032BC6859F006224CB /* ChatViewModel.swift in Sources */,
 				CE6C339C2BC67F6800D754A8 /* CommentViewModel.swift in Sources */,
 				CE6C337B2BC67CB700D754A8 /* Extension.swift in Sources */,
@@ -472,7 +476,6 @@
 				CE6C33762BC67CB700D754A8 /* RegisterView.swift in Sources */,
 				CE6C33732BC67CB700D754A8 /* LoginView.swift in Sources */,
 				7B2221CA2BC6A71E00D5DECF /* ManageViewModel.swift in Sources */,
-				CE6C33CC2BC843EC00D754A8 /* Chat.swift in Sources */,
 				CE6C33822BC67D8C00D754A8 /* Post.swift in Sources */,
 				CE6C33742BC67CB700D754A8 /* MainView.swift in Sources */,
 				CE6C33C92BC843C700D754A8 /* ChatDetailViewModel.swift in Sources */,
@@ -486,6 +489,7 @@
 				CE6C33C42BC843A200D754A8 /* ChatItemView.swift in Sources */,
 				CE6C33912BC67EBF00D754A8 /* LikeUserView.swift in Sources */,
 				7B2221CC2BC6A92300D5DECF /* UserManageView.swift in Sources */,
+				CE9825982BC9688900DB384A /* MessageView.swift in Sources */,
 				7B2221CE2BC6AC4700D5DECF /* UserManageViewModel.swift in Sources */,
 				CE6C33962BC67F1200D754A8 /* AnnounceViewModel.swift in Sources */,
 				CE6C33982BC67F3600D754A8 /* PostViewModel.swift in Sources */,
@@ -708,12 +712,12 @@
 				minimumVersion = 10.24.0;
 			};
 		};
-		CE8C424B2BC851DA008BB442 /* XCRemoteSwiftPackageReference "OpenAISwift" */ = {
+		CE9825992BC9692600DB384A /* XCRemoteSwiftPackageReference "OpenAI" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/adamrushy/OpenAISwift.git";
+			repositoryURL = "https://github.com/MacPaw/OpenAI.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.1;
+				minimumVersion = 0.2.5;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -854,10 +858,10 @@
 			package = 7B8DCDDB2BC672EF00D70C6C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
 		};
-		CE8C424C2BC851DA008BB442 /* OpenAISwift */ = {
+		CE98259A2BC9692600DB384A /* OpenAI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CE8C424B2BC851DA008BB442 /* XCRemoteSwiftPackageReference "OpenAISwift" */;
-			productName = OpenAISwift;
+			package = CE9825992BC9692600DB384A /* XCRemoteSwiftPackageReference "OpenAI" */;
+			productName = OpenAI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

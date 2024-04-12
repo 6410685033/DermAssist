@@ -11,28 +11,42 @@ import FirebaseFirestoreSwift
 struct ChatDetailsView: View {
     @StateObject var viewModel: ChatDetailsViewModel
     @State private var newMessage = ""
-    
+
     init(itemId: String) {
         _viewModel = StateObject(wrappedValue: ChatDetailsViewModel(itemId: itemId))
     }
+
     var body: some View {
         VStack {
-            ScrollView {
-                ForEach(viewModel.messages) {
-                    message in
-                    MessageView(message: message)
-                        .padding(5)
+            ScrollViewReader { scrollViewProxy in
+                ScrollView {
+                    ForEach(viewModel.messages) { message in
+                        MessageView(message: message)
+                            .padding(5)
+                            .id(message.id)  // Ensure each message has a unique ID
+                    }
+                }
+                .onAppear {
+                    if let lastMessage = viewModel.messages.last {
+                        scrollViewProxy.scrollTo(lastMessage.id, anchor: .bottom)
+                    }
+                }
+                .onChange(of: viewModel.messages) { _ in
+                    if let lastMessage = viewModel.messages.last {
+                        scrollViewProxy.scrollTo(lastMessage.id, anchor: .bottom)
+                    }
                 }
             }
+            
             Divider()
             HStack {
-                TextField("Message...", text: self.$newMessage, axis: .vertical)
+                TextField("What skin product would you like?", text: $newMessage, axis: .vertical)
                     .padding(5)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(15)
                 Button {
-                    self.viewModel.sendNewMessage(content: newMessage)
-                    
+                    viewModel.sendNewMessage(content: newMessage)
+                    newMessage = ""
                 } label: {
                     Image(systemName: "paperplane")
                 }
@@ -41,4 +55,3 @@ struct ChatDetailsView: View {
         }
     }
 }
-

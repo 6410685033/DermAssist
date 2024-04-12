@@ -14,7 +14,7 @@ import OpenAI
 final class ChatDetailsViewModel: ObservableObject {
     @Published var messages: [Message] = []
     let openAI = OpenAI(apiToken: "API")
-    
+    @Published var lastest_message: Message? = nil
     var itemId: String
     @Published var item: ChatRoom? = nil
     @Published var showingEditView = false
@@ -27,6 +27,7 @@ final class ChatDetailsViewModel: ObservableObject {
     
     func sendNewMessage(content: String) {
         let userMessage = Message(is_pin: false, createDate: Date().timeIntervalSince1970, id: UUID().uuidString, message: content, isUser: true)
+        self.saveMessage(userMessage)
         self.messages.append(userMessage)
         getBotReply()
     }
@@ -42,7 +43,9 @@ final class ChatDetailsViewModel: ObservableObject {
                 }
                 let message = choice.message.content
                 DispatchQueue.main.async {
-                    self.messages.append(Message(is_pin: false, createDate: Date().timeIntervalSince1970, id: UUID().uuidString, message: message!, isUser: false))
+                    let bot_message = Message(is_pin: false, createDate: Date().timeIntervalSince1970, id: UUID().uuidString, message: message!, isUser: false)
+                    self.messages.append(bot_message)
+                    self.saveMessage(bot_message)
                 }
             case .failure(let failure):
                 print(failure)
@@ -112,6 +115,8 @@ final class ChatDetailsViewModel: ObservableObject {
     
     func sort_message() {
         self.messages.sort { $0.createDate < $1.createDate }
+        self.lastest_message = self.messages.max(by: { $0.createDate < $1.createDate }) ?? nil
+        print("sort_message work with: \(String(describing: lastest_message))")
     }
     
     func fetch_messages() {

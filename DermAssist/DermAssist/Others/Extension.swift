@@ -50,3 +50,10 @@ extension Pinnable {
         self.is_pin = !self.is_pin
     }
 }
+
+extension Message: Equatable {
+    static func ==(lhs: Message, rhs: Message) -> Bool {
+        // Compare based on createDate
+        return lhs.createDate == rhs.createDate
+    }
+}
