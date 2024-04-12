@@ -14,7 +14,7 @@ struct NewChatView: View {
     
     var body: some View {
         VStack {
-            Text("New Item")
+            Text("New Chat")
                 .font(.system(size: 32))
                 .bold()
                 .padding(.top, 50)

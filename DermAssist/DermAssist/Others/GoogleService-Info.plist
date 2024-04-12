@@ -15,16 +15,20 @@
 	<key>STORAGE_BUCKET</key>
 	<string>dermassist-f5061.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:275843396668:ios:03894a65c9b431598fff39</string>
+	<key>FirebaseAppDelegateProxyEnable</key>
+	<string>NO</string>
+	<key>FirebaseAutomaticScreenReportingEnabled</key>
+	<string>NO</string>
 </dict>
 </plist>

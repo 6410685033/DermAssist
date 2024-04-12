@@ -22,4 +22,5 @@ struct Message: Codable ,Identifiable, Pinnable {
     
     var id: String
     let message: String
+    var isUser: Bool
 }

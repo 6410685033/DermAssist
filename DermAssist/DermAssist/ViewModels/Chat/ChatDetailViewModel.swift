@@ -9,8 +9,12 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import OpenAISwift
 
-class ChatDetailsViewModel: ObservableObject {
+final class ChatDetailsViewModel: ObservableObject {
+    @Published var messages: [Message] = []
+    private var openAI: OpenAISwift?
+    
     var itemId: String
     @Published var item: Chat? = nil
     @Published var showingEditView = false
@@ -18,6 +22,34 @@ class ChatDetailsViewModel: ObservableObject {
     init(itemId: String) {
         self.itemId = itemId
         fetch_item()
+    }
+    
+    func setupOpenAI() {
+        let config: OpenAISwift.Config = .makeDefaultOpenAI(apiKey: "API")
+        openAI = OpenAISwift(config: config) // Initialize OpenAI
+    }
+
+    func sendUserMessage(_ message: String) {
+        let userMessage = Message(is_pin: false, createDate: Date().timeIntervalSince1970, id: UUID().uuidString, message: message, isUser: true)
+        messages.append(userMessage) // Append user message to chat history
+
+        openAI?.sendCompletion(with: message, maxTokens: 500) { [weak self] result in
+            switch result {
+            case .success(let model):
+                if let response = model.choices?.first?.text {
+                    self?.receiveBotMessage(response) // Handle bot's response
+                    print("response success")
+                }
+            case .failure(_):
+                // Handle any errors during message sending
+                break
+            }
+        }
+    }
+
+    private func receiveBotMessage(_ message: String) {
+        let botMessage = Message(is_pin: false, createDate: Date().timeIntervalSince1970, id: UUID().uuidString, message: message, isUser: false)
+        messages.append(botMessage) // Append bot message to chat history
     }
     
     func toggleIsDone(item: Chat) {

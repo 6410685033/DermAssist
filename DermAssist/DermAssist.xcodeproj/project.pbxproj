@@ -67,6 +67,14 @@
 		CE6C33982BC67F3600D754A8 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33972BC67F3600D754A8 /* PostViewModel.swift */; };
 		CE6C339A2BC67F5100D754A8 /* NewPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33992BC67F5100D754A8 /* NewPostViewModel.swift */; };
 		CE6C339C2BC67F6800D754A8 /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C339B2BC67F6800D754A8 /* CommentViewModel.swift */; };
+		CE6C33C22BC843A200D754A8 /* NewChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33BF2BC843A200D754A8 /* NewChatView.swift */; };
+		CE6C33C32BC843A200D754A8 /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33C02BC843A200D754A8 /* ChatDetailView.swift */; };
+		CE6C33C42BC843A200D754A8 /* ChatItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33C12BC843A200D754A8 /* ChatItemView.swift */; };
+		CE6C33C82BC843C700D754A8 /* ChatItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33C52BC843C700D754A8 /* ChatItemViewModel.swift */; };
+		CE6C33C92BC843C700D754A8 /* ChatDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33C62BC843C700D754A8 /* ChatDetailViewModel.swift */; };
+		CE6C33CA2BC843C700D754A8 /* NewChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33C72BC843C700D754A8 /* NewChatViewModel.swift */; };
+		CE6C33CC2BC843EC00D754A8 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33CB2BC843EC00D754A8 /* Chat.swift */; };
+		CE8C424D2BC851DA008BB442 /* OpenAISwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE8C424C2BC851DA008BB442 /* OpenAISwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +112,13 @@
 		CE6C33972BC67F3600D754A8 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		CE6C33992BC67F5100D754A8 /* NewPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewModel.swift; sourceTree = "<group>"; };
 		CE6C339B2BC67F6800D754A8 /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
+		CE6C33BF2BC843A200D754A8 /* NewChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewChatView.swift; sourceTree = "<group>"; };
+		CE6C33C02BC843A200D754A8 /* ChatDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDetailView.swift; sourceTree = "<group>"; };
+		CE6C33C12BC843A200D754A8 /* ChatItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatItemView.swift; sourceTree = "<group>"; };
+		CE6C33C52BC843C700D754A8 /* ChatItemViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatItemViewModel.swift; sourceTree = "<group>"; };
+		CE6C33C62BC843C700D754A8 /* ChatDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDetailViewModel.swift; sourceTree = "<group>"; };
+		CE6C33C72BC843C700D754A8 /* NewChatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewChatViewModel.swift; sourceTree = "<group>"; };
+		CE6C33CB2BC843EC00D754A8 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +146,7 @@
 				7B8DCE0C2BC675FC00D70C6C /* FirebaseRemoteConfig in Frameworks */,
 				7B8DCDFC2BC675FC00D70C6C /* FirebaseFunctions in Frameworks */,
 				7B8DCDE82BC675FC00D70C6C /* FirebaseAppDistribution-Beta in Frameworks */,
+				CE8C424D2BC851DA008BB442 /* OpenAISwift in Frameworks */,
 				7B8DCE0A2BC675FC00D70C6C /* FirebasePerformance in Frameworks */,
 				7B8DCDEC2BC675FC00D70C6C /* FirebaseAuthCombine-Community in Frameworks */,
 				7B8DCE102BC675FC00D70C6C /* FirebaseStorage in Frameworks */,
@@ -147,6 +163,9 @@
 		7B21CEFE2BC6857F006224CB /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				CE6C33C02BC843A200D754A8 /* ChatDetailView.swift */,
+				CE6C33C12BC843A200D754A8 /* ChatItemView.swift */,
+				CE6C33BF2BC843A200D754A8 /* NewChatView.swift */,
 				7B21CEFF2BC68588006224CB /* ChatView.swift */,
 			);
 			path = Chat;
@@ -155,6 +174,9 @@
 		7B21CF012BC68591006224CB /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				CE6C33C62BC843C700D754A8 /* ChatDetailViewModel.swift */,
+				CE6C33C52BC843C700D754A8 /* ChatItemViewModel.swift */,
+				CE6C33C72BC843C700D754A8 /* NewChatViewModel.swift */,
 				7B21CF022BC6859F006224CB /* ChatViewModel.swift */,
 			);
 			path = Chat;
@@ -238,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				CE6C33662BC67CB700D754A8 /* User.swift */,
+				CE6C33CB2BC843EC00D754A8 /* Chat.swift */,
 				CE6C33812BC67D8C00D754A8 /* Post.swift */,
 			);
 			path = Models;
@@ -372,6 +395,7 @@
 				7B8DCE0D2BC675FC00D70C6C /* FirebaseRemoteConfigSwift */,
 				7B8DCE0F2BC675FC00D70C6C /* FirebaseStorage */,
 				7B8DCE112BC675FC00D70C6C /* FirebaseStorageCombine-Community */,
+				CE8C424C2BC851DA008BB442 /* OpenAISwift */,
 			);
 			productName = DermAssist;
 			productReference = 7B8DCDC82BC66D2400D70C6C /* DermAssist.app */;
@@ -403,6 +427,7 @@
 			mainGroup = 7B8DCDBF2BC66D2400D70C6C;
 			packageReferences = (
 				7B8DCDDB2BC672EF00D70C6C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CE8C424B2BC851DA008BB442 /* XCRemoteSwiftPackageReference "OpenAISwift" */,
 			);
 			productRefGroup = 7B8DCDC92BC66D2400D70C6C /* Products */;
 			projectDirPath = "";
@@ -436,6 +461,9 @@
 				CE6C337B2BC67CB700D754A8 /* Extension.swift in Sources */,
 				7B2221C72BC69B6C00D5DECF /* ManageView.swift in Sources */,
 				CE6C338F2BC67EA100D754A8 /* NewPostView.swift in Sources */,
+				CE6C33C82BC843C700D754A8 /* ChatItemViewModel.swift in Sources */,
+				CE6C33C22BC843A200D754A8 /* NewChatView.swift in Sources */,
+				CE6C33CA2BC843C700D754A8 /* NewChatViewModel.swift in Sources */,
 				CE6C338B2BC67E6C00D754A8 /* AnnounceItemView.swift in Sources */,
 				CE6C33872BC67E2400D754A8 /* AnnounceView.swift in Sources */,
 				CE6C33752BC67CB700D754A8 /* ProfileView.swift in Sources */,
@@ -444,8 +472,10 @@
 				CE6C33762BC67CB700D754A8 /* RegisterView.swift in Sources */,
 				CE6C33732BC67CB700D754A8 /* LoginView.swift in Sources */,
 				7B2221CA2BC6A71E00D5DECF /* ManageViewModel.swift in Sources */,
+				CE6C33CC2BC843EC00D754A8 /* Chat.swift in Sources */,
 				CE6C33822BC67D8C00D754A8 /* Post.swift in Sources */,
 				CE6C33742BC67CB700D754A8 /* MainView.swift in Sources */,
+				CE6C33C92BC843C700D754A8 /* ChatDetailViewModel.swift in Sources */,
 				CE6C337F2BC67CB700D754A8 /* ProfileViewModel.swift in Sources */,
 				CE6C33722BC67CB700D754A8 /* HeaderView.swift in Sources */,
 				CE6C33892BC67E5200D754A8 /* CommentView.swift in Sources */,
@@ -453,12 +483,14 @@
 				CE6C337A2BC67CB700D754A8 /* DermAssistApp.swift in Sources */,
 				7B21CF002BC68588006224CB /* ChatView.swift in Sources */,
 				CE6C337D2BC67CB700D754A8 /* LoginViewModel.swift in Sources */,
+				CE6C33C42BC843A200D754A8 /* ChatItemView.swift in Sources */,
 				CE6C33912BC67EBF00D754A8 /* LikeUserView.swift in Sources */,
 				7B2221CC2BC6A92300D5DECF /* UserManageView.swift in Sources */,
 				7B2221CE2BC6AC4700D5DECF /* UserManageViewModel.swift in Sources */,
 				CE6C33962BC67F1200D754A8 /* AnnounceViewModel.swift in Sources */,
 				CE6C33982BC67F3600D754A8 /* PostViewModel.swift in Sources */,
 				CE6C33782BC67CB700D754A8 /* User.swift in Sources */,
+				CE6C33C32BC843A200D754A8 /* ChatDetailView.swift in Sources */,
 				CE6C338D2BC67E8C00D754A8 /* PostView.swift in Sources */,
 				CE6C337E2BC67CB700D754A8 /* MainViewModel.swift in Sources */,
 			);
@@ -676,6 +708,14 @@
 				minimumVersion = 10.24.0;
 			};
 		};
+		CE8C424B2BC851DA008BB442 /* XCRemoteSwiftPackageReference "OpenAISwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adamrushy/OpenAISwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -813,6 +853,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7B8DCDDB2BC672EF00D70C6C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		CE8C424C2BC851DA008BB442 /* OpenAISwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE8C424B2BC851DA008BB442 /* XCRemoteSwiftPackageReference "OpenAISwift" */;
+			productName = OpenAISwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
