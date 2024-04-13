@@ -7,8 +7,10 @@
 
 import SwiftUI
 import FirebaseFirestoreSwift
+import CoreLocationUI
 
 struct ChatDetailsView: View {
+    @StateObject var locationManager = LocationManager()
     @StateObject var viewModel: ChatDetailsViewModel
     @State private var newMessage = ""
     
@@ -40,20 +42,8 @@ struct ChatDetailsView: View {
             
             Divider()
             HStack {
-                Button {
-                    Task {
-                        await viewModel.fetchPharmacy()
-                    }
-                }label: {
-                    Image(systemName: "mappin.and.ellipse")
-                }
-                .sheet(isPresented: $viewModel.showingPharmacy) {
-                    if let pharmacyText = viewModel.pharmacy {
-                        Text(pharmacyText)
-                    } else {
-                        Text("No pharmacy data available.")
-                    }
-                }
+                PharmacyButton(locationManager: locationManager, viewModel: viewModel)
+                
                 TextField("What skin product would you like?", text: $newMessage, axis: .vertical)
                     .padding(5)
                     .background(Color.gray.opacity(0.1))
@@ -66,6 +56,33 @@ struct ChatDetailsView: View {
                 }
             }
             .padding()
+        }
+    }
+}
+
+struct PharmacyButton: View {
+    @ObservedObject var locationManager: LocationManager
+    @ObservedObject var viewModel: ChatDetailsViewModel
+
+    var body: some View {
+        LocationButton(.currentLocation) {
+            Task {
+                locationManager.requestLocation()
+                await viewModel.fetchPharmacy()
+            }
+        }
+        .labelStyle(.iconOnly)  // Emphasizes the icon, minimal text
+        .symbolVariant(.fill)   // Filled style for the icon
+        .foregroundColor(.white)
+        .background(Color.blue) // Customizable background color
+        .clipShape(Circle())    // Makes the button circular
+        .frame(width: 60, height: 60)
+        .sheet(isPresented: $viewModel.showingPharmacy) {
+            if let pharmacyText = viewModel.pharmacy {
+                Text(pharmacyText)
+            } else {
+                Text("No pharmacy data available.")
+            }
         }
     }
 }
