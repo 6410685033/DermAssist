@@ -1,5 +1,5 @@
 {
-  "originHash" : "c530b98bf009ef8d36b779a28758af802a5c948576421efb31a0d5a4be8c5c5c",
+  "originHash" : "2f3a63364e96bd97b87cd9104c903c86de9b624d64c99adf1b854cd9bb5d1283",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "42eae77a0af79e9c3f41df04a23c76f05cfdda77",
         "version" : "10.24.0"
+      }
+    },
+    {
+      "identity" : "generative-ai-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/generative-ai-swift",
+      "state" : {
+        "revision" : "9156ed7ea18def208d504ff0cf1d584f2a81399e",
+        "version" : "0.4.11"
       }
     },
     {
@@ -103,7 +112,7 @@
     {
       "identity" : "openai",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/MacPaw/OpenAI.git",
+      "location" : "https://github.com/MacPaw/OpenAI",
       "state" : {
         "revision" : "ac5892fd0de8d283362ddc30f8e9f1a0eaba8cc0",
         "version" : "0.2.5"

@@ -11,11 +11,11 @@ import FirebaseFirestoreSwift
 struct ChatDetailsView: View {
     @StateObject var viewModel: ChatDetailsViewModel
     @State private var newMessage = ""
-
+    
     init(itemId: String) {
         _viewModel = StateObject(wrappedValue: ChatDetailsViewModel(itemId: itemId))
     }
-
+    
     var body: some View {
         VStack {
             ScrollViewReader { scrollViewProxy in
@@ -40,6 +40,20 @@ struct ChatDetailsView: View {
             
             Divider()
             HStack {
+                Button {
+                    Task {
+                        await viewModel.fetchPharmacy()
+                    }
+                }label: {
+                    Image(systemName: "mappin.and.ellipse")
+                }
+                .sheet(isPresented: $viewModel.showingPharmacy) {
+                    if let pharmacyText = viewModel.pharmacy {
+                        Text(pharmacyText)
+                    } else {
+                        Text("No pharmacy data available.")
+                    }
+                }
                 TextField("What skin product would you like?", text: $newMessage, axis: .vertical)
                     .padding(5)
                     .background(Color.gray.opacity(0.1))

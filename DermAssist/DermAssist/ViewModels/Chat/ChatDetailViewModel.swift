@@ -10,19 +10,51 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 import OpenAI
+import GoogleGenerativeAI
+
 
 final class ChatDetailsViewModel: ObservableObject {
     @Published var messages: [Message] = []
-    let openAI = OpenAI(apiToken: ProcessInfo.processInfo.environment["openAI"]!)
     @Published var lastest_message: Message? = nil
-    var itemId: String
     @Published var item: ChatRoom? = nil
     @Published var showingEditView = false
+    @Published var pharmacy: String? = nil
+    @Published var showingPharmacy = false
+    var itemId: String
+    
+    let gemini = GenerativeModel(name: "gemini-pro", apiKey: ProcessInfo.processInfo.environment["gemini"]!)
+    let openAI = OpenAI(apiToken: ProcessInfo.processInfo.environment["openAI"]!)
     
     init(itemId: String) {
         self.itemId = itemId
         fetch_chat()
         fetch_messages()
+    }
+    
+    func fetchPharmacy() async {
+        // Check if pharmacy data is already loaded
+        if let pharmacyData = pharmacy, !pharmacyData.isEmpty {
+            // If data is already there, just show it
+            DispatchQueue.main.async {
+                self.showingPharmacy = true
+            }
+        } else {
+            // If no data is loaded, fetch it from Gemini
+            do {
+                let response = try await gemini.generateContent("list of pharmacy") // Fixed typo in prompt
+                DispatchQueue.main.async {
+                    self.pharmacy = response.text
+                    self.showingPharmacy = true
+                }
+            } catch {
+                print("Error fetching pharmacy data: \(error)")
+                DispatchQueue.main.async {
+                    // Handling error: you can decide to show an error message or set a default state
+                    self.pharmacy = "Failed to fetch data: \(error.localizedDescription)"
+                    self.showingPharmacy = true
+                }
+            }
+        }
     }
     
     func sendNewMessage(content: String) {
@@ -33,7 +65,7 @@ final class ChatDetailsViewModel: ObservableObject {
     }
     
     func getBotReply() {
-
+        
         openAI.chats(query: .init(model: .gpt3_5Turbo,
                                   messages: self.messages.map({Chat(role: .user, content: $0.message)}))) { result in
             switch result {

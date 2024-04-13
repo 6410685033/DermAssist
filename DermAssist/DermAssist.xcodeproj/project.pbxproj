@@ -13,6 +13,7 @@
 		7B2221CA2BC6A71E00D5DECF /* ManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2221C92BC6A71E00D5DECF /* ManageViewModel.swift */; };
 		7B2221CC2BC6A92300D5DECF /* UserManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2221CB2BC6A92300D5DECF /* UserManageView.swift */; };
 		7B2221CE2BC6AC4700D5DECF /* UserManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2221CD2BC6AC4700D5DECF /* UserManageViewModel.swift */; };
+		7B4D5C642BCAF1B60076F710 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 7B4D5C632BCAF1B60076F710 /* GoogleGenerativeAI */; };
 		7B8DCDD32BC66D2500D70C6C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B8DCDD22BC66D2500D70C6C /* Preview Assets.xcassets */; };
 		7B8DCDDE2BC675FC00D70C6C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCDDD2BC675FC00D70C6C /* FirebaseAnalytics */; };
 		7B8DCDE02BC675FC00D70C6C /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCDDF2BC675FC00D70C6C /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -132,6 +133,7 @@
 				7B8DCDFE2BC675FC00D70C6C /* FirebaseFunctionsCombine-Community in Frameworks */,
 				7B8DCDF62BC675FC00D70C6C /* FirebaseFirestore in Frameworks */,
 				7B8DCDE22BC675FC00D70C6C /* FirebaseAnalyticsSwift in Frameworks */,
+				7B4D5C642BCAF1B60076F710 /* GoogleGenerativeAI in Frameworks */,
 				7B8DCDDE2BC675FC00D70C6C /* FirebaseAnalytics in Frameworks */,
 				7B8DCDE02BC675FC00D70C6C /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				7B8DCDFA2BC675FC00D70C6C /* FirebaseFirestoreSwift in Frameworks */,
@@ -203,6 +205,13 @@
 			path = Admin;
 			sourceTree = "<group>";
 		};
+		7B4D5C5F2BCAEFE60076F710 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		7B8DCDBF2BC66D2400D70C6C = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +232,7 @@
 		7B8DCDCA2BC66D2400D70C6C /* DermAssist */ = {
 			isa = PBXGroup;
 			children = (
+				7B4D5C5F2BCAEFE60076F710 /* Managers */,
 				CE6C33672BC67CB700D754A8 /* Models */,
 				CE6C336C2BC67CB700D754A8 /* Others */,
 				CE6C33712BC67CB700D754A8 /* ViewModels */,
@@ -399,6 +409,7 @@
 				7B8DCE0F2BC675FC00D70C6C /* FirebaseStorage */,
 				7B8DCE112BC675FC00D70C6C /* FirebaseStorageCombine-Community */,
 				CE98259A2BC9692600DB384A /* OpenAI */,
+				7B4D5C632BCAF1B60076F710 /* GoogleGenerativeAI */,
 			);
 			productName = DermAssist;
 			productReference = 7B8DCDC82BC66D2400D70C6C /* DermAssist.app */;
@@ -431,6 +442,7 @@
 			packageReferences = (
 				7B8DCDDB2BC672EF00D70C6C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				CE9825992BC9692600DB384A /* XCRemoteSwiftPackageReference "OpenAI" */,
+				7B4D5C622BCAF1B60076F710 /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
 			);
 			productRefGroup = 7B8DCDC92BC66D2400D70C6C /* Products */;
 			projectDirPath = "";
@@ -704,6 +716,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7B4D5C622BCAF1B60076F710 /* XCRemoteSwiftPackageReference "generative-ai-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/generative-ai-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.11;
+			};
+		};
 		7B8DCDDB2BC672EF00D70C6C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -723,6 +743,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7B4D5C632BCAF1B60076F710 /* GoogleGenerativeAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B4D5C622BCAF1B60076F710 /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
+			productName = GoogleGenerativeAI;
+		};
 		7B8DCDDD2BC675FC00D70C6C /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7B8DCDDB2BC672EF00D70C6C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
