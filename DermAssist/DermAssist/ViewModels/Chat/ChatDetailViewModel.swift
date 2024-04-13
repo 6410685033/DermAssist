@@ -13,7 +13,7 @@ import OpenAI
 
 final class ChatDetailsViewModel: ObservableObject {
     @Published var messages: [Message] = []
-    let openAI = OpenAI(apiToken: "API")
+    let openAI = OpenAI(apiToken: ProcessInfo.processInfo.environment["openAI"]!)
     @Published var lastest_message: Message? = nil
     var itemId: String
     @Published var item: ChatRoom? = nil
