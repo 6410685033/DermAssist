@@ -18,9 +18,13 @@ final class ChatDetailsViewModel: ObservableObject {
     @Published var lastest_message: Message? = nil
     @Published var item: ChatRoom? = nil
     @Published var showingEditView = false
+    var itemId: String
+    
+    // Gemini and location for pharmacy
     @Published var pharmacy: String? = nil
     @Published var showingPharmacy = false
-    var itemId: String
+    @Published var loadingPharmacy = false
+    
     
     let gemini = GenerativeModel(name: "gemini-pro", apiKey: ProcessInfo.processInfo.environment["gemini"]!)
     let openAI = OpenAI(apiToken: ProcessInfo.processInfo.environment["openAI"]!)
@@ -32,30 +36,35 @@ final class ChatDetailsViewModel: ObservableObject {
     }
     
     func fetchPharmacy() async {
-        // Check if pharmacy data is already loaded
-        if let pharmacyData = pharmacy, !pharmacyData.isEmpty {
-            // If data is already there, just show it
-            DispatchQueue.main.async {
-                self.showingPharmacy = true
+        DispatchQueue.main.async {
+            self.showingPharmacy = true // showing sheet
+            
+            if let pharmacyData = self.pharmacy, !pharmacyData.isEmpty {
+                self.loadingPharmacy = false
+            } else {
+                self.loadingPharmacy = true
             }
-        } else {
-            // If no data is loaded, fetch it from Gemini
+        }
+        
+        if pharmacy == nil || pharmacy!.isEmpty {
             do {
-                let response = try await gemini.generateContent("list of pharmacy") // Fixed typo in prompt
+                let response = try await gemini.generateContent("list of pharmacy")
                 DispatchQueue.main.async {
                     self.pharmacy = response.text
+                    self.loadingPharmacy = false
                     self.showingPharmacy = true
                 }
             } catch {
                 print("Error fetching pharmacy data: \(error)")
                 DispatchQueue.main.async {
-                    // Handling error: you can decide to show an error message or set a default state
                     self.pharmacy = "Failed to fetch data: \(error.localizedDescription)"
+                    self.loadingPharmacy = false
                     self.showingPharmacy = true
                 }
             }
         }
     }
+
     
     func sendNewMessage(content: String) {
         let userMessage = Message(is_pin: false, createDate: Date().timeIntervalSince1970, id: UUID().uuidString, message: content, isUser: true)

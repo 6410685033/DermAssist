@@ -20,20 +20,22 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func requestLocation() {
-        let status: CLAuthorizationStatus = manager.authorizationStatus
-        isLoading = true
-        if status == .notDetermined {
+        print("request location")
+        DispatchQueue.main.async {
+            self.isLoading = true  // Should be inside DispatchQueue.main.async if not on main thread
+        }
+            manager.requestWhenInUseAuthorization()
             manager.requestLocation()
         }
+        
+        
+        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            location = locations.first?.coordinate
+            isLoading = false
+        }
+        
+        func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+            print("Error getting location", error)
+            isLoading = false
+        }
     }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        location = locations.first?.coordinate
-        isLoading = false
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Error getting location", error)
-        isLoading = false
-    }
-}
