@@ -11,6 +11,57 @@ import FirebaseFirestore
 
 class ProfileViewModel: ObservableObject {
     @Published var user: User? = nil
+    @Published var name = ""
+    @Published var tel = ""
+    
+    init() {
+        fetchUser()
+    }
+    
+    func edit() {
+        guard validate() else {
+            return
+        }
+        guard let uId = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let currentEmail = user?.email ?? ""
+        let currentGender = user?.gender ?? "Not Specified"
+        let currentJoined = user?.joined ?? Date().timeIntervalSince1970
+        let currentRole = user?.role ?? UserRole.patient
+
+        let editUser = User(
+            id: uId,
+            name: name.isEmpty ? user?.name ?? "" : name,
+            email: currentEmail,
+            tel: tel.isEmpty ? user?.tel ?? "" : tel,
+            gender: currentGender,
+            joined: currentJoined,
+            role: currentRole
+        )
+
+        let db = Firestore.firestore()
+        db.collection("users")
+            .document(uId)
+            .setData(editUser.asDictionary(), merge: true)
+    }
+    
+    private func validate() -> Bool {
+        guard !name.trimmingCharacters(in: .whitespaces).isEmpty,
+              !tel.trimmingCharacters(in: .whitespaces).isEmpty else {
+            return false
+        }
+        guard tel.count == 10 else {
+            return false
+        }
+        return true
+    }
+    
+    func load() {
+        tel = user?.tel ?? ""
+        name = user?.name ?? ""
+    }
     
     func fetchUser() {
         guard let userId = Auth.auth().currentUser?.uid else {

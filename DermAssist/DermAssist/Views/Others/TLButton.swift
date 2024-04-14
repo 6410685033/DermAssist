@@ -20,7 +20,7 @@ struct TLButton: View {
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(background)
                 Text(title)
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
                     .bold()
                     .padding(5)
             }

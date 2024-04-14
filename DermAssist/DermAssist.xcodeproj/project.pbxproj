@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7B159A522BCC3AB0009A2B27 /* GeminiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A512BCC3AB0009A2B27 /* GeminiManager.swift */; };
+		7B159A542BCC4DD8009A2B27 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A532BCC4DD8009A2B27 /* EditProfileView.swift */; };
 		7B21CF002BC68588006224CB /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21CEFF2BC68588006224CB /* ChatView.swift */; };
 		7B21CF032BC6859F006224CB /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21CF022BC6859F006224CB /* ChatViewModel.swift */; };
 		7B2221C72BC69B6C00D5DECF /* ManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2221C62BC69B6C00D5DECF /* ManageView.swift */; };
@@ -84,6 +85,7 @@
 
 /* Begin PBXFileReference section */
 		7B159A512BCC3AB0009A2B27 /* GeminiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiManager.swift; sourceTree = "<group>"; };
+		7B159A532BCC4DD8009A2B27 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		7B21CEFF2BC68588006224CB /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		7B21CF022BC6859F006224CB /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		7B2221C62BC69B6C00D5DECF /* ManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageView.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				CE6C33602BC67CB700D754A8 /* LoginView.swift */,
 				CE6C33632BC67CB700D754A8 /* RegisterView.swift */,
 				CE6C33622BC67CB700D754A8 /* ProfileView.swift */,
+				7B159A532BCC4DD8009A2B27 /* EditProfileView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B159A542BCC4DD8009A2B27 /* EditProfileView.swift in Sources */,
 				CE9825962BC9684100DB384A /* ChatRoom.swift in Sources */,
 				7B21CF032BC6859F006224CB /* ChatViewModel.swift in Sources */,
 				CE6C339C2BC67F6800D754A8 /* CommentViewModel.swift in Sources */,
