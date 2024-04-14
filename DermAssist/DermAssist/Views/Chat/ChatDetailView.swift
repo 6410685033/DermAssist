@@ -11,6 +11,7 @@ import CoreLocationUI
 
 struct ChatDetailsView: View {
     @StateObject var locationManager = LocationManager()
+    @StateObject var geminiManager = GeminiManager()
     @StateObject var viewModel: ChatDetailsViewModel
     @State private var newMessage = ""
     
@@ -43,7 +44,7 @@ struct ChatDetailsView: View {
             Divider()
             HStack {
                 // Pharmacy near me
-                PharmacyButton(locationManager: locationManager, viewModel: viewModel)
+                PharmacyButton(locationManager: locationManager, geminiManager: geminiManager, viewModel: viewModel)
                 
                 // Input box
                 TextField("What skin product would you like?", text: $newMessage, axis: .vertical)
@@ -66,13 +67,14 @@ struct ChatDetailsView: View {
 
 struct PharmacyButton: View {
     @ObservedObject var locationManager: LocationManager
+    @ObservedObject var geminiManager: GeminiManager
     @ObservedObject var viewModel: ChatDetailsViewModel
     
     var body: some View {
         LocationButton(.currentLocation) {
             Task {
                 locationManager.requestLocation()
-                await viewModel.fetchPharmacy()
+                await geminiManager.fetchPharmacy()
             }
         }
         .labelStyle(.iconOnly)  // Emphasizes the icon, minimal text
@@ -80,13 +82,12 @@ struct PharmacyButton: View {
         .foregroundColor(.white)
         .background(Color.blue)
         .clipShape(Circle())    // Makes the button circular
-        .sheet(isPresented: $viewModel.showingPharmacy) {
-            if viewModel.loadingPharmacy || locationManager.isLoading {
-                //                Text("Loading...")
+        .sheet(isPresented: $geminiManager.showingPharmacy) {
+            if geminiManager.loadingPharmacy || locationManager.isLoading {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle(tint: .blue))
                     .scaleEffect(1.5)
-            } else if let pharmacyText = viewModel.pharmacy {
+            } else if let pharmacyText = geminiManager.pharmacy {
                 Text(pharmacyText)
             } else {
                 Text("No pharmacy data available.")

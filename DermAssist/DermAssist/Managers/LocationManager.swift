@@ -1,5 +1,5 @@
 //
-//  locationManager.swift
+//  LocationManager.swift
 //  DermAssist
 //
 //  Created by Thammasat Thonggamgaew on 14/4/2567 BE.

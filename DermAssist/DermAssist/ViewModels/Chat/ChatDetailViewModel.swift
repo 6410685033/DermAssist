@@ -20,49 +20,12 @@ final class ChatDetailsViewModel: ObservableObject {
     @Published var showingEditView = false
     var itemId: String
     
-    // Gemini and location for pharmacy
-    @Published var pharmacy: String? = nil
-    @Published var showingPharmacy = false
-    @Published var loadingPharmacy = false
-    
-    
-    let gemini = GenerativeModel(name: "gemini-pro", apiKey: ProcessInfo.processInfo.environment["gemini"]!)
     let openAI = OpenAI(apiToken: ProcessInfo.processInfo.environment["openAI"]!)
     
     init(itemId: String) {
         self.itemId = itemId
         fetch_chat()
         fetch_messages()
-    }
-    
-    func fetchPharmacy() async {
-        DispatchQueue.main.async {
-            self.showingPharmacy = true // showing sheet
-            
-            if let pharmacyData = self.pharmacy, !pharmacyData.isEmpty {
-                self.loadingPharmacy = false
-            } else {
-                self.loadingPharmacy = true
-            }
-        }
-        
-        if pharmacy == nil || pharmacy!.isEmpty {
-            do {
-                let response = try await gemini.generateContent("list of pharmacy")
-                DispatchQueue.main.async {
-                    self.pharmacy = response.text
-                    self.loadingPharmacy = false
-                    self.showingPharmacy = true
-                }
-            } catch {
-                print("Error fetching pharmacy data: \(error)")
-                DispatchQueue.main.async {
-                    self.pharmacy = "Failed to fetch data: \(error.localizedDescription)"
-                    self.loadingPharmacy = false
-                    self.showingPharmacy = true
-                }
-            }
-        }
     }
 
     
