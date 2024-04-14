@@ -44,7 +44,7 @@ struct ChatDetailsView: View {
             Divider()
             HStack {
                 // Pharmacy near me
-                PharmacyButton(locationManager: locationManager, geminiManager: geminiManager, viewModel: viewModel)
+                PharmacyButton(locationManager: locationManager, geminiManager: geminiManager)
                 
                 // Input box
                 TextField("What skin product would you like?", text: $newMessage, axis: .vertical)
@@ -68,22 +68,26 @@ struct ChatDetailsView: View {
 struct PharmacyButton: View {
     @ObservedObject var locationManager: LocationManager
     @ObservedObject var geminiManager: GeminiManager
-    @ObservedObject var viewModel: ChatDetailsViewModel
     
     var body: some View {
         LocationButton(.currentLocation) {
             Task {
-                locationManager.requestLocation()
-                await geminiManager.fetchPharmacy()
+                do {
+                    let location = try await locationManager.requestLocation()
+                    await geminiManager.fetchPharmacy(latitude: location.latitude, longitude: location.longitude)
+                } catch {
+                    print("Error getting location or fetching pharmacy data: \(error)")
+                }
             }
         }
-        .labelStyle(.iconOnly)  // Emphasizes the icon, minimal text
-        .symbolVariant(.fill)   // Filled style for the icon
+        .labelStyle(.iconOnly)
+        .symbolVariant(.fill)
         .foregroundColor(.white)
         .background(Color.blue)
-        .clipShape(Circle())    // Makes the button circular
+        .clipShape(Circle())
+        .disabled(locationManager.isLoading || geminiManager.loadingPharmacy)
         .sheet(isPresented: $geminiManager.showingPharmacy) {
-            if geminiManager.loadingPharmacy || locationManager.isLoading {
+            if geminiManager.loadingPharmacy {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle(tint: .blue))
                     .scaleEffect(1.5)
@@ -93,6 +97,5 @@ struct PharmacyButton: View {
                 Text("No pharmacy data available.")
             }
         }
-        
     }
 }
