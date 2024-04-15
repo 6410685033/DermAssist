@@ -21,8 +21,6 @@ extension Encodable {
         } catch {
             return [:]
         }
-        
-        
     }
 }
 

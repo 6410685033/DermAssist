@@ -51,7 +51,7 @@ struct AnnounceItemView: View {
         return formatter.localizedString(for: Date(timeIntervalSince1970: timestamp), relativeTo: Date())
     }
 }
-
-#Preview {
-    AnnounceItemView(item: .init(is_pin: false, createDate: Date().timeIntervalSince1970, id: "123", title: "AnnounceTitle", content: "contenttttttt", creator: "tNcfb0V8ergVGyPfyuUkRQWlnoW2", comments: [], likes: []))
-}
+//
+//#Preview {
+//    AnnounceItemView(item: .init(is_pin: false, createDate: Date().timeIntervalSince1970, id: "123", title: "AnnounceTitle", content: "contenttttttt", creator: UserDefaults(), comments: [], likes: []))
+//}

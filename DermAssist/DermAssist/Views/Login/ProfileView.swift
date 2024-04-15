@@ -10,6 +10,7 @@ import SwiftUI
 struct ProfileView: View {
     @StateObject var viewModel = ProfileViewModel()
     @State private var showingEditPage = false
+    @State private var showCreateNewAllergen = false
     @State private var showConfirmationAlert = false
     @State private var showAlert = false
     @State private var alertMessage = ""
@@ -65,6 +66,23 @@ struct ProfileView: View {
                                     Text(user.tel)
                                         .frame(width: 230, height: 30, alignment: .leading)
                                 }
+                                Text("Allergen: ")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                VStack{
+                                    VStack(spacing: 10) {
+                                        ForEach(viewModel.myAllergens, id: \.id) { allergen in
+                                            Text(allergen.allergen_name)
+                                        }
+                                        Button(action: {
+                                            showCreateNewAllergen = true
+                                        }) {
+                                            Image(systemName: "plus.circle.fill")
+                                                .foregroundColor(.green)
+                                                .font(.title)
+                                        }
+                                    }
+                                    .padding()
+                                }
                             }
                             .padding(30)
                             
@@ -106,6 +124,9 @@ struct ProfileView: View {
             }
             .fullScreenCover(isPresented: $showingEditPage, onDismiss: viewModel.fetchUser) {EditProfileView()}
             .padding(30)
+            .sheet(isPresented: $showCreateNewAllergen) {
+                CreateNewAllergenView(CreateNewAllergenPresented: $showCreateNewAllergen)
+            }
             
             // Picture
             VStack{
