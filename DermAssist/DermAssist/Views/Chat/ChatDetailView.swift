@@ -44,7 +44,7 @@ struct ChatDetailsView: View {
             Divider()
             HStack {
                 // Pharmacy near me
-                PharmacyButton(locationManager: locationManager, geminiManager: geminiManager)
+                PharmacyButton(locationManager: locationManager)
                 
                 // Input box
                 TextField("What skin product would you like?", text: $newMessage, axis: .vertical)
@@ -67,14 +67,14 @@ struct ChatDetailsView: View {
 
 struct PharmacyButton: View {
     @ObservedObject var locationManager: LocationManager
-    @ObservedObject var geminiManager: GeminiManager
     
     var body: some View {
         LocationButton(.currentLocation) {
             Task {
                 do {
+                    locationManager.showingPharmacy = true
                     let location = try await locationManager.requestLocation()
-                    await geminiManager.fetchPharmacy(latitude: location.latitude, longitude: location.longitude)
+                    await locationManager.fetchNearbyPharmacies(latitude: location.latitude, longitude: location.longitude)
                 } catch {
                     print("Error getting location or fetching pharmacy data: \(error)")
                 }
@@ -85,16 +85,16 @@ struct PharmacyButton: View {
         .foregroundColor(.white)
         .background(Color.blue)
         .clipShape(Circle())
-        .disabled(locationManager.isLoading || geminiManager.loadingPharmacy)
-        .sheet(isPresented: $geminiManager.showingPharmacy) {
-            if geminiManager.loadingPharmacy {
+        .disabled(locationManager.isLoading)
+        .sheet(isPresented: $locationManager.showingPharmacy) {
+            if locationManager.isLoading {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle(tint: .blue))
                     .scaleEffect(1.5)
-            } else if let pharmacyText = geminiManager.pharmacy {
-                Text(pharmacyText)
             } else {
-                Text("No pharmacy data available.")
+                List(locationManager.pharmacies, id: \.self) { pharmacy in
+                    Text(pharmacy)
+                }
             }
         }
     }
