@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7B159A522BCC3AB0009A2B27 /* GeminiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A512BCC3AB0009A2B27 /* GeminiManager.swift */; };
 		7B159A542BCC4DD8009A2B27 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A532BCC4DD8009A2B27 /* EditProfileView.swift */; };
+		7B159A562BCCEF78009A2B27 /* PharmacyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A552BCCEF78009A2B27 /* PharmacyManager.swift */; };
 		7B21CF002BC68588006224CB /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21CEFF2BC68588006224CB /* ChatView.swift */; };
 		7B21CF032BC6859F006224CB /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21CF022BC6859F006224CB /* ChatViewModel.swift */; };
 		7B2221C72BC69B6C00D5DECF /* ManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2221C62BC69B6C00D5DECF /* ManageView.swift */; };
@@ -86,6 +87,7 @@
 /* Begin PBXFileReference section */
 		7B159A512BCC3AB0009A2B27 /* GeminiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiManager.swift; sourceTree = "<group>"; };
 		7B159A532BCC4DD8009A2B27 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		7B159A552BCCEF78009A2B27 /* PharmacyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyManager.swift; sourceTree = "<group>"; };
 		7B21CEFF2BC68588006224CB /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		7B21CF022BC6859F006224CB /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		7B2221C62BC69B6C00D5DECF /* ManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageView.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			children = (
 				7B4D5C652BCAF90E0076F710 /* LocationManager.swift */,
 				7B159A512BCC3AB0009A2B27 /* GeminiManager.swift */,
+				7B159A552BCCEF78009A2B27 /* PharmacyManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 				CE6C33C32BC843A200D754A8 /* ChatDetailView.swift in Sources */,
 				CE6C338D2BC67E8C00D754A8 /* PostView.swift in Sources */,
 				CE6C337E2BC67CB700D754A8 /* MainViewModel.swift in Sources */,
+				7B159A562BCCEF78009A2B27 /* PharmacyManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

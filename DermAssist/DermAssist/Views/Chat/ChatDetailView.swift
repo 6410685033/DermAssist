@@ -11,7 +11,7 @@ import CoreLocationUI
 
 struct ChatDetailsView: View {
     @StateObject var locationManager = LocationManager()
-    @StateObject var geminiManager = GeminiManager()
+    @StateObject var pharmacyManager = PharmacyManager()
     @StateObject var viewModel: ChatDetailsViewModel
     @State private var newMessage = ""
     
@@ -44,7 +44,7 @@ struct ChatDetailsView: View {
             Divider()
             HStack {
                 // Pharmacy near me
-                PharmacyButton(locationManager: locationManager)
+                PharmacyButton(locationManager: locationManager, pharmacyManager: pharmacyManager)
                 
                 // Input box
                 TextField("What skin product would you like?", text: $newMessage, axis: .vertical)
@@ -67,14 +67,16 @@ struct ChatDetailsView: View {
 
 struct PharmacyButton: View {
     @ObservedObject var locationManager: LocationManager
+    @ObservedObject var pharmacyManager: PharmacyManager
+    @State var showingPharmacySheet = false
     
     var body: some View {
         LocationButton(.currentLocation) {
             Task {
                 do {
-                    locationManager.showingPharmacy = true
+                    showingPharmacySheet = true
                     let location = try await locationManager.requestLocation()
-                    await locationManager.fetchNearbyPharmacies(latitude: location.latitude, longitude: location.longitude)
+                    await pharmacyManager.fetchNearbyPharmacies(latitude: location.latitude, longitude: location.longitude)
                 } catch {
                     print("Error getting location or fetching pharmacy data: \(error)")
                 }
@@ -86,13 +88,13 @@ struct PharmacyButton: View {
         .background(Color.blue)
         .clipShape(Circle())
         .disabled(locationManager.isLoading)
-        .sheet(isPresented: $locationManager.showingPharmacy) {
-            if locationManager.isLoading {
+        .sheet(isPresented: $showingPharmacySheet) {
+            if locationManager.isLoading || pharmacyManager.isLoading {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle(tint: .blue))
                     .scaleEffect(1.5)
             } else {
-                List(locationManager.pharmacies, id: \.self) { pharmacy in
+                List(pharmacyManager.pharmacies, id: \.self) { pharmacy in
                     Text(pharmacy)
                 }
             }
