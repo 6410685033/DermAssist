@@ -17,7 +17,9 @@ class PharmacyManager: NSObject, ObservableObject {
     
     /// Fetches nearby pharmacies given a latitude and longitude.
     func fetchNearbyPharmacies(latitude: CLLocationDegrees, longitude: CLLocationDegrees) async {
-        isLoading = true
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
         
         do {
             let pharmacies = try await queryNearbyPharmacies(latitude: latitude, longitude: longitude)
@@ -60,8 +62,7 @@ class PharmacyManager: NSObject, ObservableObject {
         let response = try JSONDecoder().decode(OverpassResponse.self, from: data)
         return response.elements.compactMap {
             guard let name = $0.tags["name"], let lat = $0.lat, let lon = $0.lon else { return nil }
-            let mapURL = URL(string: "https://www.openstreetmap.org/?mlat=\(lat)&mlon=\(lon)#map=18/\(lat)/\(lon)")
-            return Pharmacy(name: name, mapURL: mapURL)
+            return Pharmacy(name: name, latitude: lat, longitude: lon)
         }
     }
 }
@@ -81,8 +82,18 @@ struct Element: Codable, Identifiable {
 struct Pharmacy: Identifiable {
     let id = UUID()
     let name: String
-    let mapURL: URL?
+    let latitude: Double
+    let longitude: Double
+
+    // Generate a Google Maps URL with a label
+    var googleMapsURL: URL? {
+        let label = name.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+        let urlString = "https://www.google.com/maps?q=\(label)@\(latitude),\(longitude)"
+        return URL(string: urlString)
+    }
 }
+
+
 
 enum PharmacyError: Error {
     case invalidURL

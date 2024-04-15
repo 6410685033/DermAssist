@@ -104,12 +104,34 @@ struct PharmacyList: View {
     let pharmacies: [Pharmacy]
     
     var body: some View {
-        List(pharmacies, id: \.id) { pharmacy in
-            if let url = pharmacy.mapURL {
-                Link(pharmacy.name, destination: url)
-            } else {
-                Text(pharmacy.name)
+        VStack(alignment: .leading) {
+            Text("Pharmacy Nearby")
+                .font(.title)
+                .padding()
+            
+            Divider()  // Add a divider below the heading
+            
+            List {
+                ForEach(pharmacies, id: \.id) { pharmacy in
+                    if let url = pharmacy.googleMapsURL {
+                        Link(pharmacy.name, destination: url)
+                            .foregroundColor(.cyan)
+                            .font(.title3)
+                            .padding(.vertical, 8)
+                    } else {
+                        Text(pharmacy.name)
+                            .font(.title3)
+                            .padding(.vertical, 8)
+                    }
+                }
             }
+            .listStyle(PlainListStyle())  // Use a plain list style
+            
+            Spacer()  // Add a spacer at the bottom to push content upwards
         }
+        .background(Color(.systemBackground))  // Set background color to system background color
     }
 }
+
+
+
