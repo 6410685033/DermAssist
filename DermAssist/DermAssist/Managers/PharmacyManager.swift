@@ -44,14 +44,14 @@ class PharmacyManager: NSObject, ObservableObject {
         }
         
         let query = """
-            [out:json];
-            (
-              node["amenity"="pharmacy"](around:\(radius),\(latitude),\(longitude));
-              way["amenity"="pharmacy"](around:\(radius),\(latitude),\(longitude));
-              relation["amenity"="pharmacy"](around:\(radius),\(latitude),\(longitude));
-            );
-            out center;
-            """
+                [out:json];
+                (
+                  node["amenity"="pharmacy"](around:\(radius),\(latitude),\(longitude));
+                  way["amenity"="pharmacy"](around:\(radius),\(latitude),\(longitude));
+                  relation["amenity"="pharmacy"](around:\(radius),\(latitude),\(longitude));
+                );
+                out center;
+                """
         let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
         guard let url = URL(string: "\(urlString)?data=\(encodedQuery ?? "")") else {
@@ -60,11 +60,19 @@ class PharmacyManager: NSObject, ObservableObject {
         
         let (data, _) = try await session.data(from: url)
         let response = try JSONDecoder().decode(OverpassResponse.self, from: data)
-        return response.elements.compactMap {
-            guard let name = $0.tags["name"], let lat = $0.lat, let lon = $0.lon else { return nil }
-            return Pharmacy(name: name, latitude: lat, longitude: lon)
+        
+        // Create CLLocation instance for the current location
+        let currentLocation = CLLocation(latitude: latitude, longitude: longitude)
+        
+        // Map Overpass API elements to Pharmacy objects and calculate distance
+        return response.elements.compactMap { element in
+            guard let name = element.tags["name"], let lat = element.lat, let lon = element.lon else { return nil }
+            let pharmacyLocation = CLLocation(latitude: lat, longitude: lon)
+            let distance = currentLocation.distance(from: pharmacyLocation)
+            return Pharmacy(name: name, latitude: lat, longitude: lon, distance: distance)
         }
     }
+    
 }
 
 struct OverpassResponse: Codable {
@@ -84,12 +92,28 @@ struct Pharmacy: Identifiable {
     let name: String
     let latitude: Double
     let longitude: Double
-
+    let distance: CLLocationDistance
+    
     // Generate a Google Maps URL with a label
     var googleMapsURL: URL? {
         let label = name.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         let urlString = "https://www.google.com/maps?q=\(label)@\(latitude),\(longitude)"
         return URL(string: urlString)
+    }
+    
+    var formattedDistance: String {
+        let newDistance: Double
+        let unit: String
+        
+        if distance.magnitude >= 1000 {
+            newDistance = distance.magnitude / 1000.0
+            unit = "km"
+        } else {
+            newDistance = distance.magnitude
+            unit = "m"
+        }
+        
+        return String(format: "%.1f %@", newDistance, unit)
     }
 }
 

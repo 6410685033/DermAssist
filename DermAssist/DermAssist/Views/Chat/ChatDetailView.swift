@@ -94,14 +94,14 @@ struct PharmacyButton: View {
                     .progressViewStyle(CircularProgressViewStyle(tint: .blue))
                     .scaleEffect(1.5)
             } else {
-                PharmacyList(pharmacies: pharmacyManager.pharmacies)
+                PharmacyList(pharmacies: $pharmacyManager.pharmacies)
             }
         }
     }
 }
 
 struct PharmacyList: View {
-    let pharmacies: [Pharmacy]
+    @Binding var pharmacies: [Pharmacy]  // Make pharmacies a binding
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -109,15 +109,25 @@ struct PharmacyList: View {
                 .font(.title)
                 .padding()
             
-            Divider()  // Add a divider below the heading
+            Divider()
             
             List {
-                ForEach(pharmacies, id: \.id) { pharmacy in
+                ForEach(pharmacies.sorted(by: { $0.distance < $1.distance }), id: \.id) { pharmacy in
                     if let url = pharmacy.googleMapsURL {
-                        Link(pharmacy.name, destination: url)
-                            .foregroundColor(.cyan)
-                            .font(.title3)
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Link(pharmacy.name, destination: url)
+                                    .foregroundColor(.cyan)
+                                    .font(.title3)
+                                
+                                Text("Distance: \(pharmacy.formattedDistance)")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                            }
                             .padding(.vertical, 8)
+                            
+                            Spacer()  // Add a spacer to push the distance text to the right
+                        }
                     } else {
                         Text(pharmacy.name)
                             .font(.title3)
@@ -125,13 +135,10 @@ struct PharmacyList: View {
                     }
                 }
             }
-            .listStyle(PlainListStyle())  // Use a plain list style
+            .listStyle(PlainListStyle())
             
-            Spacer()  // Add a spacer at the bottom to push content upwards
+            Spacer()
         }
-        .background(Color(.systemBackground))  // Set background color to system background color
+        .background(Color(.systemBackground))
     }
 }
-
-
-
