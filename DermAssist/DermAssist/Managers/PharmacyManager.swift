@@ -13,16 +13,11 @@ class PharmacyManager: NSObject, ObservableObject {
     private let radius = 5000 // Search radius in meters
     
     @Published var isLoading = false
-    @Published var pharmacies: [String] = []  // Store pharmacy names
+    @Published var pharmacies: [Pharmacy] = []  // Store pharmacy details
     
-    /// Fetches nearby pharmacies given a latitude and longitude and updates the UI.
-    /// - Parameters:
-    ///   - latitude: The latitude of the location.
-    ///   - longitude: The longitude of the location.
+    /// Fetches nearby pharmacies given a latitude and longitude.
     func fetchNearbyPharmacies(latitude: CLLocationDegrees, longitude: CLLocationDegrees) async {
-        DispatchQueue.main.async {
-            self.isLoading = true
-        }
+        isLoading = true
         
         do {
             let pharmacies = try await queryNearbyPharmacies(latitude: latitude, longitude: longitude)
@@ -40,33 +35,34 @@ class PharmacyManager: NSObject, ObservableObject {
     }
     
     /// Queries nearby pharmacies from the Overpass API.
-    /// - Throws: `PharmacyError` depending on the error encountered.
-    /// - Returns: An array of pharmacy names.
-    private func queryNearbyPharmacies(latitude: CLLocationDegrees, longitude: CLLocationDegrees) async throws -> [String] {
+    private func queryNearbyPharmacies(latitude: CLLocationDegrees, longitude: CLLocationDegrees) async throws -> [Pharmacy] {
         let urlString = "https://overpass-api.de/api/interpreter"
-        guard var components = URLComponents(string: urlString) else {
+        guard let components = URLComponents(string: urlString) else {
             throw PharmacyError.invalidURL
         }
         
-        components.queryItems = [
-            URLQueryItem(name: "data", value: """
-                    [out:json];
-                    (
-                      node["amenity"="pharmacy"](around:\(radius),\(latitude),\(longitude));
-                      way["amenity"="pharmacy"](around:\(radius),\(latitude),\(longitude));
-                      relation["amenity"="pharmacy"](around:\(radius),\(latitude),\(longitude));
-                    );
-                    out center;
-                    """)
-        ]
+        let query = """
+            [out:json];
+            (
+              node["amenity"="pharmacy"](around:\(radius),\(latitude),\(longitude));
+              way["amenity"="pharmacy"](around:\(radius),\(latitude),\(longitude));
+              relation["amenity"="pharmacy"](around:\(radius),\(latitude),\(longitude));
+            );
+            out center;
+            """
+        let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
-        guard let url = components.url else {
+        guard let url = URL(string: "\(urlString)?data=\(encodedQuery ?? "")") else {
             throw PharmacyError.invalidURL
         }
         
         let (data, _) = try await session.data(from: url)
         let response = try JSONDecoder().decode(OverpassResponse.self, from: data)
-        return response.elements.compactMap { $0.tags?["name"] }
+        return response.elements.compactMap {
+            guard let name = $0.tags["name"], let lat = $0.lat, let lon = $0.lon else { return nil }
+            let mapURL = URL(string: "https://www.openstreetmap.org/?mlat=\(lat)&mlon=\(lon)#map=18/\(lat)/\(lon)")
+            return Pharmacy(name: name, mapURL: mapURL)
+        }
     }
 }
 
@@ -74,13 +70,20 @@ struct OverpassResponse: Codable {
     var elements: [Element]
 }
 
-struct Element: Codable {
+struct Element: Codable, Identifiable {
     var type: String
     var id: Int
-    var tags: [String: String]?
+    var lat: Double?
+    var lon: Double?
+    var tags: [String: String]
 }
 
-// Define a custom error type to handle fetching errors more gracefully
+struct Pharmacy: Identifiable {
+    let id = UUID()
+    let name: String
+    let mapURL: URL?
+}
+
 enum PharmacyError: Error {
     case invalidURL
     case decodingError(Error)

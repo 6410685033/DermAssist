@@ -87,16 +87,28 @@ struct PharmacyButton: View {
         .foregroundColor(.white)
         .background(Color.blue)
         .clipShape(Circle())
-        .disabled(locationManager.isLoading)
+        .disabled(locationManager.isLoading || pharmacyManager.isLoading)
         .sheet(isPresented: $showingPharmacySheet) {
             if locationManager.isLoading || pharmacyManager.isLoading {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle(tint: .blue))
                     .scaleEffect(1.5)
             } else {
-                List(pharmacyManager.pharmacies, id: \.self) { pharmacy in
-                    Text(pharmacy)
-                }
+                PharmacyList(pharmacies: pharmacyManager.pharmacies)
+            }
+        }
+    }
+}
+
+struct PharmacyList: View {
+    let pharmacies: [Pharmacy]
+    
+    var body: some View {
+        List(pharmacies, id: \.id) { pharmacy in
+            if let url = pharmacy.mapURL {
+                Link(pharmacy.name, destination: url)
+            } else {
+                Text(pharmacy.name)
             }
         }
     }
