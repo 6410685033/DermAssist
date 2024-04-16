@@ -20,7 +20,7 @@ final class ChatDetailsViewModel: ObservableObject {
     @Published var showingEditView = false
     @Published var selectedAmount = 5
     @Published var amounts: [Int]
-    @Published var products: [String] = []
+    @Published var products: [Product] = []
     @Published var selectedProduct: String = ""
     @Published var myAllergens: [Allergen] = []
     var itemId: String
@@ -35,6 +35,7 @@ final class ChatDetailsViewModel: ObservableObject {
         fetch_messages()
         fetchMyAllergens()
         fetchProduct()
+        print(products)
     }
     
     func fetchProduct() {
@@ -44,8 +45,8 @@ final class ChatDetailsViewModel: ObservableObject {
                 print("Error fetching products: \(error?.localizedDescription ?? "Unknown error")")
                 return
             }
-            let fetchedProducts = snapshot.documents.compactMap { docSnapshot -> String? in
-                try? docSnapshot.data(as: String.self)
+            let fetchedProducts = snapshot.documents.compactMap { docSnapshot -> Product? in
+                try? docSnapshot.data(as: Product.self)
             }
             DispatchQueue.main.async {
                 self.products = fetchedProducts
