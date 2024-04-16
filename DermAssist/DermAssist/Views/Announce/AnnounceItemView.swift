@@ -16,13 +16,21 @@ struct AnnounceItemView: View {
     
     var body: some View {
         HStack {
-            NavigationLink(destination:
-                            PostView(viewModel: PostViewModel(postId: item.id)), isActive: $isNavigationActive) {
+            NavigationLink(destination: PostView(viewModel: PostViewModel(postId: item.id)), isActive: $isNavigationActive) {
                 EmptyView()
             }
-                            .frame(width: 0)
-                            .opacity(0)
-            
+            .frame(width: 0)
+            .opacity(0)
+
+            if !user.role.isAdmin {
+                // Conditionally display a pin icon if the post is pinned
+                if item.is_pin {
+                    Image(systemName: "pin.fill")
+                        .foregroundColor(.yellow) // Use a color to highlight the pin status
+                        .padding(.trailing, 5)
+                }
+            }
+
             VStack(alignment: .leading) {
                 Text(item.title)
                     .font(.headline)
@@ -44,39 +52,29 @@ struct AnnounceItemView: View {
             .onTapGesture {
                 isNavigationActive = true
             }
+
             Spacer()
             
+            // Display the PinButton if the user is an admin
             if user.role.isAdmin {
-                // PinButton aligned with other items
                 PinButton(isPinned: .constant(item.is_pin)) {
                     viewModel.togglePin(item: item)
                 }
                 .buttonStyle(PlainButtonStyle())
             }
         }
-        .background(NavigationLink("", destination: PostView(viewModel: PostViewModel(postId: item.id))).hidden())  // Ensures navigation link is not visible
-            .padding(.vertical)
-            .onAppear {
-                viewModel.fetchUserName(uid: item.creator) { name in
-                    self.userName = name ?? "Unknown User"
-                }
+        .background(NavigationLink("", destination: PostView(viewModel: PostViewModel(postId: item.id))).hidden())
+        .padding(.vertical)
+        .onAppear {
+            viewModel.fetchUserName(uid: item.creator) { name in
+                self.userName = name ?? "Unknown User"
             }
+        }
     }
-    
-    private let itemDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    }()
     
     private func relativeTime(for timestamp: TimeInterval) -> String {
         let formatter = RelativeDateTimeFormatter()
         formatter.unitsStyle = .full
         return formatter.localizedString(for: Date(timeIntervalSince1970: timestamp), relativeTo: Date())
     }
-}
-
-#Preview {
-    AnnounceItemView(item: .init(is_pin: false, createDate: Date().timeIntervalSince1970, id: "123", title: "AnnounceTitle", content: "contenttttttt", creator: "user", comments: [], likes: []), user: User.init(name: "user", email: "user@mail.com", tel: "0987654321", gender: "Male", joined: Date().timeIntervalSince1970, role: .admin))
 }
