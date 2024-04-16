@@ -17,9 +17,10 @@ class ProfileViewModel: ObservableObject {
     @Published var myAllergens: [Allergen] = []
     
     init() {
-        fetchAllergens()
         fetchUser()
+        fetchAllergens()
     }
+    
     
     func edit() {
         guard validate(), let uId = Auth.auth().currentUser?.uid else {
@@ -48,23 +49,48 @@ class ProfileViewModel: ObservableObject {
             }
             print("User info updated successfully")
         }
-
+        
         // Update allergens in a subcollection
         let allergensRef = userRef.collection("allergy")
-        myAllergens.forEach { allergen in
-            allergensRef.document(allergen.id).setData(allergen.asDictionary(), merge: true) { error in
-                if let error = error {
-                    print("Failed to update allergen \(allergen.id): \(error.localizedDescription)")
-                    return
+        allergensRef.getDocuments { (snapshot, error) in
+            guard let documents = snapshot?.documents else {
+                print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            
+            let serverAllergensIDs = documents.map { $0.documentID }
+            let localAllergensIDs = self.myAllergens.map { $0.id }
+            
+            // Find IDs to remove (those on the server but not in local list)
+            let idsToRemove = Set(serverAllergensIDs).subtracting(localAllergensIDs)
+            
+            // Remove extraneous allergens from Firestore
+            for id in idsToRemove {
+                allergensRef.document(id).delete() { error in
+                    if let error = error {
+                        print("Error removing allergen \(id): \(error.localizedDescription)")
+                    } else {
+                        print("Successfully removed allergen \(id)")
+                    }
                 }
-                print("Allergen \(allergen.id) updated successfully")
+            }
+            
+            // Update or add local allergens to Firestore
+            for allergen in self.myAllergens {
+                allergensRef.document(allergen.id).setData(allergen.asDictionary(), merge: true) { error in
+                    if let error = error {
+                        print("Failed to update allergen \(allergen.id): \(error.localizedDescription)")
+                    } else {
+                        print("Allergen \(allergen.id) updated successfully")
+                    }
+                }
             }
         }
-
+        
         // Optionally, re-fetch user data to reflect changes
         fetchUser()
     }
-
+    
     
     private func validate() -> Bool {
         !name.trimmingCharacters(in: .whitespaces).isEmpty && tel.count == 10
@@ -104,22 +130,43 @@ class ProfileViewModel: ObservableObject {
             }
         }
     }
-
+    
+    
+    //    func fetchAllergens() {
+    //        let db = Firestore.firestore()
+    //        db.collection("allergens").getDocuments { [weak self] snapshot, error in
+    //            guard let snapshot = snapshot, error == nil else {
+    //                print("Error fetching allergens: \(error?.localizedDescription ?? "Unknown error")")
+    //                return
+    //            }
+    //            DispatchQueue.main.async {
+    //                self?.allergens = snapshot.documents.compactMap { docSnapshot in
+    //                    try? docSnapshot.data(as: Allergen.self)
+    //                }
+    //            }
+    //        }
+    //        let myAllergensSet = Set(self.myAllergens)
+    //        self.allergens = allergens.filter { !myAllergensSet.contains($0) }
+    //    }
     
     func fetchAllergens() {
         let db = Firestore.firestore()
         db.collection("allergens").getDocuments { [weak self] snapshot, error in
-            guard let snapshot = snapshot, error == nil else {
+            guard let self = self, let snapshot = snapshot, error == nil else {
                 print("Error fetching allergens: \(error?.localizedDescription ?? "Unknown error")")
                 return
             }
+            let fetchedAllergens = snapshot.documents.compactMap { docSnapshot -> Allergen? in
+                try? docSnapshot.data(as: Allergen.self)
+            }
             DispatchQueue.main.async {
-                self?.allergens = snapshot.documents.compactMap { docSnapshot in
-                    try? docSnapshot.data(as: Allergen.self)
-                }
+                // Filter out allergens that are already in myAllergens
+                let myAllergensSet = Set(self.myAllergens)
+                self.allergens = fetchedAllergens.filter { !myAllergensSet.contains($0) }
             }
         }
     }
+    
     
     func fetchMyAllergens() {
         guard validate(), let uId = Auth.auth().currentUser?.uid else {
@@ -130,16 +177,16 @@ class ProfileViewModel: ObservableObject {
         let db = Firestore.firestore()
         db.collection("users/\(uId)/allergy")
             .getDocuments { [weak self] snapshot, error in
-            guard let snapshot = snapshot, error == nil else {
-                print("Error fetching allergens: \(error?.localizedDescription ?? "Unknown error")")
-                return
-            }
-            DispatchQueue.main.async {
-                self?.myAllergens = snapshot.documents.compactMap { docSnapshot in
-                    try? docSnapshot.data(as: Allergen.self)
+                guard let snapshot = snapshot, error == nil else {
+                    print("Error fetching allergens: \(error?.localizedDescription ?? "Unknown error")")
+                    return
+                }
+                DispatchQueue.main.async {
+                    self?.myAllergens = snapshot.documents.compactMap { docSnapshot in
+                        try? docSnapshot.data(as: Allergen.self)
+                    }
                 }
             }
-        }
     }
     
     func add_allergen(_ allergen: Allergen) {
@@ -152,18 +199,20 @@ class ProfileViewModel: ObservableObject {
             myAllergens.append(allergen)
         }
     }
-
+    
     func remove_allergen(_ allergen: Allergen) {
+        // Check if the allergen is present in the user's list
         if let index = myAllergens.firstIndex(where: { $0.id == allergen.id }) {
+            // Remove the allergen from the user's list
             myAllergens.remove(at: index)
             allergens.append(allergen)
         } else {
-            // Optionally handle the case where the allergen isn't found in the user-specific list
-            // e.g., add it back to allergens if it should be moved anyway
-            allergens.append(allergen)
+            // Handle the case where the allergen is not in the user's list
+            // For example, log an error or inform the user
+            print("Allergen not found in the user's list. Cannot remove.")
         }
     }
-
+    
     
     func logOut() {
         do {

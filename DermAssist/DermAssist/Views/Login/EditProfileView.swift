@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditProfileView: View {
-    @StateObject var viewModel = ProfileViewModel()
+    @ObservedObject var viewModel: ProfileViewModel
     @Environment(\.presentationMode) var presentationMode
     
     let layout = [
@@ -43,12 +43,26 @@ struct EditProfileView: View {
                 Text("My Allergens: ")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 ZStack {
-                    VStack(spacing: 10) {
-                        ForEach(viewModel.myAllergens, id: \.id) { allergen in
-                            Text(allergen.allergen_name)
+                    ScrollView {
+                        VStack(spacing: 10) {
+                            ForEach(viewModel.myAllergens, id: \.id) { allergen in
+                                HStack {
+                                    Text(allergen.allergen_name)
+                                    Spacer()
+                                    Button(action: {
+                                        viewModel.remove_allergen(allergen)
+                                    }) {
+                                        Image(systemName: "trash")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 25)
+                                            .foregroundColor(Color(UIColor(hex: "#6dad53")))
+                                    }
+                                }
+                            }
                         }
+                        .padding()
                     }
-                    .padding()
                 }
                 
                 Text("Define Allergens")
@@ -57,16 +71,18 @@ struct EditProfileView: View {
                         VStack(spacing: 10) {
                             ForEach(viewModel.allergens, id: \.id) { allergen in
                                 HStack {
-                                    Text(allergen.allergen_name)
-                                    Spacer()
-                                    Button(action: {
-                                        viewModel.add_allergen(allergen)
-                                    }) {
-                                        Image(systemName: "plus")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 25)
-                                            .foregroundColor(Color(UIColor(hex: "#6dad53")))
+                                    if !viewModel.myAllergens.contains(allergen) {
+                                        Text(allergen.allergen_name)
+                                        Spacer()
+                                        Button(action: {
+                                            viewModel.add_allergen(allergen)
+                                        }) {
+                                            Image(systemName: "plus")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 25)
+                                                .foregroundColor(Color(UIColor(hex: "#6dad53")))
+                                        }
                                     }
                                 }
                             }
@@ -94,6 +110,6 @@ struct EditProfileView: View {
 // Preview code
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView()
+        EditProfileView(viewModel: ProfileViewModel())
     }
 }

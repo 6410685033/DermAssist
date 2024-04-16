@@ -66,19 +66,25 @@ struct ProfileView: View {
                                     Text(user.tel)
                                         .frame(width: 230, height: 30, alignment: .leading)
                                 }
-                                Text("Allergen: ")
-                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                HStack {
+                                    Text("Allergen: ")
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                    
+                                    if (viewModel.user!.role.isDoctor) {
+                                            Button(action: {
+                                                showCreateNewAllergen = true
+                                            }) {
+                                                Image(systemName: "plus.circle.fill")
+                                                    .foregroundColor(.green)
+                                                    .font(.title)
+                                            }
+                                        }
+                                }
+                                
                                 VStack{
                                     VStack(spacing: 10) {
                                         ForEach(viewModel.myAllergens, id: \.id) { allergen in
                                             Text(allergen.allergen_name)
-                                        }
-                                        Button(action: {
-                                            showCreateNewAllergen = true
-                                        }) {
-                                            Image(systemName: "plus.circle.fill")
-                                                .foregroundColor(.green)
-                                                .font(.title)
                                         }
                                     }
                                     .padding()
@@ -122,7 +128,7 @@ struct ProfileView: View {
                     Text("Loading Profile")
                 }
             }
-            .fullScreenCover(isPresented: $showingEditPage, onDismiss: viewModel.fetchUser) {EditProfileView()}
+            .fullScreenCover(isPresented: $showingEditPage, onDismiss: viewModel.fetchUser) {EditProfileView(viewModel: viewModel)}
             .padding(30)
             .sheet(isPresented: $showCreateNewAllergen) {
                 CreateNewAllergenView(CreateNewAllergenPresented: $showCreateNewAllergen)
