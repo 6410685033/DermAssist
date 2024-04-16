@@ -34,6 +34,23 @@ final class ChatDetailsViewModel: ObservableObject {
         fetch_chat()
         fetch_messages()
         fetchMyAllergens()
+        fetchProduct()
+    }
+    
+    func fetchProduct() {
+        let db = Firestore.firestore()
+        db.collection("products").getDocuments { [weak self] snapshot, error in
+            guard let self = self, let snapshot = snapshot, error == nil else {
+                print("Error fetching products: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            let fetchedProducts = snapshot.documents.compactMap { docSnapshot -> String? in
+                try? docSnapshot.data(as: String.self)
+            }
+            DispatchQueue.main.async {
+                self.products = fetchedProducts
+            }
+        }
     }
 
     func fetchMyAllergens() {
