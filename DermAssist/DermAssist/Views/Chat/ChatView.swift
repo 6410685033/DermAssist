@@ -9,41 +9,38 @@ import SwiftUI
 import FirebaseFirestoreSwift
 
 struct ChatView: View {
-    
     @StateObject var viewModel: ChatViewModel
-    @FirestoreQuery var items: [ChatRoom]
     
     init(userId: String) {
-        self._items = FirestoreQuery(collectionPath: "users/\(userId)/chats")
         self._viewModel = StateObject(wrappedValue: ChatViewModel(userId: userId))
     }
     
     var body: some View {
         NavigationView {
             VStack {
-                List(items) { item in
-                    ChatItemView(item: item)
+                List(viewModel.chats) { chat in
+                    ChatItemView(item: chat)
                         .swipeActions {
-                            Button {
-                                viewModel.delete(id: item.id)
+                            Button(role: .destructive) {
+                                viewModel.delete(id: chat.id)
                             } label: {
                                 Image(systemName: "trash.fill")
                             }
                         }
-                        .tint(.red)
                 }
                 .listStyle(PlainListStyle())
+                .animation(.default, value: viewModel.chats)  // Apply animation whenever the chats array changes
             }
             .navigationTitle("Chats")
             .toolbar {
                 Button {
-                    viewModel.showingnewItemView = true
+                    viewModel.showingNewItemView = true
                 } label: {
                     Image(systemName: "plus")
                 }
             }
-            .sheet(isPresented: $viewModel.showingnewItemView) {
-                NewChatView(newItemPresented: $viewModel.showingnewItemView)
+            .sheet(isPresented: $viewModel.showingNewItemView) {
+                NewChatView(newItemPresented: $viewModel.showingNewItemView)
             }
         }
     }

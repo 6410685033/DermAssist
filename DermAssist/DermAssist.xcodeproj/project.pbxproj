@@ -10,6 +10,9 @@
 		7B159A522BCC3AB0009A2B27 /* GeminiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A512BCC3AB0009A2B27 /* GeminiManager.swift */; };
 		7B159A542BCC4DD8009A2B27 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A532BCC4DD8009A2B27 /* EditProfileView.swift */; };
 		7B159A562BCCEF78009A2B27 /* PharmacyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A552BCCEF78009A2B27 /* PharmacyManager.swift */; };
+		7B159A582BCD1CB5009A2B27 /* Allergen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A572BCD1CB5009A2B27 /* Allergen.swift */; };
+		7B159A5A2BCD1CD8009A2B27 /* CreateNewAllergenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A592BCD1CD8009A2B27 /* CreateNewAllergenView.swift */; };
+		7B159A5C2BCD1CFF009A2B27 /* CreateNewAllegenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A5B2BCD1CFF009A2B27 /* CreateNewAllegenViewModel.swift */; };
 		7B21CF002BC68588006224CB /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21CEFF2BC68588006224CB /* ChatView.swift */; };
 		7B21CF032BC6859F006224CB /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21CF022BC6859F006224CB /* ChatViewModel.swift */; };
 		7B2221C72BC69B6C00D5DECF /* ManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2221C62BC69B6C00D5DECF /* ManageView.swift */; };
@@ -19,6 +22,7 @@
 		7B4D5C642BCAF1B60076F710 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 7B4D5C632BCAF1B60076F710 /* GoogleGenerativeAI */; };
 		7B4D5C662BCAF90E0076F710 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D5C652BCAF90E0076F710 /* LocationManager.swift */; };
 		7B4D5C682BCAFA4A0076F710 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D5C672BCAFA4A0076F710 /* LoadingView.swift */; };
+		7B5A52422BCE6239000DBDDE /* PinButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5A52412BCE6239000DBDDE /* PinButton.swift */; };
 		7B8DCDD32BC66D2500D70C6C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B8DCDD22BC66D2500D70C6C /* Preview Assets.xcassets */; };
 		7B8DCDDE2BC675FC00D70C6C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCDDD2BC675FC00D70C6C /* FirebaseAnalytics */; };
 		7B8DCDE02BC675FC00D70C6C /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCDDF2BC675FC00D70C6C /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -88,6 +92,9 @@
 		7B159A512BCC3AB0009A2B27 /* GeminiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiManager.swift; sourceTree = "<group>"; };
 		7B159A532BCC4DD8009A2B27 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		7B159A552BCCEF78009A2B27 /* PharmacyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmacyManager.swift; sourceTree = "<group>"; };
+		7B159A572BCD1CB5009A2B27 /* Allergen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Allergen.swift; sourceTree = "<group>"; };
+		7B159A592BCD1CD8009A2B27 /* CreateNewAllergenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewAllergenView.swift; sourceTree = "<group>"; };
+		7B159A5B2BCD1CFF009A2B27 /* CreateNewAllegenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewAllegenViewModel.swift; sourceTree = "<group>"; };
 		7B21CEFF2BC68588006224CB /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		7B21CF022BC6859F006224CB /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		7B2221C62BC69B6C00D5DECF /* ManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageView.swift; sourceTree = "<group>"; };
@@ -96,6 +103,7 @@
 		7B2221CD2BC6AC4700D5DECF /* UserManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManageViewModel.swift; sourceTree = "<group>"; };
 		7B4D5C652BCAF90E0076F710 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7B4D5C672BCAFA4A0076F710 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		7B5A52412BCE6239000DBDDE /* PinButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinButton.swift; sourceTree = "<group>"; };
 		7B8DCDC82BC66D2400D70C6C /* DermAssist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DermAssist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B8DCDD22BC66D2500D70C6C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CE6C335F2BC67CB700D754A8 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -287,6 +295,7 @@
 			children = (
 				CE6C33662BC67CB700D754A8 /* User.swift */,
 				CE9825952BC9684100DB384A /* ChatRoom.swift */,
+				7B159A572BCD1CB5009A2B27 /* Allergen.swift */,
 				CE6C33812BC67D8C00D754A8 /* Post.swift */,
 			);
 			path = Models;
@@ -333,6 +342,7 @@
 			children = (
 				CE6C33602BC67CB700D754A8 /* LoginView.swift */,
 				CE6C33632BC67CB700D754A8 /* RegisterView.swift */,
+				7B159A592BCD1CD8009A2B27 /* CreateNewAllergenView.swift */,
 				CE6C33622BC67CB700D754A8 /* ProfileView.swift */,
 				7B159A532BCC4DD8009A2B27 /* EditProfileView.swift */,
 			);
@@ -346,6 +356,7 @@
 				CE6C335F2BC67CB700D754A8 /* HeaderView.swift */,
 				CE6C33612BC67CB700D754A8 /* MainView.swift */,
 				7B4D5C672BCAFA4A0076F710 /* LoadingView.swift */,
+				7B5A52412BCE6239000DBDDE /* PinButton.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -353,6 +364,7 @@
 		CE6C33922BC67EDE00D754A8 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				7B159A5B2BCD1CFF009A2B27 /* CreateNewAllegenViewModel.swift */,
 				CE6C336D2BC67CB700D754A8 /* LoginViewModel.swift */,
 				CE6C33702BC67CB700D754A8 /* RegisterViewModel.swift */,
 				CE6C336F2BC67CB700D754A8 /* ProfileViewModel.swift */,
@@ -488,6 +500,7 @@
 			files = (
 				7B159A542BCC4DD8009A2B27 /* EditProfileView.swift in Sources */,
 				CE9825962BC9684100DB384A /* ChatRoom.swift in Sources */,
+				7B159A5A2BCD1CD8009A2B27 /* CreateNewAllergenView.swift in Sources */,
 				7B21CF032BC6859F006224CB /* ChatViewModel.swift in Sources */,
 				CE6C339C2BC67F6800D754A8 /* CommentViewModel.swift in Sources */,
 				CE6C337B2BC67CB700D754A8 /* Extension.swift in Sources */,
@@ -497,6 +510,7 @@
 				CE6C33C22BC843A200D754A8 /* NewChatView.swift in Sources */,
 				7B159A522BCC3AB0009A2B27 /* GeminiManager.swift in Sources */,
 				7B4D5C662BCAF90E0076F710 /* LocationManager.swift in Sources */,
+				7B159A582BCD1CB5009A2B27 /* Allergen.swift in Sources */,
 				CE6C33CA2BC843C700D754A8 /* NewChatViewModel.swift in Sources */,
 				CE6C338B2BC67E6C00D754A8 /* AnnounceItemView.swift in Sources */,
 				CE6C33872BC67E2400D754A8 /* AnnounceView.swift in Sources */,
@@ -504,6 +518,7 @@
 				7B4D5C682BCAFA4A0076F710 /* LoadingView.swift in Sources */,
 				CE6C339A2BC67F5100D754A8 /* NewPostViewModel.swift in Sources */,
 				CE6C33772BC67CB700D754A8 /* TLButton.swift in Sources */,
+				7B159A5C2BCD1CFF009A2B27 /* CreateNewAllegenViewModel.swift in Sources */,
 				CE6C33762BC67CB700D754A8 /* RegisterView.swift in Sources */,
 				CE6C33732BC67CB700D754A8 /* LoginView.swift in Sources */,
 				7B2221CA2BC6A71E00D5DECF /* ManageViewModel.swift in Sources */,
@@ -523,6 +538,7 @@
 				CE9825982BC9688900DB384A /* MessageView.swift in Sources */,
 				7B2221CE2BC6AC4700D5DECF /* UserManageViewModel.swift in Sources */,
 				CE6C33962BC67F1200D754A8 /* AnnounceViewModel.swift in Sources */,
+				7B5A52422BCE6239000DBDDE /* PinButton.swift in Sources */,
 				CE6C33982BC67F3600D754A8 /* PostViewModel.swift in Sources */,
 				CE6C33782BC67CB700D754A8 /* User.swift in Sources */,
 				CE6C33C32BC843A200D754A8 /* ChatDetailView.swift in Sources */,

@@ -7,12 +7,15 @@
 
 import Foundation
 
-struct ChatRoom: Codable ,Identifiable, Pinnable {
+struct ChatRoom: Codable ,Identifiable, Pinnable, Equatable{
     var is_pin: Bool
     let createDate: TimeInterval
-    
     let id: String
     var chat_name: String
+    
+    static func ==(lhs: ChatRoom, rhs: ChatRoom) -> Bool {
+        lhs.id == rhs.id && lhs.createDate == rhs.createDate && lhs.is_pin == rhs.is_pin
+    }
 }
 
 struct Message: Codable ,Identifiable, Pinnable {

@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct PinButton: View {
+    @Binding var isPinned: Bool
+    var action: () -> Void
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: {
+            action()
+        }) {
+            Image(systemName: isPinned ? "pin.fill" : "pin.slash.fill")
+                .foregroundColor(isPinned ? .yellow : .gray)
+                .imageScale(.large)
+        }
     }
-}
-
-#Preview {
-    PinButton()
 }
