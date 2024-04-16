@@ -65,7 +65,7 @@ class CreateNewAllegenViewModel: ObservableObject {
                     name: data["name"] as? String ?? "",
                     email: data["email"] as? String ?? "",
                     tel: data["tel"] as? String ?? "",
-                    gender: data["gender"] as? String ?? "",
+                    gender: Gender(rawValue: data["gender"] as? String ?? "") ?? .undefined,
                     joined: data["joined"] as? TimeInterval ?? 0,
                     role: UserRole(rawValue: data["role"] as? String ?? "") ?? .patient
                 )

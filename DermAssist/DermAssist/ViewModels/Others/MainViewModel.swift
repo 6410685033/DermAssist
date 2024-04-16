@@ -31,16 +31,24 @@ class MainViewModel: ObservableObject {
     }
     
     private func fetchUser(userId: String) {
+        let db = Firestore.firestore()  // Ensure Firestore instance is initialized correctly.
         db.collection("users").document(userId).getDocument { [weak self] document, error in
             DispatchQueue.main.async {
-                if let document = document, document.exists, let userData = try? document.data(as: User.self) {
+                guard let document = document, document.exists else {
+                    print("No document found: \(error?.localizedDescription ?? "Unknown error")")
+                    return
+                }
+
+                do {
+                    let userData = try document.data(as: User.self)
                     self?.user = userData
-                } else {
-                    print("User data not found or failed to decode: \(error?.localizedDescription ?? "Unknown error")")
+                } catch {
+                    print("Failed to decode user: \(error)")
                 }
             }
         }
     }
+
     
     var isSignedIn: Bool {
         return Auth.auth().currentUser != nil

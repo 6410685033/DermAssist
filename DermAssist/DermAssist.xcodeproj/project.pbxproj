@@ -23,6 +23,7 @@
 		7B4D5C662BCAF90E0076F710 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D5C652BCAF90E0076F710 /* LocationManager.swift */; };
 		7B4D5C682BCAFA4A0076F710 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D5C672BCAFA4A0076F710 /* LoadingView.swift */; };
 		7B5A52422BCE6239000DBDDE /* PinButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5A52412BCE6239000DBDDE /* PinButton.swift */; };
+		7B7843972BCED34E0047A679 /* AllergenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7843962BCED34E0047A679 /* AllergenView.swift */; };
 		7B8DCDD32BC66D2500D70C6C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B8DCDD22BC66D2500D70C6C /* Preview Assets.xcassets */; };
 		7B8DCDDE2BC675FC00D70C6C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCDDD2BC675FC00D70C6C /* FirebaseAnalytics */; };
 		7B8DCDE02BC675FC00D70C6C /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCDDF2BC675FC00D70C6C /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -104,6 +105,7 @@
 		7B4D5C652BCAF90E0076F710 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7B4D5C672BCAFA4A0076F710 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7B5A52412BCE6239000DBDDE /* PinButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinButton.swift; sourceTree = "<group>"; };
+		7B7843962BCED34E0047A679 /* AllergenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllergenView.swift; sourceTree = "<group>"; };
 		7B8DCDC82BC66D2400D70C6C /* DermAssist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DermAssist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B8DCDD22BC66D2500D70C6C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CE6C335F2BC67CB700D754A8 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 				7B159A592BCD1CD8009A2B27 /* CreateNewAllergenView.swift */,
 				CE6C33622BC67CB700D754A8 /* ProfileView.swift */,
 				7B159A532BCC4DD8009A2B27 /* EditProfileView.swift */,
+				7B7843962BCED34E0047A679 /* AllergenView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				CE6C33872BC67E2400D754A8 /* AnnounceView.swift in Sources */,
 				CE6C33752BC67CB700D754A8 /* ProfileView.swift in Sources */,
 				7B4D5C682BCAFA4A0076F710 /* LoadingView.swift in Sources */,
+				7B7843972BCED34E0047A679 /* AllergenView.swift in Sources */,
 				CE6C339A2BC67F5100D754A8 /* NewPostViewModel.swift in Sources */,
 				CE6C33772BC67CB700D754A8 /* TLButton.swift in Sources */,
 				7B159A5C2BCD1CFF009A2B27 /* CreateNewAllegenViewModel.swift in Sources */,
