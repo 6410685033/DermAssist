@@ -18,26 +18,83 @@ final class ChatDetailsViewModel: ObservableObject {
     @Published var lastest_message: Message? = nil
     @Published var item: ChatRoom? = nil
     @Published var showingEditView = false
+    @Published var selectedAmount = 5
+    @Published var amounts: [Int]
+    @Published var products: [String] = []
+    @Published var selectedProduct: String = ""
+    @Published var myAllergens: [Allergen] = []
     var itemId: String
+    
     
     let openAI = OpenAI(apiToken: ProcessInfo.processInfo.environment["openAI"]!)
     
     init(itemId: String) {
+        self.amounts = Array(1...10)
         self.itemId = itemId
         fetch_chat()
         fetch_messages()
+        fetchMyAllergens()
+        fetchProduct()
+    }
+    
+    func fetchProduct() {
+        let db = Firestore.firestore()
+        db.collection("products").getDocuments { [weak self] snapshot, error in
+            guard let self = self, let snapshot = snapshot, error == nil else {
+                print("Error fetching products: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            let fetchedProducts = snapshot.documents.compactMap { docSnapshot -> String? in
+                try? docSnapshot.data(as: String.self)
+            }
+            DispatchQueue.main.async {
+                self.products = fetchedProducts
+            }
+        }
     }
 
+    func fetchMyAllergens() {
+        guard let uId = Auth.auth().currentUser?.uid else {
+            print("not validate")
+            return
+        }
+        
+        let db = Firestore.firestore()
+        db.collection("users/\(uId)/allergy")
+            .getDocuments { [weak self] snapshot, error in
+                guard let snapshot = snapshot, error == nil else {
+                    print("Error fetching allergens: \(error?.localizedDescription ?? "Unknown error")")
+                    return
+                }
+                DispatchQueue.main.async {
+                    self?.myAllergens = snapshot.documents.compactMap { docSnapshot in
+                        try? docSnapshot.data(as: Allergen.self)
+                    }
+                }
+            }
+    }
     
     func sendNewMessage(content: String) {
-        let userMessage = Message(is_pin: false, createDate: Date().timeIntervalSince1970, id: UUID().uuidString, message: content, isUser: true)
+        let allergens = formatAllergens(allergens: self.myAllergens)
+        let prompt = "Please recommend \(self.selectedAmount) specific \(content) brands that do not contain \(allergens)"
+        let userMessage = Message(is_pin: false, createDate: Date().timeIntervalSince1970, id: UUID().uuidString, message: prompt, isUser: true)
         self.saveMessage(userMessage)
         self.messages.append(userMessage)
         getBotReply()
     }
     
+    func formatAllergens(allergens: [Allergen]) -> String {
+        var result = ""
+        for (index, allergen) in allergens.enumerated() {
+            if index > 0 {
+                result += ", "
+            }
+            result += "\(allergen.allergen_name)"
+        }
+        return result
+    }
+    
     func getBotReply() {
-        
         openAI.chats(query: .init(model: .gpt3_5Turbo,
                                   messages: self.messages.map({Chat(role: .user, content: $0.message)}))) { result in
             switch result {
@@ -71,22 +128,6 @@ final class ChatDetailsViewModel: ObservableObject {
         } catch let error {
             print("Error saving message to Firestore: \(error.localizedDescription)")
         }
-    }
-    
-    func toggleIsDone(item: ChatRoom) {
-        var itemCopy = item
-        itemCopy.toggle_pin()
-        
-        guard let uid = Auth.auth().currentUser?.uid else {
-            return
-        }
-        
-        let db = Firestore.firestore()
-        db.collection("users")
-            .document(uid)
-            .collection("chats")
-            .document(itemCopy.id)
-            .setData(itemCopy.asDictionary())
     }
     
     func fetch_chat() {

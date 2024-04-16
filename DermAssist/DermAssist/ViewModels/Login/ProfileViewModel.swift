@@ -23,7 +23,6 @@ class ProfileViewModel: ObservableObject {
         fetchAllergens()
     }
     
-    
     func edit() {
             guard let uId = Auth.auth().currentUser?.uid else {
                 print("User not logged in")
