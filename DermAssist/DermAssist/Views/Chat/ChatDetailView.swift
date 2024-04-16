@@ -46,11 +46,27 @@ struct ChatDetailsView: View {
                 // Pharmacy near me
                 PharmacyButton(locationManager: locationManager, pharmacyManager: pharmacyManager)
                 
-                // Input box
-                TextField("What skin product would you like?", text: $newMessage, axis: .vertical)
-                    .padding(5)
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(15)
+                Text("Amount")
+                Picker("Select Amount", selection: $viewModel.selectedAmount) {
+                        ForEach(viewModel.amounts, id: \.self) { amount in
+                            Text("\(amount)").tag(amount)
+                        }
+                    }
+                    .pickerStyle(MenuPickerStyle())
+                
+                Text("Product")
+                Picker("Select Product", selection: $newMessage) {
+                        ForEach(viewModel.products, id: \.self) { product in
+                            Text("\(product)").tag(product)
+                        }
+                    }
+                    .pickerStyle(MenuPickerStyle())
+                
+//                // Input box
+//                TextField("What skin product would you like?", text: $newMessage, axis: .vertical)
+//                    .padding(5)
+//                    .background(Color.gray.opacity(0.1))
+//                    .cornerRadius(15)
                 
                 // Send button
                 Button {

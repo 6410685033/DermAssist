@@ -21,7 +21,6 @@ class ProfileViewModel: ObservableObject {
         fetchAllergens()
     }
     
-    
     func edit() {
         guard validate(), let uId = Auth.auth().currentUser?.uid else {
             print("Validation failed or user not logged in")
