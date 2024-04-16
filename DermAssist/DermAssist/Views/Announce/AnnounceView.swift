@@ -22,16 +22,31 @@ struct AnnounceView: View {
             }
             .navigationTitle("Announcements")
             .toolbar {
-                if (user.role.isDoctor || user.role.isAdmin) {
-                    Button {
-                        viewModel.showingnewPostView = true
-                    } label: {
-                        Image(systemName: "plus")
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    if user.role.isDoctor || user.role.isAdmin {
+                        HStack {
+                            Text("New Product")
+                            Button(action: {
+                                viewModel.showingnewProductView = true
+                            }) {
+                                Image(systemName: "plus")
+                            }
+                            
+                            Text("New Post")
+                            Button(action: {
+                                viewModel.showingnewPostView = true
+                            }) {
+                                Image(systemName: "plus")
+                            }
+                        }
                     }
                 }
             }
             .sheet(isPresented: $viewModel.showingnewPostView) {
                 NewPostView(newPostPresented: $viewModel.showingnewPostView)
+            }
+            .sheet(isPresented: $viewModel.showingnewProductView) {
+                NewProductView(newPostPresented: $viewModel.showingnewProductView)
             }
             .onAppear {
                 Task {

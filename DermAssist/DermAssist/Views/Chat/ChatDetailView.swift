@@ -56,8 +56,8 @@ struct ChatDetailsView: View {
                 
                 Text("Product")
                 Picker("Select Product", selection: $newMessage) {
-                        ForEach(viewModel.products, id: \.self) { product in
-                            Text("\(product)").tag(product)
+                        ForEach(viewModel.products, id: \.id) { product in
+                            Text("\(product.name)")
                         }
                     }
                     .pickerStyle(MenuPickerStyle())

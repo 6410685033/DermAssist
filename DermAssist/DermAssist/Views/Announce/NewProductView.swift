@@ -1,29 +1,27 @@
 //
-//  NewPostView.swift
+//  NewProductView.swift
 //  DermAssist
 //
-//  Created by Supakrit Nithikethkul on 10/4/2567 BE.
+//  Created by Supakrit Nithikethkul on 16/4/2567 BE.
 //
+
 
 import SwiftUI
 
-struct NewPostView: View {
+struct NewProductView: View {
     
-    @StateObject var viewModel = NewPostViewModel()
-    @StateObject var HomeviewModel = AnnounceViewModel()
+    @StateObject var viewModel = NewProductViewModel()
     @Binding var newPostPresented: Bool
     
     var body: some View {
         VStack {
-            Text("New Post")
+            Text("New Product")
                 .font(.system(size: 32))
                 .bold()
                 .padding(.top, 50)
             
             Form {
-                TextField("Title", text: $viewModel.title)
-                    .textFieldStyle(DefaultTextFieldStyle())
-                TextField("Content", text: $viewModel.content)
+                TextField("Product Name", text: $viewModel.product_name)
                     .textFieldStyle(DefaultTextFieldStyle())
                 TLButton(title: "Save", background: .pink) {
                     viewModel.save()
@@ -33,8 +31,4 @@ struct NewPostView: View {
             
         }
     }
-}
-
-#Preview {
-    NewPostView(newPostPresented: .constant(true))
 }
