@@ -16,14 +16,13 @@ struct AnnounceView: View {
         NavigationView {
             VStack {
                 List(viewModel.posts, id: \.id) { post in
-                    NavigationLink(destination: PostView(viewModel: PostViewModel(postId: post.id))) {
-                        AnnounceItemView(item: post)
-                    }
-                }
+                    AnnounceItemView(item: post, user: user)
+                }.listStyle(PlainListStyle())
+                    .animation(.default, value: viewModel.posts)
             }
             .navigationTitle("Announcements")
             .toolbar {
-                if (user.role.isDoctor) {
+                if (user.role.isDoctor || user.role.isAdmin) {
                     Button {
                         viewModel.showingnewPostView = true
                     } label: {
@@ -36,13 +35,13 @@ struct AnnounceView: View {
             }
             .onAppear {
                 Task {
-                    await viewModel.fetchPosts()
+                    viewModel.fetchPosts()
                 }
             }
             .onChange(of: viewModel.showingnewPostView) {
                 if !viewModel.showingnewPostView {
                     Task {
-                        await viewModel.fetchPosts()
+                        viewModel.fetchPosts()
                     }
                 }
             }

@@ -10,8 +10,8 @@ import SwiftUI
 
 struct ChatItemView: View {
     @StateObject var viewModel = ChatItemViewModel()
+    @State private var isNavigationActive = false
     let item: ChatRoom
-    @State private var isNavigationActive = false  // State to control navigation
     
     var body: some View {
         HStack {

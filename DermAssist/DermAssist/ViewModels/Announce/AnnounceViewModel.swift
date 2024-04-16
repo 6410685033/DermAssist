@@ -13,26 +13,28 @@ class AnnounceViewModel: ObservableObject {
     @Published var showingnewPostView = false
     @Published var posts: [Post] = []
     
-    func fetchPosts() async {
-        let db = Firestore.firestore()
-        do {
-            let snapshot = try await db.collection("post").getDocuments()
-            let fetchedPosts = snapshot.documents.compactMap { document in
-                try? document.data(as: Post.self)
+    private let db = Firestore.firestore()
+    
+    func fetchPosts() {
+        db.collection("post").addSnapshotListener { snapshot, error in
+                guard let documents = snapshot?.documents else {
+                    print("No documents")
+                    return
+                }
+                self.posts = documents.compactMap { try? $0.data(as: Post.self) }
+                self.sortPost() // Call sort whenever data changes
             }
-            // Switch to the main thread to update the published property
-            DispatchQueue.main.async {
-                self.posts = fetchedPosts
-                self.sortPost()
-            }
-        } catch {
-            print("Error fetching posts: \(error)")
-        }
     }
     
     func sortPost() {
-        posts.sort { $0.createDate > $1.createDate }
+        posts.sort {
+            if $0.is_pin == $1.is_pin {
+                return $0.createDate > $1.createDate // Sort by date if pin status is the same
+            }
+            return $0.is_pin && !$1.is_pin // Prioritize pinned posts
+        }
     }
+    
     
     func fetchUserName(uid: String, completion: @escaping (String?) -> Void) {
         let db = Firestore.firestore()
@@ -45,5 +47,19 @@ class AnnounceViewModel: ObservableObject {
                 completion(nil)
             }
         }
+    }
+    
+    func togglePin(item: Post) {
+        let db = Firestore.firestore()
+        
+        print("Before toggle: \(item.is_pin)")
+        
+        var updatedPost = item
+        updatedPost.toggle_pin()
+        try? db.collection("post")
+            .document(item.id)
+            .setData(from: updatedPost)
+        
+        print("After toggle: \(item.is_pin)")
     }
 }

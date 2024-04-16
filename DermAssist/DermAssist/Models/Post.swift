@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Post: Codable, Pinnable {
+struct Post: Codable, Equatable, Pinnable {
     var is_pin: Bool
     let createDate: TimeInterval
     
@@ -17,6 +17,10 @@ struct Post: Codable, Pinnable {
     let creator: String
     var comments: [Comment]
     var likes: [User]
+    
+    static func ==(lhs: Post, rhs: Post) -> Bool {
+        lhs.id == rhs.id && lhs.createDate == rhs.createDate && lhs.is_pin == rhs.is_pin
+    }
 }
 
 struct Comment: Codable, Pinnable {
