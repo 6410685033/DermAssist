@@ -13,6 +13,8 @@ class ProfileViewModel: ObservableObject {
     @Published var user: User? = nil
     @Published var name = ""
     @Published var tel = ""
+    @Published var gender: Gender = .undefined
+    @Published var role = ""
     @Published var allergens: [Allergen] = []
     @Published var myAllergens: [Allergen] = []
     
@@ -23,73 +25,31 @@ class ProfileViewModel: ObservableObject {
     
     
     func edit() {
-        guard validate(), let uId = Auth.auth().currentUser?.uid else {
-            print("Validation failed or user not logged in")
-            return
-        }
-        
-        let db = Firestore.firestore()
-        let userRef = db.collection("users").document(uId)
-        
-        // Update user basic info
-        let updatedUser = User(
-            id: uId,
-            name: name.isEmpty ? user?.name ?? "" : name,
-            email: user?.email ?? "",
-            tel: tel.isEmpty ? user?.tel ?? "" : tel,
-            gender: user?.gender ?? "Not Specified",
-            joined: user?.joined ?? Date().timeIntervalSince1970,
-            role: user?.role ?? UserRole.patient
-        )
-        
-        userRef.setData(updatedUser.asDictionary(), merge: true) { error in
-            if let error = error {
-                print("Failed to update user info: \(error.localizedDescription)")
+            guard let uId = Auth.auth().currentUser?.uid else {
+                print("User not logged in")
                 return
             }
-            print("User info updated successfully")
-        }
-        
-        // Update allergens in a subcollection
-        let allergensRef = userRef.collection("allergy")
-        allergensRef.getDocuments { (snapshot, error) in
-            guard let documents = snapshot?.documents else {
-                print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
-                return
-            }
-            
-            let serverAllergensIDs = documents.map { $0.documentID }
-            let localAllergensIDs = self.myAllergens.map { $0.id }
-            
-            // Find IDs to remove (those on the server but not in local list)
-            let idsToRemove = Set(serverAllergensIDs).subtracting(localAllergensIDs)
-            
-            // Remove extraneous allergens from Firestore
-            for id in idsToRemove {
-                allergensRef.document(id).delete() { error in
+
+            let db = Firestore.firestore()
+            let userRef = db.collection("users").document(uId)
+
+            let updatedUser = User(id: uId, name: name, email: user?.email ?? "", tel: tel, gender: gender, joined: user?.joined ?? Date().timeIntervalSince1970, role: user?.role ?? .patient)
+
+            do {
+                try userRef.setData(from: updatedUser) { error in
                     if let error = error {
-                        print("Error removing allergen \(id): \(error.localizedDescription)")
+                        print("Error updating user: \(error.localizedDescription)")
                     } else {
-                        print("Successfully removed allergen \(id)")
+                        print("User successfully updated")
                     }
                 }
+            } catch {
+                print("Failed to encode user: \(error)")
             }
-            
-            // Update or add local allergens to Firestore
-            for allergen in self.myAllergens {
-                allergensRef.document(allergen.id).setData(allergen.asDictionary(), merge: true) { error in
-                    if let error = error {
-                        print("Failed to update allergen \(allergen.id): \(error.localizedDescription)")
-                    } else {
-                        print("Allergen \(allergen.id) updated successfully")
-                    }
-                }
-            }
+
+            // After updating the user, update the local user instance
+            self.user = updatedUser
         }
-        
-        // Optionally, re-fetch user data to reflect changes
-        fetchUser()
-    }
     
     
     private func validate() -> Bool {
@@ -97,57 +57,29 @@ class ProfileViewModel: ObservableObject {
     }
     
     func load() {
-        // Assign loaded user data to published variables
-        guard let currentUser = user else { return }
-        tel = currentUser.tel
-        name = currentUser.name
-    }
+            guard let currentUser = user else { return }
+            name = currentUser.name
+            tel = currentUser.tel
+            gender = currentUser.gender // Make sure the gender is set correctly from the user data
+        }
     
     func fetchUser() {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            return
-        }
-        let db = Firestore.firestore()
-        db.collection("users").document(userId).getDocument { [weak self] snapshot, error in
-            guard let self = self, let data = snapshot?.data(), error == nil else {
-                print("Error fetching user: \(error?.localizedDescription ?? "No data found")")
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.user = User(
-                    id: data["id"] as? String ?? "",
-                    name: data["name"] as? String ?? "",
-                    email: data["email"] as? String ?? "",
-                    tel: data["tel"] as? String ?? "",
-                    gender: data["gender"] as? String ?? "",
-                    joined: data["joined"] as? TimeInterval ?? 0,
-                    role: UserRole(rawValue: data["role"] as? String ?? "") ?? .patient
-                )
-                
-                self.load()  // Process any UI updates with fetched user data
-                self.fetchMyAllergens()  // Make sure to fetch allergens here
+            guard let userId = Auth.auth().currentUser?.uid else { return }
+            let db = Firestore.firestore()
+            db.collection("users").document(userId).getDocument { [weak self] snapshot, error in
+                guard let self = self, let snapshot = snapshot, let data = snapshot.data(), error == nil else {
+                    print("Error fetching user: \(error?.localizedDescription ?? "Unknown error")")
+                    return
+                }
+                do {
+                    self.user = try snapshot.data(as: User.self)
+                    self.load() // Update local properties with fetched data
+                } catch {
+                    print("Error decoding user: \(error)")
+                }
             }
         }
-    }
     
-    
-    //    func fetchAllergens() {
-    //        let db = Firestore.firestore()
-    //        db.collection("allergens").getDocuments { [weak self] snapshot, error in
-    //            guard let snapshot = snapshot, error == nil else {
-    //                print("Error fetching allergens: \(error?.localizedDescription ?? "Unknown error")")
-    //                return
-    //            }
-    //            DispatchQueue.main.async {
-    //                self?.allergens = snapshot.documents.compactMap { docSnapshot in
-    //                    try? docSnapshot.data(as: Allergen.self)
-    //                }
-    //            }
-    //        }
-    //        let myAllergensSet = Set(self.myAllergens)
-    //        self.allergens = allergens.filter { !myAllergensSet.contains($0) }
-    //    }
     
     func fetchAllergens() {
         let db = Firestore.firestore()

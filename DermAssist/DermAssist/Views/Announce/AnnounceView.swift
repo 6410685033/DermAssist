@@ -59,5 +59,5 @@ private let itemFormatter: DateFormatter = {
 }()
 
 #Preview {
-    AnnounceView(user: .init(id: "123", name: "John", email: "john@mail.com", tel: "0812345643", gender: "Male", joined: Date().timeIntervalSince1970, role: .patient))
+    AnnounceView(user: .init(id: "123", name: "John", email: "john@mail.com", tel: "0812345643", gender: .male, joined: Date().timeIntervalSince1970, role: .patient))
 }

@@ -13,9 +13,29 @@ struct User: Codable, Identifiable {
     var name: String
     let email: String
     var tel: String
-    var gender: String
+    var gender: Gender
     let joined: TimeInterval
     var role: UserRole
+}
+
+enum Gender: String, Codable, CaseIterable {
+    case male = "male"
+    case female = "female"
+    case lgbt = "lgbt"
+    case undefined = "undefined"
+    
+    var displayName: String {
+        switch self {
+        case .male:
+            return "Male"
+        case .female:
+            return "Female"
+        case .lgbt:
+            return "LGBT"
+        case .undefined:
+            return "Undefined"
+        }
+    }
 }
 
 enum UserRole: String, Codable, CaseIterable {

@@ -25,7 +25,7 @@ struct ProfileView: View {
                         labeledText("Name", value: user.name)
                         labeledText("Email", value: user.email)
                         labeledText("Telephone", value: user.tel)
-                        labeledText("Gender", value: user.gender)
+                        labeledText("Gender", value: user.gender.displayName)
                         
                         Button("My Allergens") {
                             showingAllergenPage = true
@@ -61,7 +61,7 @@ struct ProfileView: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 100, height: 100)
-//            .padding(.top, 20)
+            .padding(.vertical, 20)
     }
     
     private func labeledText(_ label: String, value: String) -> some View {
