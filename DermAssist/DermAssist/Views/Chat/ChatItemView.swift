@@ -36,16 +36,11 @@ struct ChatItemView: View {
             .onTapGesture {
                 isNavigationActive = true
             }
-            .background(NavigationLink("", destination: ChatDetailsView(itemId: item.id)).hidden())
-
+            .background(NavigationLink("", destination: ChatDetailsView(itemId: item.id)).hidden())            
             Spacer()
-
-            // Toggle isDone button
-            Button(action: {
-                viewModel.toggleIsDone(item: item)
-            }) {
-                Image(systemName: item.is_pin ? "checkmark.circle.fill" : "circle")
-                    .foregroundColor(.blue)
+            
+            PinButton(isPinned: .constant(item.is_pin)) {
+                viewModel.togglePin(item: item)
             }
         }
     }
