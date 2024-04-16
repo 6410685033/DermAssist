@@ -14,7 +14,7 @@ class RegisterViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     @Published var tel = ""
-    @Published var gender: Gender = .undefined
+    @Published var gender = Gender.undefined
 
     
     func register() {
