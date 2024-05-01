@@ -31,3 +31,7 @@ struct NewProductView: View {
         }
     }
 }
+
+#Preview {
+    NewProductView(isPresented: .constant(true))
+}
