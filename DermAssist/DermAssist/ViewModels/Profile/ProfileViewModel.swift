@@ -20,6 +20,7 @@ class ProfileViewModel: ObservableObject {
     
     init() {
         fetchUser()
+        fetchMyAllergens()
         fetchAllergens()
     }
     

@@ -56,6 +56,8 @@ struct EditProfileView: View {
         }
         .onAppear {
             viewModel.load()
+            viewModel.fetchMyAllergens()
+            viewModel.fetchAllergens()
         }
     }
     
