@@ -54,9 +54,46 @@ class ProfileViewModel: ObservableObject {
 
     private func updateAllergens(uId: String, db: Firestore) {
         let allergensRef = db.collection("users").document(uId).collection("allergy")
-        for allergen in myAllergens {
+        
+        // Fetch current allergens from Firestore
+        allergensRef.getDocuments { [weak self] (snapshot, error) in
+            guard let snapshot = snapshot, error == nil else {
+                print("Error fetching documents: \(error?.localizedDescription ?? "unknown error")")
+                return
+            }
+            
+            let currentAllergens = snapshot.documents.compactMap { docSnapshot -> String? in
+                return docSnapshot.documentID
+            }
+            
+            let myAllergenIDs = Set(self?.myAllergens.map { $0.id } ?? [])
+            
+            // Delete allergens not in myAllergens
+            for allergenID in currentAllergens {
+                if !myAllergenIDs.contains(allergenID) {
+                    allergensRef.document(allergenID).delete { error in
+                        if let error = error {
+                            print("Error removing allergen: \(error)")
+                        }
+                    }
+                }
+            }
+            
+            // Add or update myAllergens
+            self?.addAllergens(uId: uId, db: db)
+        }
+    }
+
+    private func addAllergens(uId: String, db: Firestore) {
+        let allergensRef = db.collection("users").document(uId).collection("allergy")
+        for allergen in self.myAllergens {
             do {
-                try allergensRef.document(allergen.id).setData(from: allergen)
+                try allergensRef.document(allergen.id).setData(from: allergen) {
+                    error in
+                    if let error = error {
+                        print("Error adding allergen: \(error)")
+                    }
+                }
             } catch {
                 print("Error setting allergen data: \(error)")
             }
