@@ -35,11 +35,12 @@ class ProfileViewModel: ObservableObject {
         let updatedUser = User(id: uId, name: name, email: user?.email ?? "", tel: tel, gender: gender, joined: user?.joined ?? Date().timeIntervalSince1970, role: user?.role ?? .patient)
         
         do {
-            try userRef.setData(from: updatedUser) { error in
+            try userRef.setData(from: updatedUser) { [weak self] error in
                 if let error = error {
                     print("Error updating user: \(error.localizedDescription)")
                 } else {
                     print("User successfully updated")
+                    self?.updateAllergens(uId: uId, db: db) // Update the allergens after user is updated
                 }
             }
         } catch {
@@ -48,6 +49,17 @@ class ProfileViewModel: ObservableObject {
         
         // After updating the user, update the local user instance
         self.user = updatedUser
+    }
+
+    private func updateAllergens(uId: String, db: Firestore) {
+        let allergensRef = db.collection("users").document(uId).collection("allergy")
+        for allergen in myAllergens {
+            do {
+                try allergensRef.document(allergen.id).setData(from: allergen)
+            } catch {
+                print("Error setting allergen data: \(error)")
+            }
+        }
     }
     
     
