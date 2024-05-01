@@ -31,3 +31,7 @@ struct NewAllergenView: View {
         }
     }
 }
+
+#Preview {
+    NewAllergenView(isPresented: .constant(true))
+}
