@@ -11,7 +11,6 @@ import FirebaseFirestore
 
 class AnnounceViewModel: ObservableObject {
     @Published var showingnewPostView = false
-    @Published var showingnewProductView = false
     @Published var posts: [Post] = []
     
     private let db = Firestore.firestore()

@@ -10,6 +10,9 @@ import SwiftUI
 
 struct AnnounceView: View {
     @StateObject var viewModel = AnnounceViewModel()
+    @State private var showConfigMenu = false
+    @State private var showingAddProduct = false
+    @State private var showingAddAllergen = false
     var user: User
     
     var body: some View {
@@ -22,31 +25,16 @@ struct AnnounceView: View {
             }
             .navigationTitle("Announcements")
             .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    if user.role.isDoctor || user.role.isAdmin {
-                        HStack {
-                            Text("New Product")
-                            Button(action: {
-                                viewModel.showingnewProductView = true
-                            }) {
-                                Image(systemName: "plus")
-                            }
-                            
-                            Text("New Post")
-                            Button(action: {
-                                viewModel.showingnewPostView = true
-                            }) {
-                                Image(systemName: "plus")
-                            }
-                        }
-                    }
-                }
+                configButton
             }
             .sheet(isPresented: $viewModel.showingnewPostView) {
                 NewPostView(newPostPresented: $viewModel.showingnewPostView)
             }
-            .sheet(isPresented: $viewModel.showingnewProductView) {
-                NewProductView(newPostPresented: $viewModel.showingnewProductView)
+            .sheet(isPresented: $showingAddProduct) {
+                NewProductView(isPresented: $showingAddProduct)
+            }
+            .sheet(isPresented: $showingAddAllergen) {
+                CreateNewAllergenView(isPresented: $showingAddAllergen)
             }
             .onAppear {
                 Task {
@@ -63,6 +51,31 @@ struct AnnounceView: View {
             
         }
     }
+    
+    private var configButton: some View {
+        Button(action: {
+            self.showConfigMenu = true
+        }) {
+            Image(systemName: "ellipsis.circle")
+                .imageScale(.large)
+                .foregroundColor(Color(UIColor(hex: "#387440")))
+        }
+        .actionSheet(isPresented: $showConfigMenu) {
+            ActionSheet(
+                title: Text("Options"),
+                buttons: [
+                    .default(Text("Add Product")) {
+                        self.showingAddProduct = true
+                    },
+                    .default(Text("Add Allergen")) {
+                        self.showingAddAllergen = true
+                    },
+                    .cancel()
+                ]
+            )
+        }
+    }
+    
 }
 
 // Formatter for displaying the post's creation date
@@ -72,6 +85,7 @@ private let itemFormatter: DateFormatter = {
     formatter.timeStyle = .short
     return formatter
 }()
+
 
 #Preview {
     AnnounceView(user: .init(id: "123", name: "John", email: "john@mail.com", tel: "0812345643", gender: .male, joined: Date().timeIntervalSince1970, role: .patient))

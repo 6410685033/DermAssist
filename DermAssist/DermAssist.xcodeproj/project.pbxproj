@@ -52,6 +52,9 @@
 		7B8DCE0E2BC675FC00D70C6C /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCE0D2BC675FC00D70C6C /* FirebaseRemoteConfigSwift */; };
 		7B8DCE102BC675FC00D70C6C /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCE0F2BC675FC00D70C6C /* FirebaseStorage */; };
 		7B8DCE122BC675FC00D70C6C /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCE112BC675FC00D70C6C /* FirebaseStorageCombine-Community */; };
+		7BCD6E352BD4F3A7000F6162 /* NewProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD6E342BD4F3A7000F6162 /* NewProductViewModel.swift */; };
+		7BCD6E372BD4F3B8000F6162 /* NewProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD6E362BD4F3B8000F6162 /* NewProductView.swift */; };
+		7BCD6E392BD4F3DB000F6162 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD6E382BD4F3DB000F6162 /* Product.swift */; };
 		CE6C33722BC67CB700D754A8 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C335F2BC67CB700D754A8 /* HeaderView.swift */; };
 		CE6C33732BC67CB700D754A8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33602BC67CB700D754A8 /* LoginView.swift */; };
 		CE6C33742BC67CB700D754A8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33612BC67CB700D754A8 /* MainView.swift */; };
@@ -108,6 +111,9 @@
 		7B7843962BCED34E0047A679 /* AllergenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllergenView.swift; sourceTree = "<group>"; };
 		7B8DCDC82BC66D2400D70C6C /* DermAssist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DermAssist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B8DCDD22BC66D2500D70C6C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7BCD6E342BD4F3A7000F6162 /* NewProductViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProductViewModel.swift; sourceTree = "<group>"; };
+		7BCD6E362BD4F3B8000F6162 /* NewProductView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProductView.swift; sourceTree = "<group>"; };
+		7BCD6E382BD4F3DB000F6162 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		CE6C335F2BC67CB700D754A8 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		CE6C33602BC67CB700D754A8 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CE6C33612BC67CB700D754A8 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -184,6 +190,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B1BA3222BE227F6001A38F4 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CE6C33622BC67CB700D754A8 /* ProfileView.swift */,
+				7B159A532BCC4DD8009A2B27 /* EditProfileView.swift */,
+				7B7843962BCED34E0047A679 /* AllergenView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		7B1BA3232BE228EF001A38F4 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CE6C336F2BC67CB700D754A8 /* ProfileViewModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		7B1BA3242BE22935001A38F4 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				CE6C338C2BC67E8C00D754A8 /* PostView.swift */,
+				CE6C338E2BC67EA100D754A8 /* NewPostView.swift */,
+				CE6C33882BC67E5200D754A8 /* CommentView.swift */,
+				CE6C33902BC67EBF00D754A8 /* LikeUserView.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		7B1BA3262BE2296D001A38F4 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				CE6C33992BC67F5100D754A8 /* NewPostViewModel.swift */,
+				CE6C33972BC67F3600D754A8 /* PostViewModel.swift */,
+				CE6C339B2BC67F6800D754A8 /* CommentViewModel.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
 		7B21CEFE2BC6857F006224CB /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,6 +328,7 @@
 		CE6C33652BC67CB700D754A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7B1BA3222BE227F6001A38F4 /* Profile */,
 				7B2221C52BC69B5800D5DECF /* Admin */,
 				7B21CEFE2BC6857F006224CB /* Chat */,
 				CE6C33852BC67DF100D754A8 /* Others */,
@@ -297,6 +343,7 @@
 			children = (
 				CE6C33662BC67CB700D754A8 /* User.swift */,
 				CE9825952BC9684100DB384A /* ChatRoom.swift */,
+				7BCD6E382BD4F3DB000F6162 /* Product.swift */,
 				7B159A572BCD1CB5009A2B27 /* Allergen.swift */,
 				CE6C33812BC67D8C00D754A8 /* Post.swift */,
 			);
@@ -317,6 +364,7 @@
 		CE6C33712BC67CB700D754A8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				7B1BA3232BE228EF001A38F4 /* Profile */,
 				7B2221C82BC6A71400D5DECF /* Admin */,
 				7B21CF012BC68591006224CB /* Chat */,
 				CE6C33942BC67EF500D754A8 /* Announce */,
@@ -329,12 +377,11 @@
 		CE6C33832BC67DC700D754A8 /* Announce */ = {
 			isa = PBXGroup;
 			children = (
+				7B1BA3242BE22935001A38F4 /* Post */,
 				CE6C33862BC67E2400D754A8 /* AnnounceView.swift */,
 				CE6C338A2BC67E6C00D754A8 /* AnnounceItemView.swift */,
-				CE6C33882BC67E5200D754A8 /* CommentView.swift */,
-				CE6C338C2BC67E8C00D754A8 /* PostView.swift */,
-				CE6C338E2BC67EA100D754A8 /* NewPostView.swift */,
-				CE6C33902BC67EBF00D754A8 /* LikeUserView.swift */,
+				7BCD6E362BD4F3B8000F6162 /* NewProductView.swift */,
+				7B159A592BCD1CD8009A2B27 /* CreateNewAllergenView.swift */,
 			);
 			path = Announce;
 			sourceTree = "<group>";
@@ -344,10 +391,6 @@
 			children = (
 				CE6C33602BC67CB700D754A8 /* LoginView.swift */,
 				CE6C33632BC67CB700D754A8 /* RegisterView.swift */,
-				7B159A592BCD1CD8009A2B27 /* CreateNewAllergenView.swift */,
-				CE6C33622BC67CB700D754A8 /* ProfileView.swift */,
-				7B159A532BCC4DD8009A2B27 /* EditProfileView.swift */,
-				7B7843962BCED34E0047A679 /* AllergenView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -367,10 +410,8 @@
 		CE6C33922BC67EDE00D754A8 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				7B159A5B2BCD1CFF009A2B27 /* CreateNewAllegenViewModel.swift */,
 				CE6C336D2BC67CB700D754A8 /* LoginViewModel.swift */,
 				CE6C33702BC67CB700D754A8 /* RegisterViewModel.swift */,
-				CE6C336F2BC67CB700D754A8 /* ProfileViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -386,10 +427,10 @@
 		CE6C33942BC67EF500D754A8 /* Announce */ = {
 			isa = PBXGroup;
 			children = (
+				7B1BA3262BE2296D001A38F4 /* Post */,
 				CE6C33952BC67F1200D754A8 /* AnnounceViewModel.swift */,
-				CE6C33972BC67F3600D754A8 /* PostViewModel.swift */,
-				CE6C33992BC67F5100D754A8 /* NewPostViewModel.swift */,
-				CE6C339B2BC67F6800D754A8 /* CommentViewModel.swift */,
+				7BCD6E342BD4F3A7000F6162 /* NewProductViewModel.swift */,
+				7B159A5B2BCD1CFF009A2B27 /* CreateNewAllegenViewModel.swift */,
 			);
 			path = Announce;
 			sourceTree = "<group>";
@@ -506,6 +547,7 @@
 				7B159A5A2BCD1CD8009A2B27 /* CreateNewAllergenView.swift in Sources */,
 				7B21CF032BC6859F006224CB /* ChatViewModel.swift in Sources */,
 				CE6C339C2BC67F6800D754A8 /* CommentViewModel.swift in Sources */,
+				7BCD6E392BD4F3DB000F6162 /* Product.swift in Sources */,
 				CE6C337B2BC67CB700D754A8 /* Extension.swift in Sources */,
 				7B2221C72BC69B6C00D5DECF /* ManageView.swift in Sources */,
 				CE6C338F2BC67EA100D754A8 /* NewPostView.swift in Sources */,
@@ -521,6 +563,7 @@
 				7B4D5C682BCAFA4A0076F710 /* LoadingView.swift in Sources */,
 				7B7843972BCED34E0047A679 /* AllergenView.swift in Sources */,
 				CE6C339A2BC67F5100D754A8 /* NewPostViewModel.swift in Sources */,
+				7BCD6E352BD4F3A7000F6162 /* NewProductViewModel.swift in Sources */,
 				CE6C33772BC67CB700D754A8 /* TLButton.swift in Sources */,
 				7B159A5C2BCD1CFF009A2B27 /* CreateNewAllegenViewModel.swift in Sources */,
 				CE6C33762BC67CB700D754A8 /* RegisterView.swift in Sources */,
@@ -535,6 +578,7 @@
 				CE6C33802BC67CB700D754A8 /* RegisterViewModel.swift in Sources */,
 				CE6C337A2BC67CB700D754A8 /* DermAssistApp.swift in Sources */,
 				7B21CF002BC68588006224CB /* ChatView.swift in Sources */,
+				7BCD6E372BD4F3B8000F6162 /* NewProductView.swift in Sources */,
 				CE6C337D2BC67CB700D754A8 /* LoginViewModel.swift in Sources */,
 				CE6C33C42BC843A200D754A8 /* ChatItemView.swift in Sources */,
 				CE6C33912BC67EBF00D754A8 /* LikeUserView.swift in Sources */,

@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct CreateNewAllergenView: View {
-    
     @StateObject var viewModel = CreateNewAllegenViewModel()
-//    @StateObject var HomeviewModel = AnnounceViewModel()
-    @Binding var CreateNewAllergenPresented: Bool
-    
+    @Binding var isPresented: Bool
+
     var body: some View {
         VStack {
             Text("New Allergen")
@@ -27,10 +25,9 @@ struct CreateNewAllergenView: View {
                     .textFieldStyle(DefaultTextFieldStyle())
                 TLButton(title: "Create", background: .pink) {
                     viewModel.save()
-                    CreateNewAllergenPresented = false
+                    isPresented = false
                 }
             }
-            
         }
     }
 }

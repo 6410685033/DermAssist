@@ -9,9 +9,8 @@
 import SwiftUI
 
 struct NewProductView: View {
-    
     @StateObject var viewModel = NewProductViewModel()
-    @Binding var newPostPresented: Bool
+    @Binding var isPresented: Bool
     
     var body: some View {
         VStack {
@@ -25,7 +24,7 @@ struct NewProductView: View {
                     .textFieldStyle(DefaultTextFieldStyle())
                 TLButton(title: "Save", background: .pink) {
                     viewModel.save()
-                    newPostPresented = false
+                    isPresented = false
                 }
             }
             

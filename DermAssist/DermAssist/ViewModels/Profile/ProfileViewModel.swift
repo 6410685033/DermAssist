@@ -24,31 +24,31 @@ class ProfileViewModel: ObservableObject {
     }
     
     func edit() {
-            guard let uId = Auth.auth().currentUser?.uid else {
-                print("User not logged in")
-                return
-            }
-
-            let db = Firestore.firestore()
-            let userRef = db.collection("users").document(uId)
-
-            let updatedUser = User(id: uId, name: name, email: user?.email ?? "", tel: tel, gender: gender, joined: user?.joined ?? Date().timeIntervalSince1970, role: user?.role ?? .patient)
-
-            do {
-                try userRef.setData(from: updatedUser) { error in
-                    if let error = error {
-                        print("Error updating user: \(error.localizedDescription)")
-                    } else {
-                        print("User successfully updated")
-                    }
-                }
-            } catch {
-                print("Failed to encode user: \(error)")
-            }
-
-            // After updating the user, update the local user instance
-            self.user = updatedUser
+        guard let uId = Auth.auth().currentUser?.uid else {
+            print("User not logged in")
+            return
         }
+        
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(uId)
+        
+        let updatedUser = User(id: uId, name: name, email: user?.email ?? "", tel: tel, gender: gender, joined: user?.joined ?? Date().timeIntervalSince1970, role: user?.role ?? .patient)
+        
+        do {
+            try userRef.setData(from: updatedUser) { error in
+                if let error = error {
+                    print("Error updating user: \(error.localizedDescription)")
+                } else {
+                    print("User successfully updated")
+                }
+            }
+        } catch {
+            print("Failed to encode user: \(error)")
+        }
+        
+        // After updating the user, update the local user instance
+        self.user = updatedUser
+    }
     
     
     private func validate() -> Bool {
@@ -56,28 +56,28 @@ class ProfileViewModel: ObservableObject {
     }
     
     func load() {
-            guard let currentUser = user else { return }
-            name = currentUser.name
-            tel = currentUser.tel
-            gender = currentUser.gender // Make sure the gender is set correctly from the user data
-        }
+        guard let currentUser = user else { return }
+        name = currentUser.name
+        tel = currentUser.tel
+        gender = currentUser.gender // Make sure the gender is set correctly from the user data
+    }
     
     func fetchUser() {
-            guard let userId = Auth.auth().currentUser?.uid else { return }
-            let db = Firestore.firestore()
-            db.collection("users").document(userId).getDocument { [weak self] snapshot, error in
-                guard let self = self, let snapshot = snapshot, let data = snapshot.data(), error == nil else {
-                    print("Error fetching user: \(error?.localizedDescription ?? "Unknown error")")
-                    return
-                }
-                do {
-                    self.user = try snapshot.data(as: User.self)
-                    self.load() // Update local properties with fetched data
-                } catch {
-                    print("Error decoding user: \(error)")
-                }
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let db = Firestore.firestore()
+        db.collection("users").document(userId).getDocument { [weak self] snapshot, error in
+            guard let self = self, let snapshot = snapshot, let data = snapshot.data(), error == nil else {
+                print("Error fetching user: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            do {
+                self.user = try snapshot.data(as: User.self)
+                self.load() // Update local properties with fetched data
+            } catch {
+                print("Error decoding user: \(error)")
             }
         }
+    }
     
     
     func fetchAllergens() {

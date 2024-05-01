@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct UserManageView: View {
     @State var user: User
     @State private var isEditing = false
