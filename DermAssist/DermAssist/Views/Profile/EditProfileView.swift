@@ -55,7 +55,10 @@ struct EditProfileView: View {
             }
         }
         .onAppear {
+            print("onAppear EditProfileView occur")
             viewModel.load()
+            viewModel.fetchMyAllergens()
+            viewModel.fetchAllergens()
         }
     }
     
