@@ -13,6 +13,7 @@
 		7B159A582BCD1CB5009A2B27 /* Allergen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A572BCD1CB5009A2B27 /* Allergen.swift */; };
 		7B159A5A2BCD1CD8009A2B27 /* CreateNewAllergenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A592BCD1CD8009A2B27 /* CreateNewAllergenView.swift */; };
 		7B159A5C2BCD1CFF009A2B27 /* CreateNewAllegenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A5B2BCD1CFF009A2B27 /* CreateNewAllegenViewModel.swift */; };
+		7B1BA3282BE230AC001A38F4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1BA3272BE230AC001A38F4 /* HomeView.swift */; };
 		7B21CF002BC68588006224CB /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21CEFF2BC68588006224CB /* ChatView.swift */; };
 		7B21CF032BC6859F006224CB /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21CF022BC6859F006224CB /* ChatViewModel.swift */; };
 		7B2221C72BC69B6C00D5DECF /* ManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2221C62BC69B6C00D5DECF /* ManageView.swift */; };
@@ -55,6 +56,7 @@
 		7BCD6E352BD4F3A7000F6162 /* NewProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD6E342BD4F3A7000F6162 /* NewProductViewModel.swift */; };
 		7BCD6E372BD4F3B8000F6162 /* NewProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD6E362BD4F3B8000F6162 /* NewProductView.swift */; };
 		7BCD6E392BD4F3DB000F6162 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD6E382BD4F3DB000F6162 /* Product.swift */; };
+		7BD830152BE234170081411D /* DoctorToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD830142BE234170081411D /* DoctorToolView.swift */; };
 		CE6C33722BC67CB700D754A8 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C335F2BC67CB700D754A8 /* HeaderView.swift */; };
 		CE6C33732BC67CB700D754A8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33602BC67CB700D754A8 /* LoginView.swift */; };
 		CE6C33742BC67CB700D754A8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33612BC67CB700D754A8 /* MainView.swift */; };
@@ -99,6 +101,7 @@
 		7B159A572BCD1CB5009A2B27 /* Allergen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Allergen.swift; sourceTree = "<group>"; };
 		7B159A592BCD1CD8009A2B27 /* CreateNewAllergenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewAllergenView.swift; sourceTree = "<group>"; };
 		7B159A5B2BCD1CFF009A2B27 /* CreateNewAllegenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewAllegenViewModel.swift; sourceTree = "<group>"; };
+		7B1BA3272BE230AC001A38F4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		7B21CEFF2BC68588006224CB /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		7B21CF022BC6859F006224CB /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		7B2221C62BC69B6C00D5DECF /* ManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageView.swift; sourceTree = "<group>"; };
@@ -114,6 +117,7 @@
 		7BCD6E342BD4F3A7000F6162 /* NewProductViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProductViewModel.swift; sourceTree = "<group>"; };
 		7BCD6E362BD4F3B8000F6162 /* NewProductView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProductView.swift; sourceTree = "<group>"; };
 		7BCD6E382BD4F3DB000F6162 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		7BD830142BE234170081411D /* DoctorToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorToolView.swift; sourceTree = "<group>"; };
 		CE6C335F2BC67CB700D754A8 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		CE6C33602BC67CB700D754A8 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CE6C33612BC67CB700D754A8 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -280,6 +284,44 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		7B7930332BE23260005D7063 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				7B1BA3272BE230AC001A38F4 /* HomeView.swift */,
+				7B7930342BE23288005D7063 /* DoctorTool */,
+				CE6C33832BC67DC700D754A8 /* Announce */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		7B7930342BE23288005D7063 /* DoctorTool */ = {
+			isa = PBXGroup;
+			children = (
+				7BCD6E362BD4F3B8000F6162 /* NewProductView.swift */,
+				7B159A592BCD1CD8009A2B27 /* CreateNewAllergenView.swift */,
+				7BD830142BE234170081411D /* DoctorToolView.swift */,
+			);
+			path = DoctorTool;
+			sourceTree = "<group>";
+		};
+		7B7930352BE232E8005D7063 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				7B7930362BE232F6005D7063 /* DoctorTool */,
+				CE6C33942BC67EF500D754A8 /* Announce */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		7B7930362BE232F6005D7063 /* DoctorTool */ = {
+			isa = PBXGroup;
+			children = (
+				7B159A5B2BCD1CFF009A2B27 /* CreateNewAllegenViewModel.swift */,
+				7BCD6E342BD4F3A7000F6162 /* NewProductViewModel.swift */,
+			);
+			path = DoctorTool;
+			sourceTree = "<group>";
+		};
 		7B8DCDBF2BC66D2400D70C6C = {
 			isa = PBXGroup;
 			children = (
@@ -303,9 +345,9 @@
 				7B4D5C5F2BCAEFE60076F710 /* Managers */,
 				CE6C33672BC67CB700D754A8 /* Models */,
 				CE6C336C2BC67CB700D754A8 /* Others */,
+				7B8DCDD12BC66D2500D70C6C /* Preview Content */,
 				CE6C33712BC67CB700D754A8 /* ViewModels */,
 				CE6C33652BC67CB700D754A8 /* Views */,
-				7B8DCDD12BC66D2500D70C6C /* Preview Content */,
 			);
 			path = DermAssist;
 			sourceTree = "<group>";
@@ -328,12 +370,13 @@
 		CE6C33652BC67CB700D754A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7B1BA3222BE227F6001A38F4 /* Profile */,
+				CE6C33612BC67CB700D754A8 /* MainView.swift */,
 				7B2221C52BC69B5800D5DECF /* Admin */,
 				7B21CEFE2BC6857F006224CB /* Chat */,
-				CE6C33852BC67DF100D754A8 /* Others */,
+				7B7930332BE23260005D7063 /* Home */,
 				CE6C33842BC67DE100D754A8 /* Login */,
-				CE6C33832BC67DC700D754A8 /* Announce */,
+				CE6C33852BC67DF100D754A8 /* Others */,
+				7B1BA3222BE227F6001A38F4 /* Profile */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -341,11 +384,11 @@
 		CE6C33672BC67CB700D754A8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CE6C33662BC67CB700D754A8 /* User.swift */,
-				CE9825952BC9684100DB384A /* ChatRoom.swift */,
-				7BCD6E382BD4F3DB000F6162 /* Product.swift */,
 				7B159A572BCD1CB5009A2B27 /* Allergen.swift */,
+				CE9825952BC9684100DB384A /* ChatRoom.swift */,
 				CE6C33812BC67D8C00D754A8 /* Post.swift */,
+				7BCD6E382BD4F3DB000F6162 /* Product.swift */,
+				CE6C33662BC67CB700D754A8 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -353,10 +396,10 @@
 		CE6C336C2BC67CB700D754A8 /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				CE6C33682BC67CB700D754A8 /* Assets.xcassets */,
+				CE6C336B2BC67CB700D754A8 /* GoogleService-Info.plist */,
 				CE6C33692BC67CB700D754A8 /* DermAssistApp.swift */,
 				CE6C336A2BC67CB700D754A8 /* Extension.swift */,
-				CE6C336B2BC67CB700D754A8 /* GoogleService-Info.plist */,
+				CE6C33682BC67CB700D754A8 /* Assets.xcassets */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -364,12 +407,12 @@
 		CE6C33712BC67CB700D754A8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				7B1BA3232BE228EF001A38F4 /* Profile */,
+				7B7930352BE232E8005D7063 /* Home */,
 				7B2221C82BC6A71400D5DECF /* Admin */,
 				7B21CF012BC68591006224CB /* Chat */,
-				CE6C33942BC67EF500D754A8 /* Announce */,
-				CE6C33932BC67EEC00D754A8 /* Others */,
 				CE6C33922BC67EDE00D754A8 /* Login */,
+				CE6C33932BC67EEC00D754A8 /* Others */,
+				7B1BA3232BE228EF001A38F4 /* Profile */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -380,8 +423,6 @@
 				7B1BA3242BE22935001A38F4 /* Post */,
 				CE6C33862BC67E2400D754A8 /* AnnounceView.swift */,
 				CE6C338A2BC67E6C00D754A8 /* AnnounceItemView.swift */,
-				7BCD6E362BD4F3B8000F6162 /* NewProductView.swift */,
-				7B159A592BCD1CD8009A2B27 /* CreateNewAllergenView.swift */,
 			);
 			path = Announce;
 			sourceTree = "<group>";
@@ -400,7 +441,6 @@
 			children = (
 				CE6C33642BC67CB700D754A8 /* TLButton.swift */,
 				CE6C335F2BC67CB700D754A8 /* HeaderView.swift */,
-				CE6C33612BC67CB700D754A8 /* MainView.swift */,
 				7B4D5C672BCAFA4A0076F710 /* LoadingView.swift */,
 				7B5A52412BCE6239000DBDDE /* PinButton.swift */,
 			);
@@ -427,10 +467,8 @@
 		CE6C33942BC67EF500D754A8 /* Announce */ = {
 			isa = PBXGroup;
 			children = (
-				7B1BA3262BE2296D001A38F4 /* Post */,
 				CE6C33952BC67F1200D754A8 /* AnnounceViewModel.swift */,
-				7BCD6E342BD4F3A7000F6162 /* NewProductViewModel.swift */,
-				7B159A5B2BCD1CFF009A2B27 /* CreateNewAllegenViewModel.swift */,
+				7B1BA3262BE2296D001A38F4 /* Post */,
 			);
 			path = Announce;
 			sourceTree = "<group>";
@@ -548,6 +586,7 @@
 				7B21CF032BC6859F006224CB /* ChatViewModel.swift in Sources */,
 				CE6C339C2BC67F6800D754A8 /* CommentViewModel.swift in Sources */,
 				7BCD6E392BD4F3DB000F6162 /* Product.swift in Sources */,
+				7BD830152BE234170081411D /* DoctorToolView.swift in Sources */,
 				CE6C337B2BC67CB700D754A8 /* Extension.swift in Sources */,
 				7B2221C72BC69B6C00D5DECF /* ManageView.swift in Sources */,
 				CE6C338F2BC67EA100D754A8 /* NewPostView.swift in Sources */,
@@ -583,6 +622,7 @@
 				CE6C33C42BC843A200D754A8 /* ChatItemView.swift in Sources */,
 				CE6C33912BC67EBF00D754A8 /* LikeUserView.swift in Sources */,
 				7B2221CC2BC6A92300D5DECF /* UserManageView.swift in Sources */,
+				7B1BA3282BE230AC001A38F4 /* HomeView.swift in Sources */,
 				CE9825982BC9688900DB384A /* MessageView.swift in Sources */,
 				7B2221CE2BC6AC4700D5DECF /* UserManageViewModel.swift in Sources */,
 				CE6C33962BC67F1200D754A8 /* AnnounceViewModel.swift in Sources */,
