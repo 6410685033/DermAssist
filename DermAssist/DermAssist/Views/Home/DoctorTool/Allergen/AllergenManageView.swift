@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct AllergenManageView: View {
-    var user: User
+    @State private var showingAddAllergen = false
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            Button("Create New Allergy") {
+                showingAddAllergen = true
+            }
+            .sheet(isPresented: $showingAddAllergen) {
+                NewAllergenView(isPresented: $showingAddAllergen)
+            }
+            
+        }
+        .navigationTitle("Allergy Management")
+        
     }
 }
 
 #Preview {
-    AllergenManageView(user: .init(id: "123", name: "John", email: "john@mail.com", tel: "0812345643", gender: .male, joined: Date().timeIntervalSince1970, role: .doctor))
+    AllergenManageView()
 }

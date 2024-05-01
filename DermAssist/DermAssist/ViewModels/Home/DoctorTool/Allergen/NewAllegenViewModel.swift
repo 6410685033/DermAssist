@@ -9,7 +9,7 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-class CreateNewAllegenViewModel: ObservableObject {
+class NewAllegenViewModel: ObservableObject {
     @Published var allergen_name = ""
     @Published var createDate = Date()
     @Published var details = ""

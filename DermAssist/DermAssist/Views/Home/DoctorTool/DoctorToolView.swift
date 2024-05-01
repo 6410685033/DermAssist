@@ -8,17 +8,14 @@
 import SwiftUI
 
 struct DoctorToolView: View {
-    @State private var showingAddProduct = false
-    @State private var showingAddAllergen = false
-    
     var body: some View {
         NavigationView {
             List {
-                NavigationLink(destination: NewProductView(isPresented: $showingAddProduct)) {
-                    Text("Create New Product")
+                NavigationLink(destination: ProductManageView()) {
+                    Text("Manage Product")
                 }
-                NavigationLink(destination: NewAllergenView(isPresented: $showingAddAllergen)) {
-                    Text("Create New Allergy")
+                NavigationLink(destination: AllergenManageView()) {
+                    Text("Manage Allergy")
                 }
             }
             .navigationTitle("Doctor Tools")
