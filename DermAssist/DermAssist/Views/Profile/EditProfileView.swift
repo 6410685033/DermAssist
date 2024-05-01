@@ -74,7 +74,7 @@ struct EditProfileView: View {
             ForEach(viewModel.myAllergens, id: \.id) { allergen in
                 allergenRow(allergen, isMyAllergen: true)
             }
-            
+            ,
             Text("Define Allergens").bold()
             ForEach(viewModel.allergens, id: \.id) { allergen in
                 if !viewModel.myAllergens.contains(allergen) {

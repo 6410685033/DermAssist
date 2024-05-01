@@ -78,3 +78,7 @@ struct AnnounceItemView: View {
         return formatter.localizedString(for: Date(timeIntervalSince1970: timestamp), relativeTo: Date())
     }
 }
+
+#Preview {
+    AnnounceItemView(item: Post.init(is_pin: false, createDate: Date().timeIntervalSince1970, id: "1", title: "Title", content: "Content", creator: "John", comments: [], likes: []), user: User.init(name: "John", email: "mail@domain.com", tel: "0987654321", gender: .female, joined: Date().timeIntervalSince1970, role: .doctor))
+}

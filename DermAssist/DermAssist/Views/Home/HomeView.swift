@@ -10,25 +10,29 @@ import SwiftUI
 struct HomeView: View {
     @State private var selectedSegment = 0
     var user: User
-
+    
     var body: some View {
         if user.role.isAdmin || user.role.isDoctor {
-            VStack {
-                Picker("Options", selection: $selectedSegment) {
-                    Text("Announcement").tag(0)
-                    Text("Doctor Tool").tag(1)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding()
-                
-                if selectedSegment == 0 {
-                    AnnounceView(user: user)
-                } else {
-                    DoctorToolView()
-                }
-            }
+            segment
         } else {
             AnnounceView(user: user)
+        }
+    }
+    
+    private var segment: some View {
+        VStack {
+            Picker("Options", selection: $selectedSegment) {
+                Text("Announcement").tag(0)
+                Text("Doctor Tool").tag(1)
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding()
+            
+            if selectedSegment == 0 {
+                AnnounceView(user: user)
+            } else {
+                DoctorToolView()
+            }
         }
     }
 }

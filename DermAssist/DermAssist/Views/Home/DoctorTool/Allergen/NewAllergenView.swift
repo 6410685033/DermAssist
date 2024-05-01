@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CreateNewAllergenView: View {
+struct NewAllergenView: View {
     @StateObject var viewModel = CreateNewAllegenViewModel()
     @Binding var isPresented: Bool
 

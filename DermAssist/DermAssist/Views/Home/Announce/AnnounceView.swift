@@ -10,9 +10,6 @@ import SwiftUI
 
 struct AnnounceView: View {
     @StateObject var viewModel = AnnounceViewModel()
-    @State private var showConfigMenu = false
-    @State private var showingAddProduct = false
-    @State private var showingAddAllergen = false
     var user: User
     
     var body: some View {
@@ -24,17 +21,8 @@ struct AnnounceView: View {
                     .animation(.default, value: viewModel.posts)
             }
             .navigationTitle("Announcements")
-            .toolbar {
-                configButton
-            }
             .sheet(isPresented: $viewModel.showingnewPostView) {
                 NewPostView(newPostPresented: $viewModel.showingnewPostView)
-            }
-            .sheet(isPresented: $showingAddProduct) {
-                NewProductView(isPresented: $showingAddProduct)
-            }
-            .sheet(isPresented: $showingAddAllergen) {
-                CreateNewAllergenView(isPresented: $showingAddAllergen)
             }
             .onAppear {
                 Task {
@@ -51,31 +39,6 @@ struct AnnounceView: View {
             
         }
     }
-    
-    private var configButton: some View {
-        Button(action: {
-            self.showConfigMenu = true
-        }) {
-            Image(systemName: "ellipsis.circle")
-                .imageScale(.large)
-                .foregroundColor(Color(UIColor(hex: "#387440")))
-        }
-        .actionSheet(isPresented: $showConfigMenu) {
-            ActionSheet(
-                title: Text("Options"),
-                buttons: [
-                    .default(Text("Add Product")) {
-                        self.showingAddProduct = true
-                    },
-                    .default(Text("Add Allergen")) {
-                        self.showingAddAllergen = true
-                    },
-                    .cancel()
-                ]
-            )
-        }
-    }
-    
 }
 
 // Formatter for displaying the post's creation date
