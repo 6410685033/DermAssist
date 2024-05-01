@@ -38,6 +38,11 @@ struct AllergenView: View {
             .navigationBarItems(trailing: Button("Done") {
                 isPresented = false
             })
+            .onAppear {
+                viewModel.load()
+                viewModel.fetchMyAllergens()
+                viewModel.fetchAllergens()
+            }
         }
     }
 }

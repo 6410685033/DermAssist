@@ -94,7 +94,6 @@ class ProfileViewModel: ObservableObject {
     
     
     func fetchAllergens() {
-        print("Do fetchAllergens()")
         let db = Firestore.firestore()
         db.collection("allergens").getDocuments { [weak self] snapshot, error in
             guard let self = self, let snapshot = snapshot, error == nil else {
@@ -110,7 +109,6 @@ class ProfileViewModel: ObservableObject {
                 self.allergens = fetchedAllergens.filter { !myAllergensSet.contains($0) }
             }
         }
-        print("finish fetchAllergens()")
     }
     
     
@@ -133,8 +131,6 @@ class ProfileViewModel: ObservableObject {
                     }
                 }
             }
-        print("Do fetchMyAllergens()")
-        print(self.myAllergens)
     }
     
     func add_allergen(_ allergen: Allergen) {
