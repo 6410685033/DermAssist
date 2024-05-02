@@ -339,18 +339,10 @@
 			path = DoctorTool;
 			sourceTree = "<group>";
 		};
-		7B7930352BE232E8005D7063 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				7B7930362BE232F6005D7063 /* DoctorTool */,
-				CE6C33942BC67EF500D754A8 /* Announce */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
 		7B7930362BE232F6005D7063 /* DoctorTool */ = {
 			isa = PBXGroup;
 			children = (
+				CE6C33942BC67EF500D754A8 /* Announce */,
 				7B22432D2BE25464009D4429 /* Allergen */,
 				7B22432C2BE25457009D4429 /* Product */,
 			);
@@ -443,7 +435,7 @@
 		CE6C33712BC67CB700D754A8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				7B7930352BE232E8005D7063 /* Home */,
+				7B7930362BE232F6005D7063 /* DoctorTool */,
 				7B2221C82BC6A71400D5DECF /* Admin */,
 				7B21CF012BC68591006224CB /* Chat */,
 				CE6C33922BC67EDE00D754A8 /* Login */,

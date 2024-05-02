@@ -25,13 +25,14 @@ class NewAllegenViewModel: ObservableObject {
             return
         }
 
-        let newId = UUID().uuidString
-        let newAllergen = Allergen(createDate: Date().timeIntervalSince1970, id: UUID().uuidString, allergen_name: allergen_name, details: details, creator: user?.id ?? "not define")
-        let newPost = Post(is_pin: false, createDate: Date().timeIntervalSince1970, id: UUID().uuidString, title: "New Allergen: "+allergen_name, content: details, creator: user?.id ?? "not define", comments: [], likes: [])
+        let AllergennewId = UUID().uuidString
+        let PostnewId = UUID().uuidString
+        let newAllergen = Allergen(createDate: Date().timeIntervalSince1970, id: AllergennewId, allergen_name: allergen_name, details: details, creator: user?.id ?? "not define")
+        let newPost = Post(is_pin: false, createDate: Date().timeIntervalSince1970, id: PostnewId, title: "New Allergen: "+allergen_name, content: details, creator: user?.id ?? "not define", comments: [], likes: [])
         let db = Firestore.firestore()
         
         db.collection("allergens")
-            .document(newId)
+            .document(AllergennewId)
             .setData(newAllergen.asDictionary()) { error in
                 if let error = error {
                     print("Error writing document: \(error)")
@@ -40,7 +41,7 @@ class NewAllegenViewModel: ObservableObject {
                 }
             }
         db.collection("post")
-            .document(newId)
+            .document(PostnewId)
             .setData(newPost.asDictionary()) { error in
                 if let error = error {
                     print("Error writing document: \(error)")
