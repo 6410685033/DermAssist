@@ -12,16 +12,24 @@ struct DoctorToolView: View {
         NavigationView {
             List {
                 NavigationLink(destination: ProductManageView()) {
-                    Text("Manage Product")
+                    HStack {
+                        Image(systemName: "wrench.fill").foregroundColor(.green)
+                        Text("Manage Product")
+                    }
                 }
                 NavigationLink(destination: AllergenManageView()) {
-                    Text("Manage Allergy")
+                    HStack {
+                        Image(systemName: "bandage.fill").foregroundColor(.red)
+                        Text("Manage Allergy")
+                    }
                 }
             }
+            .listStyle(GroupedListStyle())
             .navigationTitle("Doctor Tools")
         }
     }
 }
+
 
 #Preview {
     DoctorToolView()

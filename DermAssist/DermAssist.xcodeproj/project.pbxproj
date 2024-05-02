@@ -13,7 +13,6 @@
 		7B159A582BCD1CB5009A2B27 /* Allergen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A572BCD1CB5009A2B27 /* Allergen.swift */; };
 		7B159A5A2BCD1CD8009A2B27 /* NewAllergenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A592BCD1CD8009A2B27 /* NewAllergenView.swift */; };
 		7B159A5C2BCD1CFF009A2B27 /* NewAllegenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B159A5B2BCD1CFF009A2B27 /* NewAllegenViewModel.swift */; };
-		7B1BA3282BE230AC001A38F4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1BA3272BE230AC001A38F4 /* HomeView.swift */; };
 		7B21CF002BC68588006224CB /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21CEFF2BC68588006224CB /* ChatView.swift */; };
 		7B21CF032BC6859F006224CB /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B21CF022BC6859F006224CB /* ChatViewModel.swift */; };
 		7B2221C72BC69B6C00D5DECF /* ManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2221C62BC69B6C00D5DECF /* ManageView.swift */; };
@@ -105,7 +104,6 @@
 		7B159A572BCD1CB5009A2B27 /* Allergen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Allergen.swift; sourceTree = "<group>"; };
 		7B159A592BCD1CD8009A2B27 /* NewAllergenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAllergenView.swift; sourceTree = "<group>"; };
 		7B159A5B2BCD1CFF009A2B27 /* NewAllegenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAllegenViewModel.swift; sourceTree = "<group>"; };
-		7B1BA3272BE230AC001A38F4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		7B21CEFF2BC68588006224CB /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		7B21CF022BC6859F006224CB /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		7B2221C62BC69B6C00D5DECF /* ManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageView.swift; sourceTree = "<group>"; };
@@ -328,16 +326,6 @@
 			path = Allergen;
 			sourceTree = "<group>";
 		};
-		7B7930332BE23260005D7063 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				7B1BA3272BE230AC001A38F4 /* HomeView.swift */,
-				7B7930342BE23288005D7063 /* DoctorTool */,
-				CE6C33832BC67DC700D754A8 /* Announce */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
 		7B7930342BE23288005D7063 /* DoctorTool */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,9 +403,10 @@
 			isa = PBXGroup;
 			children = (
 				CE6C33612BC67CB700D754A8 /* MainView.swift */,
+				7B7930342BE23288005D7063 /* DoctorTool */,
+				CE6C33832BC67DC700D754A8 /* Announce */,
 				7B2221C52BC69B5800D5DECF /* Admin */,
 				7B21CEFE2BC6857F006224CB /* Chat */,
-				7B7930332BE23260005D7063 /* Home */,
 				CE6C33842BC67DE100D754A8 /* Login */,
 				CE6C33852BC67DF100D754A8 /* Others */,
 				7B1BA3222BE227F6001A38F4 /* Profile */,
@@ -669,7 +658,6 @@
 				CE6C33912BC67EBF00D754A8 /* LikeUserView.swift in Sources */,
 				7B6F2C122BE2493100042061 /* AllergenManageView.swift in Sources */,
 				7B2221CC2BC6A92300D5DECF /* UserManageView.swift in Sources */,
-				7B1BA3282BE230AC001A38F4 /* HomeView.swift in Sources */,
 				CE9825982BC9688900DB384A /* MessageView.swift in Sources */,
 				7B2221CE2BC6AC4700D5DECF /* UserManageViewModel.swift in Sources */,
 				CE6C33962BC67F1200D754A8 /* AnnounceViewModel.swift in Sources */,

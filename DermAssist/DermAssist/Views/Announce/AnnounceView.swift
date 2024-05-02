@@ -16,11 +16,14 @@ struct AnnounceView: View {
         NavigationView {
             VStack {
                 List(viewModel.posts, id: \.id) { post in
-                    AnnounceItemView(item: post, user: user)
-                }.listStyle(PlainListStyle())
-                    .animation(.default, value: viewModel.posts)
+                    AnnounceItemView(viewModel: viewModel, item: post, user: user)
+                        .padding(.vertical, 4)
+                }
+                .listStyle(PlainListStyle())
+                .animation(.default, value: viewModel.posts)
             }
             .navigationTitle("Announcements")
+            .navigationBarItems(trailing: addButton)
             .sheet(isPresented: $viewModel.showingnewPostView) {
                 NewPostView(newPostPresented: $viewModel.showingnewPostView)
             }
@@ -36,20 +39,20 @@ struct AnnounceView: View {
                     }
                 }
             }
-            
+        }
+    }
+    
+    private var addButton: some View {
+        Button(action: {
+            viewModel.showingnewPostView = true
+        }) {
+            Image(systemName: "plus.circle.fill")
+                .resizable()
+                .frame(width: 24, height: 24)
         }
     }
 }
 
-// Formatter for displaying the post's creation date
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .short
-    return formatter
-}()
-
-
 #Preview {
-    AnnounceView(user: .init(id: "123", name: "John", email: "john@mail.com", tel: "0812345643", gender: .male, joined: Date().timeIntervalSince1970, role: .patient))
+    AnnounceView(user: .init(id: "123", name: "John", email: "john@mail.com", tel: "0812345643", gender: .male, joined: Date().timeIntervalSince1970, role: .admin))
 }
