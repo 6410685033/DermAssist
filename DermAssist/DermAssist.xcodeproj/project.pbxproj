@@ -62,6 +62,7 @@
 		7BCD6E372BD4F3B8000F6162 /* NewProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD6E362BD4F3B8000F6162 /* NewProductView.swift */; };
 		7BCD6E392BD4F3DB000F6162 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD6E382BD4F3DB000F6162 /* Product.swift */; };
 		7BD830152BE234170081411D /* DoctorToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD830142BE234170081411D /* DoctorToolView.swift */; };
+		CE4595D22BE3B59B00FE707E /* DermAssist_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4595D12BE3B59B00FE707E /* DermAssist_icon.png */; };
 		CE6C33722BC67CB700D754A8 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C335F2BC67CB700D754A8 /* HeaderView.swift */; };
 		CE6C33732BC67CB700D754A8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33602BC67CB700D754A8 /* LoginView.swift */; };
 		CE6C33742BC67CB700D754A8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C33612BC67CB700D754A8 /* MainView.swift */; };
@@ -128,6 +129,7 @@
 		7BCD6E362BD4F3B8000F6162 /* NewProductView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProductView.swift; sourceTree = "<group>"; };
 		7BCD6E382BD4F3DB000F6162 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		7BD830142BE234170081411D /* DoctorToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorToolView.swift; sourceTree = "<group>"; };
+		CE4595D12BE3B59B00FE707E /* DermAssist_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DermAssist_icon.png; sourceTree = "<group>"; };
 		CE6C335F2BC67CB700D754A8 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		CE6C33602BC67CB700D754A8 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CE6C33612BC67CB700D754A8 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 		CE6C336C2BC67CB700D754A8 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				CE4595D12BE3B59B00FE707E /* DermAssist_icon.png */,
 				CE6C336B2BC67CB700D754A8 /* GoogleService-Info.plist */,
 				CE6C33692BC67CB700D754A8 /* DermAssistApp.swift */,
 				CE6C336A2BC67CB700D754A8 /* Extension.swift */,
@@ -599,6 +602,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE6C33792BC67CB700D754A8 /* Assets.xcassets in Resources */,
+				CE4595D22BE3B59B00FE707E /* DermAssist_icon.png in Resources */,
 				7B8DCDD32BC66D2500D70C6C /* Preview Assets.xcassets in Resources */,
 				CE6C337C2BC67CB700D754A8 /* GoogleService-Info.plist in Resources */,
 			);
