@@ -39,8 +39,10 @@ struct ChatDetailsView: View {
             Divider()
             HStack {
                 PharmacyButton(locationManager: locationManager, pharmacyManager: pharmacyManager)
+                Spacer()
                 productAmountPicker
                 productPicker
+                Spacer()
                 sendButton
             }
             .padding()
@@ -54,7 +56,7 @@ struct ChatDetailsView: View {
     }
     
     private var productAmountPicker: some View {
-        VStack(alignment: .leading) {
+        VStack {
             Text("Amount")
                 .font(.caption)
                 .foregroundColor(.secondary)
@@ -65,10 +67,11 @@ struct ChatDetailsView: View {
             }
             .pickerStyle(MenuPickerStyle())
         }
+        .frame(alignment: .center)
     }
     
     private var productPicker: some View {
-        VStack(alignment: .leading) {
+        VStack {
             Text("Product")
                 .font(.caption)
                 .foregroundColor(.secondary)
@@ -80,16 +83,22 @@ struct ChatDetailsView: View {
             }
             .pickerStyle(MenuPickerStyle())
         }
+        .frame(alignment: .center)
     }
     
     private var sendButton: some View {
-        Button {
-            viewModel.sendNewMessage(content: newMessage)
-            newMessage = ""
-        } label: {
-            Image(systemName: "paperplane.fill").foregroundColor(.white)
+        VStack {
+            Text("Send")
+                .font(.caption)
+                .foregroundColor(.secondary)
+            Button {
+                viewModel.sendNewMessage(content: newMessage)
+                newMessage = ""
+            } label: {
+                Image(systemName: "arrow.up").foregroundColor(.white)
+            }
+            .buttonStyle(PrimaryButtonStyle())
         }
-        .buttonStyle(PrimaryButtonStyle())
     }
 }
 
@@ -110,23 +119,30 @@ struct PharmacyButton: View {
     @State private var showingPharmacySheet = false
     
     var body: some View {
-        Button(action: {
-            Task {
-                do {
-                    showingPharmacySheet = true
-                    let location = try await locationManager.requestLocation()
-                    await pharmacyManager.fetchNearbyPharmacies(latitude: location.latitude, longitude: location.longitude)
-                } catch {
-                    print("Error getting location or fetching pharmacy data: \(error)")
+        VStack {
+            Text("Find Pharmacy")
+                .font(.caption)
+                .foregroundColor(.secondary)
+            
+            LocationButton(.currentLocation) {
+                Task {
+                    do {
+                        showingPharmacySheet = true
+                        let location = try await locationManager.requestLocation()
+                        await pharmacyManager.fetchNearbyPharmacies(latitude: location.latitude, longitude: location.longitude)
+                    } catch {
+                        print("Error getting location or fetching pharmacy data: \(error)")
+                    }
                 }
             }
-        }) {
-            Image(systemName: "mappin.and.ellipse")
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.blue)
-                .clipShape(Circle())
+            .labelStyle(IconOnlyLabelStyle())
+            .foregroundColor(.white)
+            .clipShape(Circle())
+            .background(
+                Circle().fill(Color.blue)
+            )
         }
+        .frame(alignment: .center)
         .disabled(locationManager.isLoading || pharmacyManager.isLoading)
         .sheet(isPresented: $showingPharmacySheet) {
             if locationManager.isLoading || pharmacyManager.isLoading {
@@ -139,7 +155,6 @@ struct PharmacyButton: View {
         }
     }
 }
-
 struct PharmacyList: View {
     @Binding var pharmacies: [Pharmacy]
     
@@ -164,4 +179,8 @@ struct PharmacyList: View {
         }
         .listStyle(PlainListStyle())
     }
+}
+
+#Preview{
+    ChatDetailsView(itemId: "")
 }
