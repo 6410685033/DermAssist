@@ -12,10 +12,13 @@ struct AnnounceView: View {
     @StateObject var viewModel = AnnounceViewModel()
     var user: User
     
+    @State private var searchText = ""
+    
     var body: some View {
         NavigationView {
             VStack {
-                List(viewModel.posts, id: \.id) { post in
+                SearchBar(searchText: $searchText)
+                List(filteredPosts, id: \.id) { post in
                     AnnounceItemView(viewModel: viewModel, item: post, user: user)
                         .padding(.vertical, 4)
                 }
@@ -49,6 +52,14 @@ struct AnnounceView: View {
             Image(systemName: "plus.circle.fill")
                 .resizable()
                 .frame(width: 24, height: 24)
+        }
+    }
+    
+    private var filteredPosts: [Post] {
+        if searchText.isEmpty {
+            return viewModel.posts
+        } else {
+            return viewModel.posts.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
         }
     }
 }

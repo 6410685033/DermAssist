@@ -114,7 +114,7 @@ class PostViewModel: ObservableObject {
                 
                 // add user to likes field
                 postRef.updateData([
-                    "likes": FieldValue.arrayUnion([user.asDictionary])
+                    "likes": FieldValue.arrayUnion([user.asDictionary()])
                 ]) { error in
                     if let error = error {
                         print("Error updating likes: \(error.localizedDescription)")
@@ -133,7 +133,7 @@ class PostViewModel: ObservableObject {
     
     func unlikePost() {
         // get user and post
-        guard let userId = Auth.auth().currentUser?.uid, let postId = self.post?.id else {
+        guard let userId = Auth.auth().currentUser?.uid, let postId = post?.id else {
             print("User not logged in or post ID unavailable.")
             return
         }
@@ -141,7 +141,7 @@ class PostViewModel: ObservableObject {
         // find user in firebase
         let db = Firestore.firestore()
         db.collection("users").document(userId).getDocument { [weak self] (document, error) in
-            guard let document = document, document.exists else {
+            guard let self = self, let document = document, document.exists else {
                 print("User document does not exist: \(error?.localizedDescription ?? "")")
                 return
             }
@@ -151,17 +151,18 @@ class PostViewModel: ObservableObject {
                 let user = try document.data(as: User.self)
                 let postRef = db.collection("post").document(postId)
                 
-                // add user to likes field
+                // remove user from likes field
                 postRef.updateData([
-                    "likes": FieldValue.arrayRemove([user.asDictionary])
+                    "likes": FieldValue.arrayRemove([user.asDictionary()])
                 ]) { error in
                     if let error = error {
                         print("Error updating likes: \(error.localizedDescription)")
                     } else {
-                        print("unlike post successfully.")
-                        if let index = self!.post?.likes.firstIndex(where: { $0.id == userId }) {
-                            DispatchQueue.main.async {
-                                self!.post?.likes.remove(at: index)
+                        print("Unlike post successfully.")
+                        DispatchQueue.main.async {
+                            // Safely find the index and remove it from the likes array
+                            if let index = self.post?.likes.firstIndex(where: { $0.id == userId }) {
+                                self.post?.likes.remove(at: index)
                             }
                         }
                     }
@@ -171,6 +172,7 @@ class PostViewModel: ObservableObject {
             }
         }
     }
+    
     
     func toggleLike() {
         if isLiked {

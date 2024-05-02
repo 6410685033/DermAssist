@@ -17,11 +17,20 @@ class ProfileViewModel: ObservableObject {
     @Published var role = ""
     @Published var allergens: [Allergen] = []
     @Published var myAllergens: [Allergen] = []
+    @Published var searchText = ""
     
     init() {
         fetchUser()
         fetchMyAllergens()
         fetchAllergens()
+    }
+    
+    var filteredAllergens: [Allergen] {
+        if searchText.isEmpty {
+            return allergens
+        } else {
+            return allergens.filter { $0.allergen_name.lowercased().contains(searchText.lowercased()) }
+        }
     }
     
     func edit() {
@@ -51,7 +60,7 @@ class ProfileViewModel: ObservableObject {
         // After updating the user, update the local user instance
         self.user = updatedUser
     }
-
+    
     private func updateAllergens(uId: String, db: Firestore) {
         let allergensRef = db.collection("users").document(uId).collection("allergy")
         
@@ -83,7 +92,7 @@ class ProfileViewModel: ObservableObject {
             self?.addAllergens(uId: uId, db: db)
         }
     }
-
+    
     private func addAllergens(uId: String, db: Firestore) {
         let allergensRef = db.collection("users").document(uId).collection("allergy")
         for allergen in self.myAllergens {
