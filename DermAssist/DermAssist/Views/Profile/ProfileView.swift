@@ -10,17 +10,17 @@ import SwiftUI
 struct ProfileView: View {
     @StateObject var viewModel = ProfileViewModel()
     @State private var showingEditPage = false
-    @State private var showingAllergenPage = false  // State for showing AllergenView
+    @State private var showingAllergenPage = false
     @State private var showConfirmationAlert = false
     @State private var showAlert = false
     @State private var alertMessage = ""
-    
+
     var body: some View {
         NavigationView {
             VStack {
                 if let user = viewModel.user {
                     VStack(spacing: 20) {
-                        profileImage
+                        profileImage(for: user.role)
                         
                         labeledText("Name", value: user.name)
                         labeledText("Email", value: user.email)
@@ -57,12 +57,36 @@ struct ProfileView: View {
         }
     }
     
-    private var profileImage: some View {
+    private func profileImage(for role: UserRole) -> some View {
         Image(systemName: "person.circle.fill")
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 100, height: 100)
             .padding(.vertical, 20)
+            .overlay(
+                roleIcon(for: role)
+                    .offset(x: 30, y: 10),
+                alignment: .bottomTrailing
+            )
+    }
+
+    private func roleIcon(for role: UserRole) -> some View {
+        Image(systemName: icon(for: role))
+            .resizable()
+            .frame(width: 50, height: 50)
+            .background(Color.green)
+            .clipShape(Circle())
+    }
+
+    private func icon(for role: UserRole) -> String {
+        switch role {
+        case .patient:
+            return "person.crop.circle"
+        case .doctor:
+            return "stethoscope.circle"
+        case .admin:
+            return "wrench.and.screwdriver.circle"
+        }
     }
     
     private func labeledText(_ label: String, value: String) -> some View {
@@ -73,7 +97,6 @@ struct ProfileView: View {
             Spacer()
         }
     }
-    
     
     private var deleteAccountButton: some View {
         Button("Delete Account") {
@@ -113,8 +136,4 @@ struct ProfileView: View {
             Image(systemName: "pencil")
         }
     }
-}
-
-#Preview {
-    ProfileView()
 }
