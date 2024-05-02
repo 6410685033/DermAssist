@@ -56,17 +56,12 @@ struct ChatDetailsView: View {
                 
                 Text("Product")
                 Picker("Select Product", selection: $newMessage) {
-                        ForEach(viewModel.products, id: \.id) { product in
+                    Text("-").tag("-")  // Default option
+                        ForEach(viewModel.products, id: \.name) { product in
                             Text("\(product.name)")
                         }
                     }
                     .pickerStyle(MenuPickerStyle())
-                
-//                // Input box
-//                TextField("What skin product would you like?", text: $newMessage, axis: .vertical)
-//                    .padding(5)
-//                    .background(Color.gray.opacity(0.1))
-//                    .cornerRadius(15)
                 
                 // Send button
                 Button {
