@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import FirebaseFirestoreSwift
 import CoreLocationUI
 
 struct ChatDetailsView: View {
@@ -26,55 +25,84 @@ struct ChatDetailsView: View {
                     ForEach(viewModel.messages) { message in
                         MessageView(message: message)
                             .padding(5)
-                            .id(message.id)  // Ensure each message has a unique ID
+                            .id(message.id)
                     }
                 }
                 .onAppear {
-                    if let lastMessage = viewModel.messages.last {
-                        scrollViewProxy.scrollTo(lastMessage.id, anchor: .bottom)
-                    }
+                    scrollToLastMessage(using: scrollViewProxy)
                 }
                 .onChange(of: viewModel.messages) { _ in
-                    if let lastMessage = viewModel.messages.last {
-                        scrollViewProxy.scrollTo(lastMessage.id, anchor: .bottom)
-                    }
+                    scrollToLastMessage(using: scrollViewProxy)
                 }
             }
             
             Divider()
             HStack {
-                // Pharmacy near me
                 PharmacyButton(locationManager: locationManager, pharmacyManager: pharmacyManager)
-                
-                Text("Amount")
-                Picker("Select Amount", selection: $viewModel.selectedAmount) {
-                    ForEach(viewModel.amounts, id: \.self) { amount in
-                        Text("\(amount)").tag(amount)
-                    }
-                }
-                .pickerStyle(MenuPickerStyle())
-                
-                Text("Product")
-                Picker("Select Product", selection: $newMessage) {
-                    Text("-").tag("-")  // Default option
-                    ForEach(viewModel.products, id: \.name) { product in
-                        Text("\(product.name)")
-                    }
-                }
-                .pickerStyle(MenuPickerStyle())
-                
-                // Send button
-                Button {
-                    viewModel.sendNewMessage(content: newMessage)
-                    newMessage = ""
-                } label: {
-                    Image(systemName: "paperplane")
-                }
+                productAmountPicker
+                productPicker
+                sendButton
             }
             .padding()
         }
     }
+    
+    private func scrollToLastMessage(using scrollViewProxy: ScrollViewProxy) {
+        if let lastMessage = viewModel.messages.last {
+            scrollViewProxy.scrollTo(lastMessage.id, anchor: .bottom)
+        }
+    }
+    
+    private var productAmountPicker: some View {
+        VStack(alignment: .leading) {
+            Text("Amount")
+                .font(.caption)
+                .foregroundColor(.secondary)
+            Picker("Select Amount", selection: $viewModel.selectedAmount) {
+                ForEach(viewModel.amounts, id: \.self) { amount in
+                    Text("\(amount)").tag(amount)
+                }
+            }
+            .pickerStyle(MenuPickerStyle())
+        }
+    }
+    
+    private var productPicker: some View {
+        VStack(alignment: .leading) {
+            Text("Product")
+                .font(.caption)
+                .foregroundColor(.secondary)
+            Picker("Select Product", selection: $newMessage) {
+                Text("-").tag("-")  // Default option
+                ForEach(viewModel.products, id: \.name) { product in
+                    Text(product.name)
+                }
+            }
+            .pickerStyle(MenuPickerStyle())
+        }
+    }
+    
+    private var sendButton: some View {
+        Button {
+            viewModel.sendNewMessage(content: newMessage)
+            newMessage = ""
+        } label: {
+            Image(systemName: "paperplane.fill").foregroundColor(.white)
+        }
+        .buttonStyle(PrimaryButtonStyle())
+    }
 }
+
+struct PrimaryButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(Color.blue)
+            .clipShape(Circle())
+            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+    }
+}
+
 
 struct PharmacyButton: View {
     @ObservedObject var locationManager: LocationManager
@@ -93,9 +121,9 @@ struct PharmacyButton: View {
                 }
             }
         }) {
-            Image(systemName: "mappin")
+            Image(systemName: "mappin.and.ellipse")
                 .foregroundColor(.white)
-                .padding(12)
+                .padding()
                 .background(Color.blue)
                 .clipShape(Circle())
         }
@@ -112,50 +140,28 @@ struct PharmacyButton: View {
     }
 }
 
-
 struct PharmacyList: View {
-    @Binding var pharmacies: [Pharmacy]  // Make pharmacies a binding
+    @Binding var pharmacies: [Pharmacy]
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Pharmacy Nearby")
-                .font(.title)
-                .padding()
-            
-            Divider()
-            
-            List {
-                ForEach(pharmacies.sorted(by: { $0.distance < $1.distance }), id: \.id) { pharmacy in
+        List {
+            ForEach(pharmacies.sorted(by: { $0.distance < $1.distance }), id: \.id) { pharmacy in
+                VStack(alignment: .leading) {
                     if let url = pharmacy.googleMapsURL {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Link(pharmacy.name, destination: url)
-                                    .foregroundColor(.cyan)
-                                    .font(.title3)
-                                
-                                Text("Distance: \(pharmacy.formattedDistance)")
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
-                            }
-                            .padding(.vertical, 8)
-                            
-                            Spacer()  // Add a spacer to push the distance text to the right
-                        }
+                        Link(pharmacy.name, destination: url)
+                            .font(.title3)
+                            .foregroundColor(.blue)
+                        Text("Distance: \(pharmacy.formattedDistance)")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
                     } else {
                         Text(pharmacy.name)
                             .font(.title3)
-                            .padding(.vertical, 8)
                     }
                 }
+                .padding(.vertical, 8)
             }
-            .listStyle(PlainListStyle())
-            
-            Spacer()
         }
-        .background(Color(.systemBackground))
+        .listStyle(PlainListStyle())
     }
 }
-
-//#Preview{
-//    PharmacyButton(locationManager: LocationManager(), pharmacyManager: PharmacyManager())
-//}
