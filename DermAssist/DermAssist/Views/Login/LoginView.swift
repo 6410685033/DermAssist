@@ -12,8 +12,8 @@ struct LoginView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 20) {
-                // Header with title and subtitle
+            // Header with title and subtitle
+            VStack(alignment: .center, spacing: 20) {
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Derm Assist")
                         .font(.largeTitle)
@@ -24,7 +24,20 @@ struct LoginView: View {
                         .font(.title2)
                         .foregroundColor(.secondary)
                 }
-                .padding(.top, 50)
+                .padding(.top, 20)
+                
+                Spacer()
+                
+                // Image from file path with adjusted size and styling
+                Image("DermAssist_icon")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 150, height: 150) // Adjust size here
+                    .clipShape(Circle()) // Apply circular clipping mask
+                    .overlay(
+                        Circle().stroke(Color.blue, lineWidth: 4)
+                    )
+                    .shadow(radius: 10) // Add shadow for visual effect
                 
                 Spacer()
                 
