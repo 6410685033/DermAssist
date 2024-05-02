@@ -48,20 +48,20 @@ struct ChatDetailsView: View {
                 
                 Text("Amount")
                 Picker("Select Amount", selection: $viewModel.selectedAmount) {
-                        ForEach(viewModel.amounts, id: \.self) { amount in
-                            Text("\(amount)").tag(amount)
-                        }
+                    ForEach(viewModel.amounts, id: \.self) { amount in
+                        Text("\(amount)").tag(amount)
                     }
-                    .pickerStyle(MenuPickerStyle())
+                }
+                .pickerStyle(MenuPickerStyle())
                 
                 Text("Product")
                 Picker("Select Product", selection: $newMessage) {
                     Text("-").tag("-")  // Default option
-                        ForEach(viewModel.products, id: \.name) { product in
-                            Text("\(product.name)")
-                        }
+                    ForEach(viewModel.products, id: \.name) { product in
+                        Text("\(product.name)")
                     }
-                    .pickerStyle(MenuPickerStyle())
+                }
+                .pickerStyle(MenuPickerStyle())
                 
                 // Send button
                 Button {
@@ -79,10 +79,10 @@ struct ChatDetailsView: View {
 struct PharmacyButton: View {
     @ObservedObject var locationManager: LocationManager
     @ObservedObject var pharmacyManager: PharmacyManager
-    @State var showingPharmacySheet = false
+    @State private var showingPharmacySheet = false
     
     var body: some View {
-        LocationButton(.currentLocation) {
+        Button(action: {
             Task {
                 do {
                     showingPharmacySheet = true
@@ -92,12 +92,13 @@ struct PharmacyButton: View {
                     print("Error getting location or fetching pharmacy data: \(error)")
                 }
             }
+        }) {
+            Image(systemName: "mappin")
+                .foregroundColor(.white)
+                .padding(12)
+                .background(Color.blue)
+                .clipShape(Circle())
         }
-        .labelStyle(.iconOnly)
-        .symbolVariant(.fill)
-        .foregroundColor(.white)
-        .background(Color.blue)
-        .clipShape(Circle())
         .disabled(locationManager.isLoading || pharmacyManager.isLoading)
         .sheet(isPresented: $showingPharmacySheet) {
             if locationManager.isLoading || pharmacyManager.isLoading {
@@ -110,6 +111,7 @@ struct PharmacyButton: View {
         }
     }
 }
+
 
 struct PharmacyList: View {
     @Binding var pharmacies: [Pharmacy]  // Make pharmacies a binding
@@ -153,3 +155,7 @@ struct PharmacyList: View {
         .background(Color(.systemBackground))
     }
 }
+
+//#Preview{
+//    PharmacyButton(locationManager: LocationManager(), pharmacyManager: PharmacyManager())
+//}
