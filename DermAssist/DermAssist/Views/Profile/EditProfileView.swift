@@ -33,11 +33,6 @@ struct EditProfileView: View {
                     myAllergensSection
                     defineAllergensSection
                     
-//                    Button("Save Changes") {
-//                        viewModel.edit()
-//                        presentationMode.wrappedValue.dismiss()
-//                    }
-                    //                    .buttonStyle(PrimaryButtonStyle())
                 }
                 .navigationTitle("Edit Profile")
                 .navigationBarItems(leading: cancelButton, trailing: saveButton)
@@ -74,8 +69,7 @@ struct EditProfileView: View {
     
     private var defineAllergensSection: some View {
         Section(header: Text("Define Allergens")) {
-            TextField("Search Allergens", text: $viewModel.searchText)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+            SearchBar(searchText: $viewModel.searchText) // Replace the original TextField with SearchBar
             ForEach(viewModel.filteredAllergens, id: \.id) { allergen in
                 if !viewModel.myAllergens.contains(allergen) {
                     allergenRow(allergen, isMyAllergen: false)
@@ -106,17 +100,6 @@ struct EditProfileView: View {
         Button("Save") {
             viewModel.edit()
             presentationMode.wrappedValue.dismiss()
-        }
-    }
-    
-    struct PrimaryButtonStyle: ButtonStyle {
-        func makeBody(configuration: Configuration) -> some View {
-            configuration.label
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.green)
-                .cornerRadius(10)
-                .scaleEffect(configuration.isPressed ? 0.95 : 1)
         }
     }
 }
