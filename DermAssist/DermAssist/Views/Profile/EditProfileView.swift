@@ -30,26 +30,17 @@ struct EditProfileView: View {
                         Text("Role: \(user.role.displayName)").foregroundColor(.gray)
                     }
                     
-                    allergenSection
+                    myAllergensSection
+                    defineAllergensSection
                     
-                    Button("Save Changes") {
-                        viewModel.edit()
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.green)
-                    .cornerRadius(10)
+//                    Button("Save Changes") {
+//                        viewModel.edit()
+//                        presentationMode.wrappedValue.dismiss()
+//                    }
+                    //                    .buttonStyle(PrimaryButtonStyle())
                 }
                 .navigationTitle("Edit Profile")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button("Cancel") {
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                    }
-                }
+                .navigationBarItems(leading: cancelButton, trailing: saveButton)
             } else {
                 Text("Loading Profile...")
             }
@@ -69,20 +60,27 @@ struct EditProfileView: View {
         }
     }
     
-    
-    
-    private var allergenSection: some View {
+    private var myAllergensSection: some View {
         Section(header: Text("My Allergens")) {
-            ForEach(viewModel.myAllergens, id: \.id) { allergen in
-                allergenRow(allergen, isMyAllergen: true)
+            if viewModel.myAllergens.isEmpty {
+                Text("None").foregroundColor(.gray).italic()
+            } else {
+                ForEach(viewModel.myAllergens, id: \.id) { allergen in
+                    allergenRow(allergen, isMyAllergen: true)
+                }
             }
-            Text("Define Allergens").bold()
-            ForEach(viewModel.allergens, id: \.id) { allergen in
+        }
+    }
+    
+    private var defineAllergensSection: some View {
+        Section(header: Text("Define Allergens")) {
+            TextField("Search Allergens", text: $viewModel.searchText)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            ForEach(viewModel.filteredAllergens, id: \.id) { allergen in
                 if !viewModel.myAllergens.contains(allergen) {
                     allergenRow(allergen, isMyAllergen: false)
                 }
             }
-            
         }
     }
     
@@ -94,15 +92,31 @@ struct EditProfileView: View {
                 isMyAllergen ? viewModel.remove_allergen(allergen) : viewModel.add_allergen(allergen)
             }) {
                 Image(systemName: isMyAllergen ? "trash" : "plus")
-                    .foregroundColor(Color(UIColor.systemGreen))
-            }
+            }.buttonStyle(BorderlessButtonStyle())
         }
     }
-}
-
-// Preview code
-struct EditProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditProfileView(viewModel: ProfileViewModel())
+    
+    private var cancelButton: some View {
+        Button("Cancel") {
+            presentationMode.wrappedValue.dismiss()
+        }
+    }
+    
+    private var saveButton: some View {
+        Button("Save") {
+            viewModel.edit()
+            presentationMode.wrappedValue.dismiss()
+        }
+    }
+    
+    struct PrimaryButtonStyle: ButtonStyle {
+        func makeBody(configuration: Configuration) -> some View {
+            configuration.label
+                .foregroundColor(.white)
+                .padding()
+                .background(Color.green)
+                .cornerRadius(10)
+                .scaleEffect(configuration.isPressed ? 0.95 : 1)
+        }
     }
 }

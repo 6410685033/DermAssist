@@ -29,6 +29,7 @@
 		7B5A52422BCE6239000DBDDE /* PinButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5A52412BCE6239000DBDDE /* PinButton.swift */; };
 		7B6F2C122BE2493100042061 /* AllergenManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F2C112BE2493100042061 /* AllergenManageView.swift */; };
 		7B7843972BCED34E0047A679 /* AllergenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7843962BCED34E0047A679 /* AllergenView.swift */; };
+		7B8C54802BE3AB3D009C3DFB /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C547F2BE3AB3D009C3DFB /* SearchBar.swift */; };
 		7B8DCDD32BC66D2500D70C6C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B8DCDD22BC66D2500D70C6C /* Preview Assets.xcassets */; };
 		7B8DCDDE2BC675FC00D70C6C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCDDD2BC675FC00D70C6C /* FirebaseAnalytics */; };
 		7B8DCDE02BC675FC00D70C6C /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8DCDDF2BC675FC00D70C6C /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -120,6 +121,7 @@
 		7B5A52412BCE6239000DBDDE /* PinButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinButton.swift; sourceTree = "<group>"; };
 		7B6F2C112BE2493100042061 /* AllergenManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllergenManageView.swift; sourceTree = "<group>"; };
 		7B7843962BCED34E0047A679 /* AllergenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllergenView.swift; sourceTree = "<group>"; };
+		7B8C547F2BE3AB3D009C3DFB /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		7B8DCDC82BC66D2400D70C6C /* DermAssist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DermAssist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B8DCDD22BC66D2500D70C6C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7BCD6E342BD4F3A7000F6162 /* NewProductViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProductViewModel.swift; sourceTree = "<group>"; };
@@ -342,7 +344,6 @@
 		7B7930362BE232F6005D7063 /* DoctorTool */ = {
 			isa = PBXGroup;
 			children = (
-				CE6C33942BC67EF500D754A8 /* Announce */,
 				7B22432D2BE25464009D4429 /* Allergen */,
 				7B22432C2BE25457009D4429 /* Product */,
 			);
@@ -435,6 +436,7 @@
 		CE6C33712BC67CB700D754A8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				CE6C33942BC67EF500D754A8 /* Announce */,
 				7B7930362BE232F6005D7063 /* DoctorTool */,
 				7B2221C82BC6A71400D5DECF /* Admin */,
 				7B21CF012BC68591006224CB /* Chat */,
@@ -471,6 +473,7 @@
 				CE6C335F2BC67CB700D754A8 /* HeaderView.swift */,
 				7B4D5C672BCAFA4A0076F710 /* LoadingView.swift */,
 				7B5A52412BCE6239000DBDDE /* PinButton.swift */,
+				7B8C547F2BE3AB3D009C3DFB /* SearchBar.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -634,6 +637,7 @@
 				7BCD6E352BD4F3A7000F6162 /* NewProductViewModel.swift in Sources */,
 				CE6C33772BC67CB700D754A8 /* TLButton.swift in Sources */,
 				7B159A5C2BCD1CFF009A2B27 /* NewAllegenViewModel.swift in Sources */,
+				7B8C54802BE3AB3D009C3DFB /* SearchBar.swift in Sources */,
 				CE6C33762BC67CB700D754A8 /* RegisterView.swift in Sources */,
 				CE6C33732BC67CB700D754A8 /* LoginView.swift in Sources */,
 				7B2221CA2BC6A71E00D5DECF /* ManageViewModel.swift in Sources */,
