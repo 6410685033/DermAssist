@@ -10,9 +10,11 @@ import SwiftUI
 struct UserManageView: View {
     @State var user: User
     @State private var isEditing = false
+    @State private var showingAlert = false
+    @State private var alertMessage = ""
     @StateObject private var viewModel = UserManageViewModel()
     let roles = UserRole.allCases
-
+    
     var body: some View {
         Form {
             Section(header: Text("User Info")) {
@@ -28,17 +30,16 @@ struct UserManageView: View {
                     Text("Role: \(user.role.displayName)")
                 }
             }
-
+            
             Button(isEditing ? "Save" : "Edit") {
                 if isEditing {
-                    // Call the update method
                     viewModel.updateUserDetail(user) { success, error in
                         if let error = error {
-                            // Handle the error, maybe show an alert
-                            print("Error: \(error.localizedDescription)")
+                            alertMessage = error.localizedDescription
+                            showingAlert = true
                         } else if success {
-                            // Handle the success, maybe show a confirmation message
-                            print("User details updated successfully")
+                            alertMessage = "User details updated successfully."
+                            showingAlert = true
                         }
                     }
                 }
@@ -46,9 +47,12 @@ struct UserManageView: View {
             }
         }
         .navigationTitle("User Details")
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text("Update Status"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+        }
     }
 }
 
 #Preview {
-    UserManageView(user: User.init(id: "123", name: "Tony Stark", email: "iron@man.com", tel: "0812345678", gender: .male, joined: Date().timeIntervalSince1970, role: .doctor))
+    UserManageView(user: User(id: "123", name: "Tony Stark", email: "iron@man.com", tel: "0812345678", gender: .male, joined: Date().timeIntervalSince1970, role: .doctor))
 }

@@ -19,31 +19,57 @@ struct EditPostView: View {
     var body: some View {
         NavigationView {
             Form {
-                TextField("Title", text: $title)
-                TextEditor(text: $content)
-                Button("Save") {
-                    // Call the onCommit closure with the new title and content
-                    if let post = post {
-                        onCommit(title.isEmpty ? post.title : title,
-                                 content.isEmpty ? post.content : content)
-                    }
-                    // Dismiss the EditPostView after the save operation
-                    self.presentationMode.wrappedValue.dismiss()
+                Section(header: Text("Post Title")) {
+                    TextField("Enter Title", text: $title)
                 }
+                
+                Section(header: Text("Post Content")) {
+                    TextEditor(text: $content)
+                        .frame(minHeight: 200)  // Ensure there's ample space for editing content
+                }
+                
+                Button("Save") {
+                    savePost()
+                }
+                .disabled(title.isEmpty && content.isEmpty) // Disable save if both fields are empty
             }
             .navigationBarTitle("Edit Post", displayMode: .inline)
+            .navigationBarItems(leading: cancelButton)
             .onAppear {
-                // Initialize text fields with current post data
-                if let post = post {
-                    title = post.title
-                    content = post.content
-                }
+                loadInitialData()
             }
+        }
+    }
+    
+    private var cancelButton: some View {
+        Button("Cancel") {
+            presentationMode.wrappedValue.dismiss()
+        }
+    }
+    
+    private func loadInitialData() {
+        // Initialize text fields with current post data only if they haven't been edited yet
+        if let post = post, title.isEmpty && content.isEmpty {
+            title = post.title
+            content = post.content
+        }
+    }
+    
+    private func savePost() {
+        // Use non-empty fields or default to existing data
+        if let post = post {
+            onCommit(title.isEmpty ? post.title : title,
+                     content.isEmpty ? post.content : content)
+            presentationMode.wrappedValue.dismiss()
         }
     }
 }
 
-
-//#Preview {
-//    EditPostView()
-//}
+// For preview purposes
+struct EditPostView_Previews: PreviewProvider {
+    static var previews: some View {
+        EditPostView(post: .constant(Post(is_pin: false, createDate: Date().timeIntervalSince1970, id: "id", title: "Title", content: "Content", creator: "Creator", comments: [], likes: [])), onCommit: { title, content in
+            print("Title: \(title), Content: \(content)")
+        })
+    }
+}

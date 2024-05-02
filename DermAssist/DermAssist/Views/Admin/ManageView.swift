@@ -22,6 +22,11 @@ struct ManageView: View {
                 }
             }
             .navigationTitle("Manage Users")
+            .toolbar {
+                Button("Refresh") {
+                    viewModel.fetchUsers()
+                }
+            }
             .onAppear {
                 viewModel.fetchUsers()
             }
