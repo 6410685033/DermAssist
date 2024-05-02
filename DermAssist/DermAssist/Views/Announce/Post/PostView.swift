@@ -11,14 +11,27 @@ struct PostView: View {
     @ObservedObject var viewModel: PostViewModel
     @State private var newCommentText: String = ""
     @State private var showingLikedUsers = false
+    @State private var showConfigMenu = false
+    @State private var showingEditView = false
+    @State private var showingDeleteAlert = false
+    
+    @Environment(\.presentationMode) var presentationMode
+    
     
     var body: some View {
         ScrollView {
             if let post = viewModel.post {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(post.title)
-                        .font(.title)
-                        .bold()
+                    HStack {
+                        Text(post.title)
+                            .font(.title)
+                            .bold()
+                        Spacer()
+                        
+                        if viewModel.currentUserIsCreator {
+                            configButton
+                        }
+                    }
                     
                     Text("Posted on \(viewModel.formattedCreateDate)")
                         .font(.subheadline)
@@ -35,6 +48,7 @@ struct PostView: View {
                             Image(systemName: viewModel.isLiked ? "heart.fill" : "heart")
                                 .foregroundColor(viewModel.isLiked ? .red : .gray)
                             Text("Like")
+                                .foregroundColor(Color(UIColor(hex: "#387440")))
                         }
                     }
                     .buttonStyle(BorderlessButtonStyle())
@@ -42,16 +56,14 @@ struct PostView: View {
                     // Like count and liked user list
                     if !viewModel.post!.likes.isEmpty {
                         Button(action: {
-                            showingLikedUsers = true  // Set to true to show the sheet
+                            showingLikedUsers = true
                         }) {
                             HStack {
                                 Image(systemName: "heart.circle.fill").foregroundColor(.red)
                                 Text("\(viewModel.likeCount)")
                             }
                         }
-                        // Use .sheet here within the body of a view
                         .sheet(isPresented: $showingLikedUsers) {
-                            // Present the LikedUsersView as the content of the sheet
                             LikedUsersView(likes: viewModel.post!.likes)
                         }
                     }
@@ -60,7 +72,7 @@ struct PostView: View {
                     // Comments Section
                     Text("Comments")
                         .font(.headline)
-                        .padding(.vertical)
+                        .padding(.top)
                     
                     ForEach(post.comments, id: \.id) { comment in
                         VStack(alignment: .leading) {
@@ -69,18 +81,6 @@ struct PostView: View {
                         .padding(.bottom)
                     }
                     
-                    // Comment Input Field
-                    TextField("Add a comment...", text: $newCommentText)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding(.bottom)
-                    
-                    // Submit Button
-                    Button("Submit") {
-                        viewModel.comment(content: newCommentText)
-                        newCommentText = ""
-                    }
-                    .buttonStyle(.bordered)
-                    
                 }
                 .padding()
             } else {
@@ -88,8 +88,70 @@ struct PostView: View {
                     .font(.headline)
             }
         }
+        .sheet(isPresented: $showingEditView) {
+            EditPostView(post: $viewModel.post, onCommit: { newTitle, newContent in
+                viewModel.editPost(newTitle: newTitle, newContent: newContent)
+            })
+        }
         .navigationBarTitle("Post Details", displayMode: .inline)
+        // Comment Input Field
+        HStack(alignment: .center){
+            TextField("Add a comment...", text: $newCommentText)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            
+            // Submit Button
+            if (!newCommentText.isEmpty){
+                Button{
+                    viewModel.comment(content: newCommentText)
+                    newCommentText = ""
+                } label: {
+                    Image(systemName: "arrow.up.circle.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 20)
+                        .foregroundColor(Color(UIColor(hex: "#387440")))
+                }
+            }
+        }
+        .padding()
     }
+    
+    private var configButton: some View {
+        Button(action: {
+            self.showConfigMenu = true
+        }) {
+            Image(systemName: "ellipsis.circle")
+                .imageScale(.large)
+                .foregroundColor(Color(UIColor(hex: "#387440")))
+        }
+        .actionSheet(isPresented: $showConfigMenu) {
+            ActionSheet(
+                title: Text("Options"),
+                buttons: [
+                    .default(Text("Edit")) {
+                        self.showingEditView = true
+                    },
+                    .destructive(Text("Delete")) {
+                        self.showingDeleteAlert = true
+                    },
+                    .cancel()
+                ]
+            )
+        }
+        .alert(isPresented: $showingDeleteAlert) {
+            Alert(
+                title: Text("Are you sure you want to delete this post?"),
+                message: Text("This action cannot be undone."),
+                primaryButton: .destructive(Text("Delete")) {
+                    viewModel.deletePost()
+                    // Use this to pop the current view off the navigation stack
+                    self.presentationMode.wrappedValue.dismiss()
+                },
+                secondaryButton: .cancel()
+            )
+        }
+    }
+    
 }
 
 

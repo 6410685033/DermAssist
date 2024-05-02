@@ -16,6 +16,11 @@ class PostViewModel: ObservableObject {
         fetchPost(postId: postId)
     }
     
+    var currentUserIsCreator: Bool {
+        let currentUserId = Auth.auth().currentUser?.uid
+        return post?.creator == currentUserId
+    }
+    
     
     // Post section
     var formattedCreateDate: String {
@@ -175,5 +180,53 @@ class PostViewModel: ObservableObject {
         }
     }
     
+    func editPost(newTitle: String, newContent: String) {
+        // Ensure we have a post ID and a user is logged in
+        guard let postId = self.post?.id else {
+            print("Post ID is unavailable.")
+            return
+        }
+        
+        // find post in firebase
+        let db = Firestore.firestore()
+        let postRef = db.collection("post").document(postId)
+        
+        // update post content
+        postRef.updateData([
+            "content": newContent
+        ]) { error in
+            if let error = error {
+                print("Error updating post: \(error.localizedDescription)")
+            } else {
+                print("Post successfully updated.")
+                DispatchQueue.main.async {
+                    self.post?.title = newTitle
+                    self.post?.content = newContent
+                }
+            }
+        }
+    }
+    
+    func deletePost() {
+        guard let postId = self.post?.id else {
+            print("Post ID is unavailable.")
+            return
+        }
+        
+        // find post in firebase and delete
+        let db = Firestore.firestore()
+        let postRef = db.collection("post").document(postId)
+        
+        postRef.delete() { error in
+            if let error = error {
+                print("Error removing post: \(error.localizedDescription)")
+            } else {
+                print("Post successfully deleted.")
+                DispatchQueue.main.async {
+                    self.post = nil
+                }
+            }
+        }
+    }
     
 }

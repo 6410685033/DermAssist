@@ -21,6 +21,7 @@
 		7B2221CE2BC6AC4700D5DECF /* UserManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2221CD2BC6AC4700D5DECF /* UserManageViewModel.swift */; };
 		7B22432B2BE25447009D4429 /* ProductManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B22432A2BE25447009D4429 /* ProductManageView.swift */; };
 		7B22432F2BE25CBF009D4429 /* AllergenManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B22432E2BE25CBF009D4429 /* AllergenManageViewModel.swift */; };
+		7B28ECE12BE3A06000690372 /* EditPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B28ECE02BE3A06000690372 /* EditPostView.swift */; };
 		7B4093AB2BE37CF200080679 /* ProductManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4093AA2BE37CF200080679 /* ProductManageViewModel.swift */; };
 		7B4D5C642BCAF1B60076F710 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 7B4D5C632BCAF1B60076F710 /* GoogleGenerativeAI */; };
 		7B4D5C662BCAF90E0076F710 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D5C652BCAF90E0076F710 /* LocationManager.swift */; };
@@ -112,6 +113,7 @@
 		7B2221CD2BC6AC4700D5DECF /* UserManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManageViewModel.swift; sourceTree = "<group>"; };
 		7B22432A2BE25447009D4429 /* ProductManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManageView.swift; sourceTree = "<group>"; };
 		7B22432E2BE25CBF009D4429 /* AllergenManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllergenManageViewModel.swift; sourceTree = "<group>"; };
+		7B28ECE02BE3A06000690372 /* EditPostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPostView.swift; sourceTree = "<group>"; };
 		7B4093AA2BE37CF200080679 /* ProductManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManageViewModel.swift; sourceTree = "<group>"; };
 		7B4D5C652BCAF90E0076F710 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7B4D5C672BCAFA4A0076F710 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 		7B1BA3242BE22935001A38F4 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				7B28ECE02BE3A06000690372 /* EditPostView.swift */,
 				CE6C338C2BC67E8C00D754A8 /* PostView.swift */,
 				CE6C338E2BC67EA100D754A8 /* NewPostView.swift */,
 				CE6C33882BC67E5200D754A8 /* CommentView.swift */,
@@ -656,6 +659,7 @@
 				CE6C337D2BC67CB700D754A8 /* LoginViewModel.swift in Sources */,
 				CE6C33C42BC843A200D754A8 /* ChatItemView.swift in Sources */,
 				CE6C33912BC67EBF00D754A8 /* LikeUserView.swift in Sources */,
+				7B28ECE12BE3A06000690372 /* EditPostView.swift in Sources */,
 				7B6F2C122BE2493100042061 /* AllergenManageView.swift in Sources */,
 				7B2221CC2BC6A92300D5DECF /* UserManageView.swift in Sources */,
 				CE9825982BC9688900DB384A /* MessageView.swift in Sources */,

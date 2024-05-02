@@ -12,8 +12,8 @@ struct Post: Codable, Equatable, Pinnable {
     let createDate: TimeInterval
     
     let id: String
-    let title: String
-    let content: String
+    var title: String
+    var content: String
     let creator: String
     var comments: [Comment]
     var likes: [User]
