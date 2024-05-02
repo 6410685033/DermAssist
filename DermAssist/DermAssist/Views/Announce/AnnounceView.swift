@@ -23,7 +23,7 @@ struct AnnounceView: View {
                 .animation(.default, value: viewModel.posts)
             }
             .navigationTitle("Announcements")
-            .navigationBarItems(trailing: addButton)
+            .navigationBarItems(trailing: user.role.isDoctor || user.role.isAdmin ? addButton : nil)
             .sheet(isPresented: $viewModel.showingnewPostView) {
                 NewPostView(newPostPresented: $viewModel.showingnewPostView)
             }
@@ -54,5 +54,5 @@ struct AnnounceView: View {
 }
 
 #Preview {
-    AnnounceView(user: .init(id: "123", name: "John", email: "john@mail.com", tel: "0812345643", gender: .male, joined: Date().timeIntervalSince1970, role: .admin))
+    AnnounceView(user: .init(id: "123", name: "John", email: "john@mail.com", tel: "0812345643", gender: .male, joined: Date().timeIntervalSince1970, role: .patient))
 }
