@@ -85,7 +85,7 @@ struct ProfileView: View {
         case .doctor:
             return "stethoscope.circle"
         case .admin:
-            return "wrench.and.screwdriver.circle"
+            return "wrench.and.screwdriver"
         }
     }
     
