@@ -21,6 +21,7 @@ struct AllergenManageView: View {
                         .font(.subheadline)
                 }
             }
+            .onDelete(perform: viewModel.deleteAllergen)
             Button("Create New Allergy") {
                 showingAddAllergen = true
             }
@@ -29,6 +30,11 @@ struct AllergenManageView: View {
             }
         }
         .navigationTitle("Allergy Management")
+        .onChange(of: showingAddAllergen) {
+            if !showingAddAllergen {  // When the sheet is dismissed
+                viewModel.fetchAllergens()
+            }
+        }
         .onAppear {
             viewModel.fetchAllergens()
         }

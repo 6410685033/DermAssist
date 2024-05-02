@@ -16,23 +16,27 @@ struct ProductManageView: View {
             ForEach(viewModel.products, id: \.id) { product in
                 VStack(alignment: .leading) {
                     Text(product.name)
-                        .font(.headline)
                 }
             }
+            .onDelete(perform: viewModel.deleteProduct)  // Handle deletion
             Button("Create New Product") {
                 showingNewProduct = true
             }
             .sheet(isPresented: $showingNewProduct) {
-                NewAllergenView(isPresented: $showingNewProduct)
+                NewProductView(isPresented: $showingNewProduct)
             }
         }
         .navigationTitle("Product Management")
         .onAppear {
             viewModel.fetchProducts()
         }
+        .onChange(of: showingNewProduct) {
+            if !showingNewProduct {  // When the sheet is dismissed
+                viewModel.fetchProducts()
+            }
+        }
     }
 }
-
 
 #Preview {
     ProductManageView()

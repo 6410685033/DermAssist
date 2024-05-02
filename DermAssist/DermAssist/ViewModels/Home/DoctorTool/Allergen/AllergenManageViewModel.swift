@@ -40,4 +40,18 @@ class AllergenViewModel: ObservableObject {
             } ?? []
         }
     }
+    
+    func deleteAllergen(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let allergen = allergens[index]
+            db.collection("allergens").document(allergen.id).delete() { [self] error in
+                if let error = error {
+                    print("Error removing document: \(error)")
+                } else {
+                    print("Document successfully removed!")
+                    fetchAllergens()  // Re-fetch the data to update the UI
+                }
+            }
+        }
+    }
 }

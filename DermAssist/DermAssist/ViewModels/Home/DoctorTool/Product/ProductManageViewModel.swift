@@ -34,5 +34,19 @@ class ProductManageViewModel: ObservableObject {
             } ?? []
         }
     }
+    
+    func deleteProduct(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let product = products[index]
+            db.collection("products").document(product.id).delete() { [self] error in
+                if let error = error {
+                    print("Error removing document: \(error)")
+                } else {
+                    print("Document successfully removed!")
+                    fetchProducts()  // Re-fetch the data to update the UI
+                }
+            }
+        }
+    }
 }
 
