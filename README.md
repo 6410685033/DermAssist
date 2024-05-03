@@ -3,7 +3,7 @@
 DermAssist is a comprehensive dermatology assistance app built using SwiftUI. It offers a range of features from user authentication to in-depth management tools for dermatology professionals. This app facilitates patient communication, data management, and educational tools in a user-friendly environment.
 
 ### member
-Supakrit Nithikethkul 6410615139
+Supakrit Nithikethkul 6410615139  
 Thammasat Thonggamgaew 6410685033
 
 ## Features
@@ -14,28 +14,6 @@ Thammasat Thonggamgaew 6410685033
 - **Chat System**: Enables real-time communication among users.
 - **Doctor Tools**: Specialized tools for dermatology professionals, including product management and allergen tracking.
 - **Admin Panel**: Administrative tools for managing user roles, posts, and more.
-
-## Installation
-
-Clone the repository to your local machine:
-
-bash
-git clone https://github.com/6410685033/DermAssist.git
-
-Navigate to the project directory:
-
-bash
-cd DermAssist
-
-Open the project in Xcode:
-
-bash
-open DermAssist.xcworkspace
-
-Run the project in Xcode or use the command line:
-
-bash
-xcodebuild -scheme DermAssist
 
 ## Usage
 
@@ -48,7 +26,8 @@ xcodebuild -scheme DermAssist
 
 - SwiftUI
 - Firebase for backend services
-- overpass-api
+- Overpass-API
+- ChatGPT
 
 ## Storyboard
 
