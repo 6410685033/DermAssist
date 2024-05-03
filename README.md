@@ -52,4 +52,4 @@ xcodebuild -scheme DermAssist
 
 ## Storyboard
 
-![Storyboard](./Final/Storyboard.png.png)
+![Storyboard](./Final/Storyboard.png)
