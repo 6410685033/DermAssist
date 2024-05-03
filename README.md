@@ -52,4 +52,26 @@ xcodebuild -scheme DermAssist
 
 ## Storyboard
 
-![Storyboard](./Final/Storyboard.png)
+#### Start
+
+![Start](./Final/Storyboard/Start.png)
+
+#### Announcement
+
+![Announcement](./Final/Storyboard/Announcement.png)
+
+#### Chat
+
+![Chat](./Final/Storyboard/Chat.png)
+
+#### Profile
+
+![Profile](./Final/Storyboard/Profile.png)
+
+#### Doctor Tools
+
+![Doctor Tools](./Final/Storyboard/Doctor%20Tools.png)
+
+#### Admin Manage
+
+![Admin Manage](./Final/Storyboard/Admin%20Manage.png)
